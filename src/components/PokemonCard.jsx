@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -6,6 +6,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Divider } from '@mui/material';
+import ScaleIcon from '@mui/icons-material/Scale';
+import HeightIcon from '@mui/icons-material/Height';
 import Pokemon from './Pokemon';
 
 export default function PokemonCard({ pokemon }) {
@@ -50,13 +52,19 @@ export default function PokemonCard({ pokemon }) {
                 <Typography gutterBottom variant="h5" component="div">
                     {pokemon.name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                {/* <Typography variant="body2" color="text.secondary">
                     {pokemon.url}
-                </Typography>
+                </Typography> */}
             </CardContent>
             <CardActions>
-                <Button size="small">{pokemonData.height}</Button>
-                <Button size="small">{pokemonData.weight}</Button>
+                {pokemonData && (
+                    <>
+                        <HeightIcon />
+                        <p>{pokemonData.height}</p>
+                        <ScaleIcon />
+                        <p>{pokemonData.weight}</p>
+                    </>
+                )}
             </CardActions>
         </Card>
     );
