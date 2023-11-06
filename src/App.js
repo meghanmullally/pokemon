@@ -34,7 +34,7 @@ function App() {
 
   console.log("pokemonList ", pokemonList);
   console.log("pokemonStateList ", pokemonStateList);
-
+ 
   const firstPokemon = {
     name: "bulbasaur",
     url: "https://pokeapi.co/api/v2/pokemon/1/"
@@ -49,7 +49,7 @@ function App() {
           {pokemonStateList.map((pokemonItem) => (
             <Grid item xs={2} sm={4} md={4}>
               <PokemonCard key={pokemonItem.name} pokemon={pokemonItem}>
-                <Pokemon item={pokemonItem} />
+                {/* <Pokemon item={pokemonItem} /> */}
               </PokemonCard>
             </Grid>
           ))}
