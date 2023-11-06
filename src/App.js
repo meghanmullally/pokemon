@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Pokemon from './components/Pokemon';
 import PokemonCard from './components/PokemonCard';
 import { Box, Grid, Paper } from '@mui/material';
+import ResponsiveAppBar from './components/Navigation';
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
 
   return (
     <div className="App">
+      <ResponsiveAppBar/>
       <h1>POKEMON APP</h1>
       <Box sx={{ width: '100%' }}>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -56,6 +58,7 @@ function App() {
         </Grid>
       </Box>
       <h2>Practice Interview</h2>
+      <a  href="https://icons8.com/icon/63311/pokeball">Pokeball</a> icon by <a href="https://icons8.com">Icons8</a>
     </div>
   );
 }
