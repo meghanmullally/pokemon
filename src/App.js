@@ -49,7 +49,7 @@ function App() {
       <Box sx={{ width: '100%' }}>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           {pokemonStateList.map((pokemonItem) => (
-            <Grid item xs={2} sm={4} md={4}>
+            <Grid item xs={2}>
               <PokemonCard key={pokemonItem.name} pokemon={pokemonItem}>
                 {/* <Pokemon item={pokemonItem} /> */}
               </PokemonCard>
