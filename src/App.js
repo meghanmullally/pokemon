@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     // Please note that at the time of this implementation the the image url to use for the pokemon stops at 649
-    const POKEMON_LIMIT = 10;
+    const POKEMON_LIMIT = 12;
     const url = `https://pokeapi.co/api/v2/pokemon?limit=${POKEMON_LIMIT}`;
 
     fetch(url)
@@ -45,7 +45,8 @@ function App() {
   return (
     <div className="App">
       <ResponsiveAppBar/>
-      <h1>POKEMON APP</h1>
+      <h1>Pokemon App</h1>
+      
       <Box sx={{ width: '100%' }}>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           {pokemonStateList.map((pokemonItem) => (

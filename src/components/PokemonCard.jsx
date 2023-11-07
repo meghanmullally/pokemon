@@ -30,12 +30,26 @@ export default function PokemonCard({ pokemon }) {
                 console.log("pokemonData = ", data)
                 //   console.log("data.results = ", data.results);
                 setpokemonData(data);
+            })
+            .catch((error) => {
+                console.error('Error fetching Pokemon data:', error);
             });
 
     }, [pokemon]);
 
     console.log("setpokemonData", setpokemonData);
     console.log("pokemonData", pokemonData);
+
+
+    let pokemonHeight = null;
+    let pokemonWeight = null;
+
+    if (pokemonData) {
+        // The pokemon's height in decimetres which is converted into metres by dividing by 10
+        pokemonHeight = (pokemonData.height / 10);
+        // The pokemon's weight in hectograms which is converted into kilograms by dividing by 10
+        pokemonWeight = (pokemonData.weight / 10);
+    }
 
     if (!pokemon) return null;
 
@@ -60,9 +74,9 @@ export default function PokemonCard({ pokemon }) {
                 {pokemonData && (
                     <>
                         <HeightIcon />
-                        <p>{pokemonData.height}</p>
+                        <p>{pokemonHeight} m</p>
                         <ScaleIcon />
-                        <p>{pokemonData.weight}</p>
+                        <p>{pokemonWeight} kg</p>
                     </>
                 )}
             </CardActions>
