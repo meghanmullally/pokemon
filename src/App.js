@@ -1,10 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
-import Pokemon from './components/Pokemon';
-import PokemonCard from './components/PokemonCard';
-import { Box, Grid, Paper } from '@mui/material';
 import ResponsiveAppBar from './components/Navigation';
+import Pokedex from './components/Pokedex/Pokedex';
 
 
 function App() {
@@ -35,7 +32,7 @@ function App() {
 
   console.log("pokemonList ", pokemonList);
   console.log("pokemonStateList ", pokemonStateList);
- 
+
   const firstPokemon = {
     name: "bulbasaur",
     url: "https://pokeapi.co/api/v2/pokemon/1/"
@@ -44,22 +41,12 @@ function App() {
 
   return (
     <div className="App">
-      <ResponsiveAppBar/>
+      <ResponsiveAppBar />
       <h1>Pokemon App</h1>
-      
-      <Box sx={{ width: '100%' }}>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          {pokemonStateList.map((pokemonItem) => (
-            <Grid item xs={2}>
-              <PokemonCard key={pokemonItem.name} pokemon={pokemonItem}>
-                {/* <Pokemon item={pokemonItem} /> */}
-              </PokemonCard>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+
+      <Pokedex pokemonStateList={pokemonStateList} />
       <h2>Practice Interview</h2>
-      <a  href="https://icons8.com/icon/63311/pokeball">Pokeball</a> icon by <a href="https://icons8.com">Icons8</a>
+      <a href="https://icons8.com/icon/63311/pokeball">Pokeball</a> icon by <a href="https://icons8.com">Icons8</a>
     </div>
   );
 }
