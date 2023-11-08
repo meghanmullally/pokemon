@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ScaleIcon from '@mui/icons-material/Scale';
 import HeightIcon from '@mui/icons-material/Height';
 
@@ -27,16 +27,6 @@ const Pokemon = ({ pokemonData }) => {
           <p>{pokemonHeight} m</p>
           <ScaleIcon />
           <p>{pokemonWeight} kg</p>
-          {/* {types && (
-            <div>
-              <strong>Types:</strong>
-              <ul>
-                {types.map((type, index) => (
-                  <li key={index}>{type}</li>
-                ))}
-              </ul>
-            </div>
-          )} */}
         </div>
       )}
     </>
