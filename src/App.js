@@ -15,7 +15,8 @@ function App() {
 
   useEffect(() => {
     // Please note that at the time of this implementation the the image url to use for the pokemon stops at 649
-    const POKEMON_LIMIT = 12;
+    // the Pokémon API (PokeAPI) contains information on the first 898 Pokémon species, which includes all Pokémon from Generations I to VIII.
+    const POKEMON_LIMIT = 24;
     const url = `https://pokeapi.co/api/v2/pokemon?limit=${POKEMON_LIMIT}`;
 
     fetch(url)

@@ -49,7 +49,7 @@ const getTypeIconUrl = (typeName) => {
 
 const PokemonTypeIcons = ({ types }) => {
 
-  console.log("pokemonTypes", types)
+  // console.log("pokemonTypes", types)
   return (
     <div>
       {types.map((type, index) => (
