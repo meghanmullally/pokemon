@@ -2,7 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import ResponsiveAppBar from './components/Navigation';
 import Pokedex from './components/Pokedex/Pokedex';
-
+import Pokemon from './components/Pokemon';
 
 function App() {
 
@@ -40,14 +40,13 @@ function App() {
 
 
   return (
-    <div className="App">
+   <div className="App">
       <ResponsiveAppBar />
       <h1>Pokemon App</h1>
-
       <Pokedex pokemonStateList={pokemonStateList} />
       <h2>Practice Interview</h2>
       <a href="https://icons8.com/icon/63311/pokeball">Pokeball</a> icon by <a href="https://icons8.com">Icons8</a>
     </div>
-  );
+  ); 
 }
 export default App;
