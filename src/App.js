@@ -14,7 +14,6 @@ function App() {
   // const [currentPokemon, setCurrentPokemon] = useState({ name: "", url: "" });
 
   useEffect(() => {
-    // Please note that at the time of this implementation the the image url to use for the pokemon stops at 649
     // the Pokémon API (PokeAPI) contains information on the first 898 Pokémon species, which includes all Pokémon from Generations I to VIII.
     const POKEMON_LIMIT = 24;
     const url = `https://pokeapi.co/api/v2/pokemon?limit=${POKEMON_LIMIT}`;
@@ -34,16 +33,10 @@ function App() {
   console.log("pokemonList ", pokemonList);
   console.log("pokemonStateList ", pokemonStateList);
 
-  // const firstPokemon = {
-  //   name: "bulbasaur",
-  //   url: "https://pokeapi.co/api/v2/pokemon/1/"
-  // };
-
 
   return (
     <div className="App">
       <ResponsiveAppBar />
-      {/* <h1>Pokemon App</h1> */}
       <img src={PokemonHeaderImg} alt="Pokemon Header" style={{ height: '100px', width: '200px' }} />
       <Pokedex pokemonStateList={pokemonStateList} />
       <a href="https://icons8.com/icon/63311/pokeball">Pokeball</a> icon by <a href="https://icons8.com">Icons8</a>

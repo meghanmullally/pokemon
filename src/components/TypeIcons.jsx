@@ -40,68 +40,19 @@ const TypeIcons = {
 };
 
 
-// const TypeIcons = {
-//   normal: '../img/logos/Normal_icon_Sleep.png',
-//   fighting: '../img/logos/Fighting_icon_Sleep.png',
-//   flying: '../img/logos/Flying_icon_Sleep.png',
-//   poison: '../img/logos/Poison_icon_Sleep.png',
-//   ground: '../img/logos/Ground_icon_Sleep.png',
-//   rock: '../img/logos/Rock_icon_Sleep.png',
-//   bug: '../img/logos/Bug_icon_Sleep.png',
-//   ghost: '../img/logos/Ghost_icon_Sleep.png',
-//   steel: '../img/logos/Steel_icon_Sleep.png',
-//   fire: '../img/logos/Fire_icon_Sleep.png',
-//   water: '../img/logos/Water_icon_Sleep.png',
-//   grass: '../img/logos/Grass_icon_Sleep.png',
-//   electric: '../img/logos/Electric_icon_Sleep.png',
-//   psychic: '../img/logos/Psychic_icon_Sleep.png',
-//   ice: '../img/logos/Ice_icon_Sleep.png',
-//   dragon: '../img/logos/Dragon_icon_Sleep.png',
-//   dark: '../img/logos/Dark_icon_Sleep.png',
-//   fairy: '../img/logos/Fairy_icon_Sleep.png'
-// };
-
-// const typeMapping = {
-//   1: "normal",
-//   2: "fighting",
-//   3: "flying",
-//   4: "poison",
-//   5: "ground",
-//   6: "rock",
-//   7: "bug",
-//   8: "ghost",
-//   9: "steel",
-//   10: "fire",
-//   11: "water",
-//   12: "grass",
-//   13: "electric",
-//   14: "psychic",
-//   15: "ice",
-//   16: "dragon",
-//   17: "dark",
-//   18: "fairy",
-// };
-
 const getTypeIconUrl = (typeName) => {
   return TypeIcons[typeName.toLowerCase()] || null;
 };
 
-// console.log("getTypeIconUrl", TypeIcons)
 
 const PokemonTypeIcons = ({ types }) => {
-
-  console.log("types", types)
-  // console.log("getTypeIconUrl(type.type.name)", getTypeIconUrl(type.type.name))
 
   return (
     <div>
       {types.map((typeInfo, typeIndex) => {
-
-        // console.log('typeInfo:', typeInfo);
-        // console.log('typeIndex:', typeIndex);
-
         return (
-          // typeInfo is used to represent an individual type object, and typeIndex is used to represent the index of that type in the types array. 
+          // typeInfo is used to represent an individual type object
+          // typeIndex is used to represent the index of that type in the types array. 
           <img
             key={typeIndex}
             src={getTypeIconUrl(typeInfo.type.name)}

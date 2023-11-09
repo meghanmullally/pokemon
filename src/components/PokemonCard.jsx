@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from '@mui/material/Card';
-// import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-// import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Divider } from '@mui/material';
 import PokemonTypeIcons from './TypeIcons';
@@ -59,11 +57,6 @@ export default function PokemonCard({ pokemon }) {
         fairy: '#D685AD',
     };
 
-    // const getBackgroundColor = (types) => {
-    //     const firstType = types[0].type.name;
-    //     return typeColors[firstType] || 'white'; // Default to white if color is not found
-    //   };
-
     const getBackgroundColor = (types) => {
         const firstType = types[0].type.name;
         const color = typeColors[firstType] || 'white'; // Default to white if color is not found
@@ -94,13 +87,7 @@ export default function PokemonCard({ pokemon }) {
                     <Typography gutterBottom variant="h5" component="div">
                         {pokemon.name}
                     </Typography>
-                    {/* <Typography variant="body2" color="text.secondary">
-                    {pokemon.url}
-                </Typography> */}
                 </CardContent>
-                {/* <CardActions> */}
-                {/* {pokemonData && <PokemonTypeIcons types={pokemonData.types} />} */}
-                {/* </CardActions> */}
             </Card>
     );
 }
