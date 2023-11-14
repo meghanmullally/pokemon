@@ -9,6 +9,7 @@ const Pokemon = ({ pokemonData }) => {
   let pokemonHeight = null;
   let pokemonWeight = null;
 
+  
   if (pokemonData) {
     // The pokemon's height in decimetres which is converted into metres by dividing by 10
     pokemonHeight = (pokemonData.height / 10);

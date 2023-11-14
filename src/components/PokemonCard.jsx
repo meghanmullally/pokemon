@@ -35,7 +35,6 @@ export default function PokemonCard({ pokemon }) {
         return null; // or some loading indicator
     }
 
-
     const typeColors = {
         normal: '#A8A77A',
         fire: '#EE8130',
@@ -71,23 +70,21 @@ export default function PokemonCard({ pokemon }) {
         ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png`
         : defaultPokemonImageUrl;
 
-    console.log("pokemonImgUrl", pokemonImgUrl)
-
     return (
-                <Card style={{ backgroundColor: getBackgroundColor(pokemonData.types) }}>
-                <CardMedia
-                    component="img"
-                    alt="pokemon image"
-                    height={{ height: '100%' }}
-                    image={pokemonImgUrl} // default image
-                    />
-                    {pokemonData && <PokemonTypeIcons types={pokemonData.types} />}
-                <Divider variant="middle" />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {pokemon.name}
-                    </Typography>
-                </CardContent>
-            </Card>
+        <Card style={{ backgroundColor: getBackgroundColor(pokemonData.types) }}>
+            <CardMedia
+                component="img"
+                alt="pokemon image"
+                height={{ height: '100%' }}
+                image={pokemonImgUrl} // default image
+            />
+            {pokemonData && <PokemonTypeIcons types={pokemonData.types} />}
+            <Divider variant="middle" />
+            <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                    {pokemon.name}
+                </Typography>
+            </CardContent>
+        </Card>
     );
 }
