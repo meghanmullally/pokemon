@@ -1,8 +1,10 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import ResponsiveAppBar from './components/Navigation';
 import Pokedex from './components/Pokedex/Pokedex';
-import PokemonHeaderImg from './img/pokedex_logo.svg';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Pokemon from './components/Pokemon';
+import ErrorPage from './components/Error';
+import RootLayout from './Root';
 
 function App() {
 
@@ -10,8 +12,7 @@ function App() {
 
   // give variable name, then set it with function..place in memory to useState to keep track of it...
   // example in Max's react course - destructoring 
-  const [pokemonStateList, setPokemonStateList] = useState([]);
-  // const [currentPokemon, setCurrentPokemon] = useState({ name: "", url: "" });
+  const [pokemonData, setPokemonData] = useState([]);
 
   useEffect(() => {
     // the Pokémon API (PokeAPI) contains information on the first 898 Pokémon species, which includes all Pokémon from Generations I to VIII.
@@ -25,22 +26,26 @@ function App() {
       })
       .then((data) => {
         console.log("data.results = ", data.results);
-        setPokemonStateList(data.results);
+        setPokemonData(data.results);
       });
 
   }, []);
 
-  console.log("pokemonList ", pokemonList);
-  console.log("pokemonStateList ", pokemonStateList);
+  console.log("pokemonData ", pokemonData);
 
+  const router = createBrowserRouter([
+        { path: '/', element: <Pokedex pokemonData={pokemonData}/> },
+        { path: '/pokemon/:pokemonId', element: <Pokemon /> },
+  ]);
 
   return (
     <div className="App">
-      <ResponsiveAppBar />
-      <img src={PokemonHeaderImg} alt="Pokemon Header" style={{ height: '100px', width: '200px' }} />
-      <Pokedex pokemonStateList={pokemonStateList} />
+      <RootLayout />
+      <RouterProvider router={router} />
+      <br/>
       <a href="https://icons8.com/icon/63311/pokeball">Pokeball</a> icon by <a href="https://icons8.com">Icons8</a>
     </div>
   );
-}
+};
+
 export default App;
