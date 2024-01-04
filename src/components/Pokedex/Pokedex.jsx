@@ -1,5 +1,5 @@
 import React from 'react';
-import PokemonCard from '../PokemCard/PokemonCard';
+import PokemonCard from '../PokemonCard/PokemonCard';
 import { Box, Grid } from '@mui/material';
 import './Pokedex.css';
 

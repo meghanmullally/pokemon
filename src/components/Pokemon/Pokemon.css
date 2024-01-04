@@ -1,0 +1,63 @@
+.pokemon_card_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    margin: 2rem;
+    border-radius: 1rem;
+    width: 220px; 
+    max-width: 100%; 
+    text-align: center;
+}
+
+.pokemonDetailsContainer {
+    border-radius: 1rem;
+    padding: 0.2rem 0.4rem;
+    font-weight: 400;
+    font-size: 35px;
+}
+
+.cardHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pokemonID {
+    margin-bottom: -4rem;
+}
+
+.img_container {
+    height: 150px;
+    width: 200px;
+}
+
+.pokemonName {
+    margin-top: 0.5rem;
+    text-transform: capitalize;
+}
+
+.pokeType {
+    display: flex;
+    gap: 10px; /* Simplified to 'gap' property */
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem; 
+}
+
+.pokeTypeBG {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Updated to 50% for a perfect circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokeInfo {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
