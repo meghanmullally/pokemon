@@ -5,16 +5,14 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Divider, Paper } from '@mui/material';
-import PokemonTypeIcons from '../TypeIcons';
 import { TYPE_COLORS } from '../../constants/pokemon';
 import './PokemonCard.css';
 
 export default function PokemonCard(props) {
 
     const { pokemonId } = props;
-
-    console.log("pokemonCard pokemonid", pokemonId);
-
+    // Destructuring properties from pokemonId
+    const { id, name, sprite} = pokemonId;
 
     // Type Colors and Card Background Color
     const getBackgroundColor = (types) => {
@@ -28,33 +26,26 @@ export default function PokemonCard(props) {
         }
     };
 
-    // Pokemon Image
-    const defaultPokemonImageUrl = 'src/img/default_pokemon.png';
-    let pokemonImgUrl = pokemonId
-        ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId.id}.png`
-        : defaultPokemonImageUrl;
-
-
     return (
         <>
-            <NavLink to={`/pokemon/${pokemonId}`}  className="nav-link">
+            <NavLink className="nav-link" to={{ pathname: `/pokemon/${id}` }}>
                 <Paper>
                     <Card
-                        style=
-                        {
-                            { backgroundColor: getBackgroundColor(pokemonId.types) }
-                        }>
+                        // style=
+                        // {
+                        //     { backgroundColor: pokemonDetails ? getBackgroundColor(pokemonDetails.types) : 'white30' }
+                        // }
+                        >
                         <CardMedia
                             component="img"
                             alt="pokemon image"
                             height={{ height: '100%' }}
-                            image={pokemonImgUrl} // default image
+                            image={sprite} // default image
                         />
-                        {pokemonId && <PokemonTypeIcons types={pokemonId.types} />}
                         <Divider variant="middle" />
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="div">
-                                {pokemonId && pokemonId.name}
+                                {pokemonId && name}
                             </Typography>
                         </CardContent>
                     </Card>
