@@ -2,7 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import Pokedex from './components/Pokedex/Pokedex';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Pokemon from './components/Pokemon';
+import Pokemon from './components/Pokemon/Pokemon';
 // import ErrorPage from './components/Error';
 import RootLayout from './Root';
 
@@ -20,40 +20,52 @@ function App() {
     const url = `https://pokeapi.co/api/v2/pokemon?limit=${POKEMON_LIMIT}`;
 
     fetch(url)
-      .then((response) => {
-        const data = response.json();
-        return data;
-      })
+      .then((response) => response.json())
       .then((data) => {
-        console.log("data.results = ", data.results);
-        const modifiedPokemonData = data.results.map((pokemon, index) => ({
-          ...pokemon,
-          id: index + 1, // Add 1 to index to create a unique ID for each Pokemon
-        }));
+        const modifiedPokemonData = {};
+
+        data.results.forEach((pokemon, index) => {
+          const pokemonImgId = (index + 1).toString();
+          const sprite = generatedPokemonImageUrl(pokemonImgId);
+
+          modifiedPokemonData[index + 1] = {
+            id: index + 1,
+            name: pokemon.name,
+            sprite: sprite,
+          };
+        });
+
         console.log("modifiedPokemonData =", modifiedPokemonData);
-        setPokemonData(modifiedPokemonData);
+        setPokemonData(Object.values(modifiedPokemonData));
         setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching Pokemon Data', error);
         setLoading(false);
       });
-
   }, []);
 
   console.log("pokemonData ", pokemonData);
 
+  // Pokemon Image
+  const generatedPokemonImageUrl = (id) => {
+    const defaultPokemonImageUrl = 'src/img/default_pokemon.png';
+    return id
+      ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+      : defaultPokemonImageUrl;
+  };
+
   const router = createBrowserRouter([
     { path: '/', element: !loading ? <Pokedex pokemonData={pokemonData} /> : null },
-    { path: '/pokemon/:pokemonId', element: <Pokemon /> },
+    { path: '/pokemon/:pokemonId', element: <Pokemon pokemonData={pokemonData} /> },
   ]);
 
   return (
     <div className="App">
       <RootLayout />
       <RouterProvider router={router} />
-      <br/>
-      <a href="https://icons8.com/icon/63311/pokeball">Pokeball</a> icon by <a href="https://icons8.com">Icons8</a>
+      <br />
+      {/* <a href="https://icons8.com/icon/63311/pokeball">Pokeball</a> icon by <a href="https://icons8.com">Icons8</a> */}
     </div>
   );
 };
