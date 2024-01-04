@@ -47,6 +47,11 @@ const getTypeIconUrl = (typeName) => {
 
 const PokemonTypeIcons = ({ types }) => {
 
+ // Check if types is defined and is an array
+ if (!Array.isArray(types) || types.length === 0) {
+  return null; // or handle it according to your requirements
+}
+
   return (
     <div>
       {types.map((typeInfo, typeIndex) => {
