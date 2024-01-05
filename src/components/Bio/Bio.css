@@ -1,19 +1,21 @@
+.bio_paper {
+    display: flex;
+    padding: 25px;
+    margin: 25px;
+    width: 100%;
+    height: 100%;
+}
+
 .bio_title {
     display: flex;
     margin: 1rem;
 }
 
 
-.description {
-    display: flex;
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
-
 .ability_btn, .egg_btn {
     display: flex;
-    gap: 8px; /* Simplified to 'gap' property */
-    align-items: center;
-    justify-content: center;
+    gap: 1rem; /* Simplified to 'gap' property */
+    /* align-items: center;
+    justify-content: center; */
     margin: 1rem; 
 }

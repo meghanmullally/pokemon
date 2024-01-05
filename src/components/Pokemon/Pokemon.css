@@ -1,3 +1,8 @@
+.full_pokemon_details {
+    display: flex;
+    align-items:first baseline;
+}
+
 .pokemon_card_container {
     display: flex;
     flex-direction: column;
@@ -6,7 +11,7 @@
     padding: 1.5rem;
     margin: 2rem;
     border-radius: 1rem;
-    width: 220px; 
+    width: 275px; 
     max-width: 100%; 
     text-align: center;
 }
@@ -14,8 +19,6 @@
 .pokemonDetailsContainer {
     border-radius: 1rem;
     padding: 0.2rem 0.4rem;
-    font-weight: 400;
-    font-size: 35px;
 }
 
 .cardHeader {
@@ -26,6 +29,8 @@
 
 .pokemonID {
     margin-bottom: -4rem;
+    font-size: 35px;
+    font-weight: 400;
 }
 
 .img_container {
@@ -36,6 +41,8 @@
 .pokemonName {
     margin-top: 0.5rem;
     text-transform: capitalize;
+    font-size: 25px;
+    font-weight: 400;
 }
 
 .pokeType {
@@ -43,7 +50,7 @@
     gap: 10px; /* Simplified to 'gap' property */
     align-items: center;
     justify-content: center;
-    margin-top: 1rem; 
+    margin: 1rem;
 }
 
 .pokeTypeBG {
@@ -61,3 +68,9 @@
     justify-content: center;
     align-items: center;
 }
+
+ .description {
+    display: flex;
+    margin-left: 1rem;
+    margin-right: 1rem;
+} 
