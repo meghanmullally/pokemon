@@ -1,0 +1,19 @@
+.bio_title {
+    display: flex;
+    margin: 1rem;
+}
+
+
+.description {
+    display: flex;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.ability_btn, .egg_btn {
+    display: flex;
+    gap: 8px; /* Simplified to 'gap' property */
+    align-items: center;
+    justify-content: center;
+    margin: 1rem; 
+}
