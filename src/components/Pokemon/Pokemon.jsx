@@ -4,6 +4,7 @@ import { Card, Divider, Tooltip } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 import PokemonTypeIcons from '../TypeIcons';
 import Bio from '../Bio/Bio';
+import Stats from '../Stats/Stats';
 import './Pokemon.css';
 // import ErrorPage from './Error';
 
@@ -111,6 +112,7 @@ const Pokemon = ({ pokemonData }) => {
         </Card>
         <Bio pokemonDetails={pokemonDetails} pokemonSpecies={pokemonSpecies} />
       </div> {/* full pokemon detail div  */}
+        <Stats pokemonDetails={pokemonDetails}/>
     </>
   );
 };
