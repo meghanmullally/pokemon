@@ -15,7 +15,5 @@
 .ability_btn, .egg_btn {
     display: flex;
     gap: 1rem; /* Simplified to 'gap' property */
-    /* align-items: center;
-    justify-content: center; */
     margin: 1rem; 
 }

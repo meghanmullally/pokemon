@@ -1,12 +1,10 @@
 import React from "react";
 import { Paper, Divider, Tooltip, Button, Grid } from '@mui/material';
-import ScaleIcon from '@mui/icons-material/Scale';
-import HeightIcon from '@mui/icons-material/Height';
 import './Bio.css';
 
 export default function Bio({ pokemonDetails, pokemonSpecies }) {
     const { abilities, height, weight } = pokemonDetails;
-    const { egg_groups, capture_rate, growth_rate, gender_rate, evolution_chain, habitat, generation, base_happiness, hatch_counter } = pokemonSpecies;
+    const { egg_groups, capture_rate, growth_rate, gender_rate, evolution_chain, habitat, generation, base_happiness, hatch_counter, flavor_text_entries } = pokemonSpecies;
 
 
     // Pokemon Height & Weight
@@ -16,9 +14,9 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
 
     if (pokemonDetails) {
         // The pokemon's height in decimetres which is converted into metres by dividing by 10
-        pokemonHeight = (pokemonDetails.height / 10);
+        pokemonHeight = (height / 10);
         // The pokemon's weight in hectograms which is converted into kilograms by dividing by 10
-        pokemonWeight = (pokemonDetails.weight / 10);
+        pokemonWeight = (weight / 10);
     }
 
     return (
@@ -26,15 +24,13 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
             <Paper className="bio_paper">
                 <Grid container spacing={2} columns={16}>
                     <Grid item xs={8}>
+                    <h3 className="bio_title"> About</h3>
+                        <p>{flavor_text_entries[0].flavor_text}</p>
+                        <Divider />
                         <h3 className="bio_title"> Generation</h3>
                         <p>{generation.name}</p>
                         <Divider />
-                        {/* <h3 className="bio_title">Height and Weight: </h3> */}
-                        {/* <p>Height: {height / 10} m</p>
-                        <p>Weight: {weight / 10} kg</p> */}
-                        {/* <HeightIcon /> */}
                         <p><strong>Height: </strong>{pokemonHeight} m</p>
-                        {/* <ScaleIcon /> */}
                         <p><strong>Weight: </strong> {pokemonWeight} kg</p>
                         <Divider />
                         <h3 className="bio_title">Habitat</h3>
