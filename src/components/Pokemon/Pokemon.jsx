@@ -71,20 +71,16 @@ const Pokemon = ({ pokemonData }) => {
   console.log("Im in the pokemon function");
   console.log("pokemonDetails=", pokemonDetails);
   console.log('pokemonData:', pokemonData);
-  console.log('pokemonData.sprite:', pokemonData.sprite);
-  console.log('pokemonData.sprite[pokemonId]:', pokemonData.sprite && pokemonData.sprite[pokemonId]);
 
   return (
     <>
-      <div className='full_pokemon_details'>
-        <Card className='pokemon_card_container'>
-          <div className="pokemonDetailsContainer">
-            <div className='cardHeader'>
-              <div className='pokemonID'>
-                #{String(pokemonDetails.id).padStart(3, '0')}
-              </div>
+      <div className='pokemonContainer'>
+        <Card className='pokemonCardContainer'>
+          <div className="pokemonSideCard">
+            <div className='pokemonID'>
+              #{String(pokemonDetails.id).padStart(3, '0')}
             </div>
-            <div className='img_container'>
+            <div className='imgContainer'>
               <CardMedia
                 component="img"
                 alt="pokemon image"
@@ -104,15 +100,16 @@ const Pokemon = ({ pokemonData }) => {
                 </Tooltip>
               ))}
             </div>
-            <Divider variant='middle' />
-            <div className='pokeInfo'>
-              <p className="description">{pokemonSpecies.flavor_text_entries[0].flavor_text}</p>
+            <Divider />
+            <div className='statsInfo'>
+              <Stats pokemonDetails={pokemonDetails} />
             </div>
-          </div> {/* Detials Container End */}
+          </div> {/* pokemonSideCard End */}
         </Card>
-        <Bio pokemonDetails={pokemonDetails} pokemonSpecies={pokemonSpecies} />
+        <div className='detailContainer'>
+          <Bio pokemonDetails={pokemonDetails} pokemonSpecies={pokemonSpecies} />
+        </div>
       </div> {/* full pokemon detail div  */}
-        <Stats pokemonDetails={pokemonDetails}/>
     </>
   );
 };
