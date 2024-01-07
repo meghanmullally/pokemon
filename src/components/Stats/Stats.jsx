@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, LinearProgress } from '@mui/material';
+import { Paper, Typography, LinearProgress } from '@mui/material';
 import './Stats.css';
 
 export default function Stats({ pokemonDetails }) {
@@ -32,6 +32,7 @@ export default function Stats({ pokemonDetails }) {
 
     return (
         <>
+        <Paper elevation={0}>
                 {stats.map((stat) => (
                     <div key={stat.stat.name} className="stat_container">
                         <div className="stat_row">
@@ -53,6 +54,7 @@ export default function Stats({ pokemonDetails }) {
                         />
                     </div>
                 ))}           
+        </Paper>
         </>
     );
 }

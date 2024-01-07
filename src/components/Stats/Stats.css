@@ -7,11 +7,8 @@
     justify-content: space-between;
 }
 
-.stat_name {
-    padding-bottom: 10px;
-    font-variant-caps: small-caps;
-}
-
+.stat_name,
 .stat_base_stat {
     padding-bottom: 10px;
+    font-variant-caps: small-caps;
 }
