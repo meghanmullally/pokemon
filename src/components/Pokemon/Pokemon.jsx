@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import { Card, Divider, Tooltip } from '@mui/material';
+import { Card, Divider, Tooltip, Paper } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 import PokemonTypeIcons from '../TypeIcons';
 import Bio from '../Bio/Bio';
 import Stats from '../Stats/Stats';
 import './Pokemon.css';
+import { TYPE_COLORS } from '../../constants/pokemon';
+import Evolution from '../EvolutionChain/Evolution';
 // import ErrorPage from './Error';
 
 
@@ -72,44 +74,77 @@ const Pokemon = ({ pokemonData }) => {
   console.log("pokemonDetails=", pokemonDetails);
   console.log('pokemonData:', pokemonData);
 
+  // Type Colors and Card Background Color
+  const getBorderColor = (types) => {
+    if (types && types.length === 2) {
+      const firstType = types[0].type.name;
+      const secondType = types[1].type.name;
+      let color1 = TYPE_COLORS[firstType] || 'white'; // Default to white if color is not found
+      let color2 = TYPE_COLORS[secondType] || 'white';
+      return `linear-gradient(to bottom, ${color1} 10%, ${color2})`;
+      // Add 80 (hexadecimal for 128, which is 50% opacity) to the color
+    } else if (types && types.length === 1) {
+      const singleType = types[0].type.name;
+      const color = TYPE_COLORS[singleType] || 'white';
+      return color;
+    } else {
+      // Handle the case when types is undefined or an empty array
+      return 'white30'; // You can provide a default color or handle it as needed
+    }
+  };
+
   return (
     <>
-      <div className='pokemonContainer'>
-        <Card className='pokemonCardContainer'>
-          <div className="pokemonSideCard">
-            <div className='pokemonID'>
-              #{String(pokemonDetails.id).padStart(3, '0')}
+      <Paper
+        style=
+        {
+          {
+            margin: '10px',
+            borderWidth: '10px',
+            background: `${getBorderColor(pokemonDetails.types)}`,
+            borderRadius: '1rem',
+          }
+        }
+      >
+        <div className='pokemonContainer'>
+          <Card className='pokemonCardContainer'>
+            <div className="pokemonSideCard">
+              <div className='pokemonID'>
+                #{String(pokemonDetails.id).padStart(3, '0')}
+              </div>
+              <div className='imgContainer'>
+                <CardMedia
+                  component="img"
+                  alt="pokemon image"
+                  className='cardMedia'
+                  image={pokemonData && pokemonData[pokemonId - 1] && pokemonData[pokemonId - 1].sprite}
+                />
+              </div>
+              <div className='pokemonName'>
+                <h3>{pokemonDetails.name}</h3>
+              </div>
+              <div className='pokeType'>
+                {pokemonDetails && pokemonDetails.types.map((type) => (
+                  <Tooltip key={type.type.name} title={type.type.name} arrow>
+                    <div className='pokeTypeBG'>
+                      <PokemonTypeIcons types={[type]} />
+                    </div>
+                  </Tooltip>
+                ))}
+              </div>
+              <Divider />
+              <div className='statsInfo'>
+                <Stats pokemonDetails={pokemonDetails} />
+              </div>
             </div>
-            <div className='imgContainer'>
-              <CardMedia
-                component="img"
-                alt="pokemon image"
-                height={{ height: '100%' }}
-                image={pokemonData && pokemonData[pokemonId - 1] && pokemonData[pokemonId - 1].sprite}
-              />
-            </div>
-            <div className='pokemonName'>
-              <h3>{pokemonDetails.name}</h3>
-            </div>
-            <div className='pokeType'>
-              {pokemonDetails && pokemonDetails.types.map((type) => (
-                <Tooltip key={type.type.name} title={type.type.name} arrow>
-                  <div className='pokeTypeBG'>
-                    <PokemonTypeIcons types={[type]} />
-                  </div>
-                </Tooltip>
-              ))}
-            </div>
-            <Divider />
-            <div className='statsInfo'>
-              <Stats pokemonDetails={pokemonDetails} />
-            </div>
-          </div> {/* pokemonSideCard End */}
-        </Card>
-        <div className='detailContainer'>
-          <Bio pokemonDetails={pokemonDetails} pokemonSpecies={pokemonSpecies} />
-        </div>
-      </div> {/* full pokemon detail div  */}
+            {/* pokemonSideCard End */}
+          </Card>
+          <div className='detailContainer' >
+            <Bio pokemonDetails={pokemonDetails} pokemonSpecies={pokemonSpecies} />
+          </div>
+        </div> {/* Pokemone Container div  */}
+        <Evolution pokemonSpecies={pokemonSpecies}/>
+      </Paper>
     </>
   );
 };
