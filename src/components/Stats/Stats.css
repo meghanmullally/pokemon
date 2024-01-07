@@ -1,0 +1,17 @@
+.stat_container {
+    margin: .2rem;
+}
+
+.stat_row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stat_name {
+    padding-bottom: 10px;
+    font-variant-caps: small-caps;
+}
+
+.stat_base_stat {
+    padding-bottom: 10px;
+}
