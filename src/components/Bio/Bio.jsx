@@ -4,46 +4,59 @@ import './Bio.css';
 
 export default function Bio({ pokemonDetails, pokemonSpecies }) {
     const { abilities, height, weight } = pokemonDetails;
-    const { egg_groups, capture_rate, growth_rate, gender_rate, evolution_chain, habitat, generation, base_happiness, hatch_counter, flavor_text_entries } = pokemonSpecies;
+    const { egg_groups, capture_rate, growth_rate, gender_rate, habitat, generation, base_happiness, hatch_counter, flavor_text_entries } = pokemonSpecies;
 
 
     // Pokemon Height & Weight
     let pokemonHeight = null;
     let pokemonWeight = null;
 
+    // Pokemon Height (feet) & Weight (lbs)
+    let pokemonHeightFeet = null;
+    let pokemonWeightLbs = null;
 
     if (pokemonDetails) {
         // The pokemon's height in decimetres which is converted into metres by dividing by 10
         pokemonHeight = (height / 10);
+        // for an approximate result, multiply the length value by 3.281
+        pokemonHeightFeet = (height / 10 * 3.28);
         // The pokemon's weight in hectograms which is converted into kilograms by dividing by 10
         pokemonWeight = (weight / 10);
+        // for an approximate result, multiply the mass value by 2.205
+        pokemonWeightLbs = (weight *  0.2205).toFixed(1);
     }
 
     return (
         <>
             <Paper className="bio_paper">
-                <Grid container spacing={2} columns={16}>
+                <Grid wrap="nowrap" container spacing={2} columns={16}>
                     <Grid item xs={8}>
                     <h3 className="bio_title"> About</h3>
-                        <p>{flavor_text_entries[0].flavor_text}</p>
+                        <p className='description'>{flavor_text_entries[0].flavor_text}</p>
                         <Divider />
                         <h3 className="bio_title"> Generation</h3>
-                        <p>{generation.name}</p>
+                        <p className='bio_para'>{generation.name}</p>
                         <Divider />
-                        <p><strong>Height: </strong>{pokemonHeight} m</p>
-                        <p><strong>Weight: </strong> {pokemonWeight} kg</p>
+                        <h3 className="bio_title">Height:</h3> 
+                        <p className='bio_para'>{pokemonHeight} m / {pokemonHeightFeet} "</p>
+                        <h3 className="bio_title">Weight:</h3> 
+                        <p className='bio_para'> {pokemonWeight} kg / {pokemonWeightLbs} lbs </p>
                         <Divider />
                         <h3 className="bio_title">Habitat</h3>
-                        <p>{habitat.name}</p>
+                        <p className='bio_para'>{habitat.name}</p>
                         <Divider />
                         <h3 className="bio_title">Capture Rate</h3>
-                        <p>{capture_rate}</p>
+                        <p className='bio_para'>{capture_rate}</p>
+                        <h3 className="bio_title">Base Happiness</h3>
+                        <p className='bio_para'>{base_happiness}</p>
                     </Grid>
                     <Grid item xs={8}>
                         <h3 className="bio_title">Growth Rate</h3>
-                        {growth_rate.name}
+                        <p className='bio_para'>{growth_rate.name}</p>
                         <h3 className="bio_title">Gender Ratio</h3>
-                        <p>{gender_rate}</p>
+                        <p className='bio_para'>{gender_rate}</p>
+                            <h3 className="bio_title">Hatch Counter</h3>
+                            <p className='bio_para'>{hatch_counter}</p>
                         <Divider />
                         <h3 className="bio_title"> Abilities: </h3>
                         <ul className="ability_btn">

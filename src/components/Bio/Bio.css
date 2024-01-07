@@ -11,6 +11,16 @@
     margin: 1rem;
 }
 
+.description {
+    display: flex;
+    text-align: justify;
+    padding-left: 1rem;
+}
+
+.bio_para {
+    display: flex;
+    justify-content: right;  
+}
 
 .ability_btn, .egg_btn {
     display: flex;
