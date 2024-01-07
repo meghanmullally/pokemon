@@ -1,41 +1,35 @@
-.full_pokemon_details {
+.pokemonContainer {
     display: flex;
-    align-items:first baseline;
+    flex-direction: row;
+    align-items: center;
 }
 
-.pokemon_card_container {
+.pokemonCardContainer {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem;
+    /* flex-direction: column;
+    justify-content: space-between; */
+    padding: 4rem;
     margin: 2rem;
     border-radius: 1rem;
-    width: 275px; 
-    max-width: 100%; 
+    /* width: 275px;  */
+    max-width: 100%;
     text-align: center;
 }
 
-.pokemonDetailsContainer {
+
+.pokemonSideCard {
     border-radius: 1rem;
     padding: 0.2rem 0.4rem;
 }
 
-.cardHeader {
+
+.pokemonID {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.pokemonID {
-    margin-bottom: -4rem;
     font-size: 35px;
-    font-weight: 400;
-}
-
-.img_container {
-    height: 150px;
-    width: 200px;
+    font-weight: 500;
 }
 
 .pokemonName {
@@ -44,6 +38,15 @@
     font-size: 25px;
     font-weight: 400;
 }
+
+.imgContainer {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 150px;
+    width: 200px;
+}
+
 
 .pokeType {
     display: flex;
@@ -56,7 +59,6 @@
 .pokeTypeBG {
     width: 40px;
     height: 40px;
-    border-radius: 50%; /* Updated to 50% for a perfect circle */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,8 +71,14 @@
     align-items: center;
 }
 
- .description {
+.statsInfo {
+    padding-top: 1rem;
+}
+
+.detailsContainer {
     display: flex;
-    margin-left: 1rem;
-    margin-right: 1rem;
-} 
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 10px;
+    width: 100%;
+}
