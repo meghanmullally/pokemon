@@ -1,3 +1,7 @@
 .nav-link {
     text-decoration: none;
 }
+
+.pokemonCardPaper {
+    margin-top: 15px;
+}
