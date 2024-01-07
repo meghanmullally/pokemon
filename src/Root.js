@@ -1,12 +1,12 @@
 import ResponsiveAppBar from "./components/Navigation";
-import PokemonHeaderImg from './img/pokedex_logo.svg';
+// import PokemonHeaderImg from './img/pokedex_logo.svg';
 
 function RootLayout() {
 
     return (
         <>
             <ResponsiveAppBar />
-            <img
+            {/* <img
                 src={PokemonHeaderImg}
                 alt="Pokemon Header"
                 style=
@@ -14,7 +14,7 @@ function RootLayout() {
                     height: '100px',
                     width: '200px'
                 }}
-            />
+            /> */}
         </>
     );
 }
