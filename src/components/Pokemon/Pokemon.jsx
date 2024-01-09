@@ -46,7 +46,7 @@ const Pokemon = ({ pokemonData }) => {
     fetch(speciesUrl)
       .then((response) => response.json())
       .then((data) => {
-        console.log("In Pokemon - EVO data = ", data);
+        console.log("In Pokemon - species data = ", data);
         setPokemonSpecies(data);
       })
       .catch((error) => {
