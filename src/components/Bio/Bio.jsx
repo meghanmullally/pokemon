@@ -31,15 +31,15 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
             <Paper className="bio_paper">
                 <Grid wrap="nowrap" container spacing={2} columns={16}>
                     <Grid item xs={8}>
-                    <h3 className="bio_title"> About</h3>
+                        <h3 className="bio_title"> About</h3>
                         <p className='description'>{flavor_text_entries[0].flavor_text}</p>
                         <Divider />
                         <h3 className="bio_title"> Generation</h3>
                         <p className='bio_para'>{generation.name}</p>
                         <Divider />
-                        <h3 className="bio_title">Height:</h3> 
+                        <h3 className="bio_title">Height:</h3>
                         <p className='bio_para'>{pokemonHeight} m / {pokemonHeightFeet} "</p>
-                        <h3 className="bio_title">Weight:</h3> 
+                        <h3 className="bio_title">Weight:</h3>
                         <p className='bio_para'> {pokemonWeight} kg / {pokemonWeightLbs} lbs </p>
                         <Divider />
                         <h3 className="bio_title">Habitat</h3>
@@ -55,13 +55,17 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
                         <p className='bio_para'>{growth_rate.name}</p>
                         <h3 className="bio_title">Gender Ratio</h3>
                         <p className='bio_para'>{gender_rate}</p>
-                            <h3 className="bio_title">Hatch Counter</h3>
-                            <p className='bio_para'>{hatch_counter}</p>
+                        <h3 className="bio_title">Hatch Counter</h3>
+                        <p className='bio_para'>{hatch_counter}</p>
                         <Divider />
                         <h3 className="bio_title"> Abilities: </h3>
                         <ul className="ability_btn">
                             {abilities.map((ability) => (
-                                <Button variant="outlined" key={ability.ability.name}>
+                                <Button
+                                    color={ability.is_hidden ? 'secondary' : 'primary'}
+                                    variant={ability.is_hidden ? "outlined" : "outlined"}
+                                    key={ability.ability.name}
+                                >
                                     {ability.ability.name}
                                 </Button>
                             ))}
