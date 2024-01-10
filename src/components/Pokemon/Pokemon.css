@@ -1,20 +1,17 @@
 .pokemonContainer {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
     align-items: center;
-    padding-top: 65px;
+    padding-top: 8px;
 }
 
 .pokemonCardContainer {
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: space-between;
     padding: 2rem;
     margin: 2rem;
-    /* border-radius: 1rem; */
-    /* width: 275px;  */
-    /* max-width: 275px; */
     text-align: center;
     width: auto; 
     height: auto;
@@ -83,10 +80,10 @@
     padding-top: 1rem;
 }
 
-.detailsContainer {
+/* .detailsContainer {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-top: 10px;
     width: 100%;
-}
+} */
