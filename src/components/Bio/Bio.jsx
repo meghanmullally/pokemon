@@ -23,7 +23,7 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
         // The pokemon's weight in hectograms which is converted into kilograms by dividing by 10
         pokemonWeight = (weight / 10);
         // for an approximate result, multiply the mass value by 2.205
-        pokemonWeightLbs = (weight *  0.2205).toFixed(1);
+        pokemonWeightLbs = (weight * 0.2205).toFixed(1);
     }
 
     return (
@@ -47,14 +47,18 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
                         <Divider />
                         <h3 className="bio_title">Capture Rate</h3>
                         <p className='bio_para'>{capture_rate}</p>
+                        <Divider />
                         <h3 className="bio_title">Base Happiness</h3>
                         <p className='bio_para'>{base_happiness}</p>
                     </Grid>
+                    <Divider orientation="vertical" variant="middle" />
                     <Grid item xs={8}>
                         <h3 className="bio_title">Growth Rate</h3>
                         <p className='bio_para'>{growth_rate.name}</p>
+                        <Divider />
                         <h3 className="bio_title">Gender Ratio</h3>
                         <p className='bio_para'>{gender_rate}</p>
+                        <Divider />
                         <h3 className="bio_title">Hatch Counter</h3>
                         <p className='bio_para'>{hatch_counter}</p>
                         <Divider />
