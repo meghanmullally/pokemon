@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import { Card, Divider, Tooltip, Paper } from '@mui/material';
+import { Card, Divider, Tooltip, Paper, Box, Typography } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 import PokemonTypeIcons from '../TypeIcons';
 import Bio from '../Bio/Bio';
@@ -81,7 +81,7 @@ const Pokemon = ({ pokemonData }) => {
       const secondType = types[1].type.name;
       let color1 = TYPE_COLORS[firstType] || 'white'; // Default to white if color is not found
       let color2 = TYPE_COLORS[secondType] || 'white';
-      return `linear-gradient(to bottom, ${color1} 10%, ${color2})`;
+      return `linear-gradient(to bottom, ${color1} 15%, ${color2} 75%)`;
       // Add 80 (hexadecimal for 128, which is 50% opacity) to the color
     } else if (types && types.length === 1) {
       const singleType = types[0].type.name;
@@ -95,7 +95,7 @@ const Pokemon = ({ pokemonData }) => {
 
   return (
     <>
-      <Paper
+      <Box
         style=
         {
           {
@@ -123,7 +123,7 @@ const Pokemon = ({ pokemonData }) => {
               <div className='pokemonName'>
                 <h3>{pokemonDetails.name}</h3>
               </div>
-              <div className='pokeType'>
+              <div className='pokeType'> 
                 {pokemonDetails && pokemonDetails.types.map((type) => (
                   <Tooltip key={type.type.name} title={type.type.name} arrow>
                     <div className='pokeTypeBG'>
@@ -139,12 +139,12 @@ const Pokemon = ({ pokemonData }) => {
             </div>
             {/* pokemonSideCard End */}
           </Card>
-          <div className='detailContainer' >
+          {/* <div className='detailContainer' > */}
             <Bio pokemonDetails={pokemonDetails} pokemonSpecies={pokemonSpecies} />
-          </div>
+          {/* </div> */}
         </div> {/* Pokemone Container div  */}
         <Evolution pokemonSpecies={pokemonSpecies}/>
-      </Paper>
+      </Box>
     </>
   );
 };
