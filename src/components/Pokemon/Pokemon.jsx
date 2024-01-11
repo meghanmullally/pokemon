@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import { Card, Divider, Tooltip, Paper, Box, Typography } from '@mui/material';
+import { Card, Divider, Tooltip, Paper, Box, Button } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 import PokemonTypeIcons from '../TypeIcons';
 import Bio from '../Bio/Bio';
@@ -99,7 +99,7 @@ const Pokemon = ({ pokemonData }) => {
         style=
         {
           {
-            margin: '10px',
+            margin: '80px',
             borderWidth: '10px',
             background: `${getBorderColor(pokemonDetails.types)}`,
             borderRadius: '1rem',
@@ -123,7 +123,7 @@ const Pokemon = ({ pokemonData }) => {
               <div className='pokemonName'>
                 <h3>{pokemonDetails.name}</h3>
               </div>
-              <div className='pokeType'> 
+              <div className='pokeType'>
                 {pokemonDetails && pokemonDetails.types.map((type) => (
                   <Tooltip key={type.type.name} title={type.type.name} arrow>
                     <div className='pokeTypeBG'>
@@ -140,11 +140,21 @@ const Pokemon = ({ pokemonData }) => {
             {/* pokemonSideCard End */}
           </Card>
           {/* <div className='detailContainer' > */}
-            <Bio pokemonDetails={pokemonDetails} pokemonSpecies={pokemonSpecies} />
+          <Bio pokemonDetails={pokemonDetails} pokemonSpecies={pokemonSpecies} />
           {/* </div> */}
         </div> {/* Pokemone Container div  */}
-        <Evolution pokemonSpecies={pokemonSpecies}/>
-      </Box>
+        <Paper className='movePaper'>
+          <h3 className="bio_title">Moves: </h3>
+          <ul className="moveList">
+            {pokemonDetails.moves.map((move) => (
+              <Button id='moveBtn' variant="outlined" key={move.move.name} size="small" >
+                {move.move.name}
+              </Button>
+            ))}
+          </ul>c
+      </Paper>
+      <Evolution pokemonSpecies={pokemonSpecies} />
+    </Box >
     </>
   );
 };

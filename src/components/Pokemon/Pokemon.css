@@ -13,7 +13,7 @@
     padding: 2rem;
     margin: 2rem;
     text-align: center;
-    width: auto; 
+    width: auto;
     height: auto;
 }
 
@@ -80,10 +80,25 @@
     padding-top: 1rem;
 }
 
-/* .detailsContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 10px;
-    width: 100%;
-} */
+.movePaper {
+    display: block;
+    /* flex-direction: row; */
+    padding: 1rem;
+    margin: 0 2.5rem 2rem 4.5rem;
+    /* margin-left: 4.5rem; */
+    
+}
+
+.moveList {
+    /* width: 355px; */
+    width: auto;
+    height: 100%;
+    overflow: scroll;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#moveBtn {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
