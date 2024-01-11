@@ -74,6 +74,7 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
                                 </Button>
                             ))}
                         </ul>
+                        <Divider />
                         <h3 className="bio_title">Egg Group: </h3>
                         <ul className="egg_btn">
                             {egg_groups.map((group) => (
