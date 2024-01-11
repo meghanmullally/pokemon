@@ -151,7 +151,7 @@ const Pokemon = ({ pokemonData }) => {
                 {move.move.name}
               </Button>
             ))}
-          </ul>c
+          </ul>
       </Paper>
       <Evolution pokemonSpecies={pokemonSpecies} />
     </Box >
