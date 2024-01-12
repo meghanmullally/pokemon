@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import { Card, Divider, Tooltip, Paper, Box, Button } from '@mui/material';
-import CardMedia from '@mui/material/CardMedia';
+import { Card, Divider, Tooltip, Paper, Box, Button, Grid, CardMedia, CircularProgress } from '@mui/material';
+// import CardMedia from '@mui/material/CardMedia';
 import PokemonTypeIcons from '../TypeIcons';
 import Bio from '../Bio/Bio';
 import Stats from '../Stats/Stats';
@@ -56,6 +56,14 @@ const Pokemon = ({ pokemonData }) => {
 
   }, [pokemonId]);
 
+  if (!pokemonDetails || !pokemonSpecies) {
+    // come back to this and add a loading circle
+    return <div className='circularProgress'>
+      Loading....
+      {/* <CircularProgress color="primary" variant="indeterminate" /> */}
+    </div>;
+  }
+
   console.log("------------------------------");
   console.log('In Pokemon - pokemon details, pokemon species');
   console.log('pokemonDetails =', pokemonDetails);
@@ -99,7 +107,7 @@ const Pokemon = ({ pokemonData }) => {
         style=
         {
           {
-            margin: '80px',
+            margin: '40px',
             borderWidth: '10px',
             background: `${getBorderColor(pokemonDetails.types)}`,
             borderRadius: '1rem',
@@ -139,11 +147,14 @@ const Pokemon = ({ pokemonData }) => {
             </div>
             {/* pokemonSideCard End */}
           </Card>
-          {/* <div className='detailContainer' > */}
-          <Bio pokemonDetails={pokemonDetails} pokemonSpecies={pokemonSpecies} />
-          {/* </div> */}
+
+          <div className='detailContainer' >
+            <Bio pokemonDetails={pokemonDetails} pokemonSpecies={pokemonSpecies} />
+          </div>
         </div> {/* Pokemone Container div  */}
-        <Paper className='movePaper'>
+
+        {/* Moves Container */}
+        <Paper className='moveContainer'>
           <h3 className="bio_title">Moves: </h3>
           <ul className="moveList">
             {pokemonDetails.moves.map((move) => (
@@ -152,9 +163,12 @@ const Pokemon = ({ pokemonData }) => {
               </Button>
             ))}
           </ul>
-      </Paper>
-      <Evolution pokemonSpecies={pokemonSpecies} />
-    </Box >
+        </Paper>
+        {/* Evolution Container */}
+        <div className="evolutionContainer">
+          <Evolution pokemonSpecies={pokemonSpecies} />
+        </div>
+      </Box >
     </>
   );
 };

@@ -8,8 +8,10 @@
 
 .pokemonCardContainer {
     display: flex;
-    align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    /* align-items: center; */
     padding: 2rem;
     margin: 2rem;
     text-align: center;
@@ -32,7 +34,6 @@
 }
 
 .pokemonName {
-    margin-top: 0.5rem;
     text-transform: capitalize;
     font-size: 25px;
     font-weight: 400;
@@ -55,45 +56,35 @@
 .pokeType {
     display: flex;
     gap: 10px;
-    /* Simplified to 'gap' property */
     align-items: center;
     justify-content: center;
     margin: 1rem;
 }
 
 .pokeTypeBG {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 40px;
     height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.pokeInfo {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    align-items: center;
 }
 
 .statsInfo {
     padding-top: 1rem;
 }
 
-.movePaper {
-    display: block;
-    /* flex-direction: row; */
+.moveContainer {
+    display: blocflexk;
+    flex-direction: column;
     padding: 1rem;
-    margin: 0 2.5rem 2rem 4.5rem;
-    /* margin-left: 4.5rem; */
-    
+    margin: 2rem;
+    /* margin: 0 2.5rem 2rem 4.5rem;     */
 }
 
 .moveList {
-    /* width: 355px; */
     width: auto;
     height: 100%;
-    overflow: scroll;
+    overflow: auto;
     text-align: left;
     text-transform: uppercase;
 }
@@ -102,3 +93,13 @@
     margin-right: 8px;
     margin-bottom: 8px;
 }
+
+.evolutionContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+    padding-top: 5px;
+    /* align-items: center; */
+    padding-bottom: 50px;
+  }
+  
