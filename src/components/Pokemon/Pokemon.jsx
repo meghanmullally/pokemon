@@ -12,34 +12,31 @@ import Evolution from '../EvolutionChain/Evolution';
 
 
 const Pokemon = ({ pokemonData }) => {
-
-  // specific pokemon details
+  // Main Pokemon Details
   const [pokemonDetails, setPokemonDetails] = useState(null);
-  // for pokemon Evo
+  // Pokemon Species Details for Bio 
   const [pokemonSpecies, setPokemonSpecies] = useState(null);
 
-  console.log('pokemonDetails:', pokemonDetails);
-
+  console.log("pokemonDetails:", pokemonDetails);
 
   const params = useParams();
-  console.log("params = ", params)
+  console.log("params = ", params);
   let { pokemonId } = params;
-
 
   useEffect(() => {
     // pokemonUrl can take pokemon name or id, using name since that is what comes back in the fetch in app.js
     const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
-    // url for Evo 
+    // url for Evo
     const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`;
 
     fetch(pokemonUrl)
       .then((response) => response.json())
       .then((data) => {
-        console.log('In Pokemon - pokemonDetails = ', data);
+        console.log("In Pokemon - pokemonDetails = ", data);
         setPokemonDetails(data);
       })
       .catch((error) => {
-        console.error('Error fetching Pokemon data:', error);
+        console.error("Error fetching Pokemon data:", error);
         // Handle the error, show an error message, or redirect to an error page
       });
 
@@ -50,115 +47,124 @@ const Pokemon = ({ pokemonData }) => {
         setPokemonSpecies(data);
       })
       .catch((error) => {
-        console.error('Error fetching Pokemon species data:', error);
+        console.error("Error fetching Pokemon species data:", error);
         // Handle the error, show an error message, or redirect to an error page
       });
-
   }, [pokemonId]);
 
   if (!pokemonDetails || !pokemonSpecies) {
     // come back to this and add a loading circle
-    return <div className='circularProgress'>
-      Loading....
-      {/* <CircularProgress color="primary" variant="indeterminate" /> */}
-    </div>;
+    return (
+      <div className="circularProgress">
+        Loading....
+        {/* <CircularProgress color="primary" variant="indeterminate" /> */}
+      </div>
+    );
   }
 
   console.log("------------------------------");
-  console.log('In Pokemon - pokemon details, pokemon species');
-  console.log('pokemonDetails =', pokemonDetails);
-  console.log('pokemonSpecies =', pokemonSpecies);
-
+  console.log("In Pokemon - pokemon details, pokemon species");
+  console.log("pokemonDetails =", pokemonDetails);
+  console.log("pokemonSpecies =", pokemonSpecies);
 
   // checking for both pokemonDetails and pokemonSpecies
   if (!pokemonDetails || !pokemonSpecies) {
-    console.log('No pokemonDetails or pokemonSpecies found');
+    console.log("No pokemonDetails or pokemonSpecies found");
     return null; // or some loading indicator
   }
 
-
-  console.log("-------------------------------")
+  console.log("-------------------------------");
   console.log("Im in the pokemon function");
   console.log("pokemonDetails=", pokemonDetails);
-  console.log('pokemonData:', pokemonData);
+  console.log("pokemonData:", pokemonData);
 
   // Type Colors and Card Background Color
   const getBorderColor = (types) => {
     if (types && types.length === 2) {
       const firstType = types[0].type.name;
       const secondType = types[1].type.name;
-      let color1 = TYPE_COLORS[firstType] || 'white'; // Default to white if color is not found
-      let color2 = TYPE_COLORS[secondType] || 'white';
+      let color1 = TYPE_COLORS[firstType] || "white"; // Default to white if color is not found
+      let color2 = TYPE_COLORS[secondType] || "white";
       return `linear-gradient(to bottom, ${color1} 15%, ${color2} 75%)`;
       // Add 80 (hexadecimal for 128, which is 50% opacity) to the color
     } else if (types && types.length === 1) {
       const singleType = types[0].type.name;
-      const color = TYPE_COLORS[singleType] || 'white';
+      const color = TYPE_COLORS[singleType] || "white";
       return color;
     } else {
       // Handle the case when types is undefined or an empty array
-      return 'white30'; // You can provide a default color or handle it as needed
+      return "white30"; // You can provide a default color or handle it as needed
     }
   };
 
   return (
     <>
       <Box
-        style=
-        {
-          {
-            margin: '40px',
-            borderWidth: '10px',
-            background: `${getBorderColor(pokemonDetails.types)}`,
-            borderRadius: '1rem',
-          }
-        }
+        style={{
+          margin: "40px",
+          borderWidth: "10px",
+          background: `${getBorderColor(pokemonDetails.types)}`,
+          borderRadius: "1rem",
+        }}
       >
-        <div className='pokemonContainer'>
-          <Card className='pokemonCardContainer'>
+        <div className="pokemonContainer">
+          <Card className="pokemonCardContainer">
             <div className="pokemonSideCard">
-              <div className='pokemonID'>
-                #{String(pokemonDetails.id).padStart(3, '0')}
+              <div className="pokemonID">
+                #{String(pokemonDetails.id).padStart(3, "0")}
               </div>
-              <div className='imgContainer'>
+              <div className="imgContainer">
                 <CardMedia
                   component="img"
                   alt="pokemon image"
-                  className='cardMedia'
-                  image={pokemonData && pokemonData[pokemonId - 1] && pokemonData[pokemonId - 1].sprite}
+                  className="cardMedia"
+                  image={
+                    pokemonData &&
+                    pokemonData[pokemonId - 1] &&
+                    pokemonData[pokemonId - 1].sprite
+                  }
                 />
               </div>
-              <div className='pokemonName'>
+              <div className="pokemonName">
                 <h3>{pokemonDetails.name}</h3>
               </div>
-              <div className='pokeType'>
-                {pokemonDetails && pokemonDetails.types.map((type) => (
-                  <Tooltip key={type.type.name} title={type.type.name} arrow>
-                    <div className='pokeTypeBG'>
-                      <PokemonTypeIcons types={[type]} />
-                    </div>
-                  </Tooltip>
-                ))}
+              <div className="pokeType">
+                {pokemonDetails &&
+                  pokemonDetails.types.map((type) => (
+                    <Tooltip key={type.type.name} title={type.type.name} arrow>
+                      <div className="pokeTypeBG">
+                        <PokemonTypeIcons types={[type]} />
+                      </div>
+                    </Tooltip>
+                  ))}
               </div>
               <Divider />
-              <div className='statsInfo'>
+              <div className="statsInfo">
                 <Stats pokemonDetails={pokemonDetails} />
               </div>
             </div>
             {/* pokemonSideCard End */}
           </Card>
 
-          <div className='detailContainer' >
-            <Bio pokemonDetails={pokemonDetails} pokemonSpecies={pokemonSpecies} />
+          <div className="detailContainer">
+            <Bio
+              pokemonDetails={pokemonDetails}
+              pokemonSpecies={pokemonSpecies}
+            />
           </div>
-        </div> {/* Pokemone Container div  */}
-
+        </div>{" "}
+        {/* Pokemone Container div  */}
         {/* Moves Container */}
-        <Paper className='moveContainer'>
+        <Paper className="moveContainer">
           <h3 className="bio_title">Moves: </h3>
           <ul className="moveList">
             {pokemonDetails.moves.map((move) => (
-              <Button id='moveBtn' variant="outlined" key={move.move.name} size="small" >
+              <Button
+                id="moveBtn"
+                variant="outlined"
+                key={move.move.name}
+                size="small"
+              >
                 {move.move.name}
               </Button>
             ))}
@@ -168,7 +174,7 @@ const Pokemon = ({ pokemonData }) => {
         <div className="evolutionContainer">
           <Evolution pokemonSpecies={pokemonSpecies} />
         </div>
-      </Box >
+      </Box>
     </>
   );
 };
