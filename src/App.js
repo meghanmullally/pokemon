@@ -1,17 +1,16 @@
-import './App.css';
-import { useEffect, useState } from 'react';
-import Pokedex from './components/Pokedex/Pokedex';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Pokemon from './components/Pokemon/Pokemon';
+import "./App.css";
+import { useEffect, useState } from "react";
+import Pokedex from "./components/Pokedex/Pokedex";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Pokemon from "./components/Pokemon/Pokemon";
 // import ErrorPage from './components/Error';
-import RootLayout from './Root';
+import RootLayout from "./Root";
 
 function App() {
-
   // give variable name, then set it with function..place in memory to useState to keep track of it...
-  // example in Max's react course - destructoring 
+  // example in Max's react course - destructoring
   const [pokemonData, setPokemonData] = useState([]);
-  // help to determine if data is still being fetched or if it has loaded successfully 
+  // help to determine if data is still being fetched or if it has loaded successfully
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,7 +39,7 @@ function App() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching Pokemon Data', error);
+        console.error("Error fetching Pokemon Data", error);
         setLoading(false);
       });
   }, []);
@@ -49,15 +48,21 @@ function App() {
 
   // Pokemon Image
   const generatedPokemonImageUrl = (id) => {
-    const defaultPokemonImageUrl = 'src/img/default_pokemon.png';
+    const defaultPokemonImageUrl = "src/img/default_pokemon.png";
     return id
       ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
       : defaultPokemonImageUrl;
   };
 
   const router = createBrowserRouter([
-    { path: '/', element: !loading ? <Pokedex pokemonData={pokemonData} /> : null },
-    { path: '/pokemon/:pokemonId', element: <Pokemon pokemonData={pokemonData} /> },
+    {
+      path: "/",
+      element: !loading ? <Pokedex pokemonData={pokemonData} /> : null,
+    },
+    {
+      path: "/pokemon/:pokemonId",
+      element: <Pokemon pokemonData={pokemonData} />,
+    },
   ]);
 
   return (
