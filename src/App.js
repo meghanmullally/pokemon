@@ -13,6 +13,14 @@ function App() {
   // help to determine if data is still being fetched or if it has loaded successfully
   const [loading, setLoading] = useState(true);
 
+  // Pokemon Image
+  const generatedPokemonImageUrl = (id) => {
+    const defaultPokemonImageUrl = "src/img/default_pokemon.png";
+    return id
+      ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+      : defaultPokemonImageUrl;
+  };
+
   useEffect(() => {
     // the Pokémon API (PokeAPI) contains information on the first 898 Pokémon species, which includes all Pokémon from Generations I to VIII.
     const POKEMON_LIMIT = 24;
@@ -45,14 +53,6 @@ function App() {
   }, []);
 
   console.log("pokemonData ", pokemonData);
-
-  // Pokemon Image
-  const generatedPokemonImageUrl = (id) => {
-    const defaultPokemonImageUrl = "src/img/default_pokemon.png";
-    return id
-      ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
-      : defaultPokemonImageUrl;
-  };
 
   const router = createBrowserRouter([
     {
