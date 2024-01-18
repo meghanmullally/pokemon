@@ -1,11 +1,12 @@
 import React from 'react';
 import { AppBar, Toolbar, Grid, Typography } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
+import Search from '../Search/Search';
 // import PokemonHeaderImg from '../img/pokedex_logo.svg';
 
 
 
-function ResponsiveAppBar() {
+function Header({ optionData }) {
 
   return (
     <>
@@ -31,6 +32,7 @@ function ResponsiveAppBar() {
                 }}
             /> */}
             </Grid>
+            <Search optionData={optionData}/>
           </Grid>
         </Toolbar>
       </AppBar>
@@ -39,4 +41,4 @@ function ResponsiveAppBar() {
 };
 
 
-export default ResponsiveAppBar;
+export default Header;
