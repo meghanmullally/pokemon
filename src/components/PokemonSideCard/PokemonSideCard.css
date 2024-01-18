@@ -1,0 +1,62 @@
+.pokemonCardContainer {
+    display: flex;
+    flex-direction: row;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    /* align-items: center; */
+    padding: 2rem;
+    margin: 2rem;
+    text-align: center;
+    width: auto;
+    height: auto;
+}
+
+.sideCard {
+    border-radius: 1rem;
+    padding: 0.2rem 0.4rem;
+}
+
+
+.pokemonID {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.pokemonName {
+    text-transform: capitalize;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.imgContainer {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    width: 200px;
+}
+
+.cardMedia {
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+}
+
+.pokeType {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.pokeTypeBG {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
