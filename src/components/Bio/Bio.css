@@ -1,9 +1,13 @@
 .bio_paper {
     display: flex;
-    /* padding: 15px; */
     max-width: 975px;
     width: 100%;
     height: 685px;
+}
+
+.bioGrid {
+    padding-left: 12px;
+    padding-right: 12px;
 }
 
 .bio_title {

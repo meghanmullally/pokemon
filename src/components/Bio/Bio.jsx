@@ -27,9 +27,9 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
 
   return (
     <>
-      <Paper className="bio_paper">
+      <Paper elevation={0} className="bio_paper" >
         <Grid wrap="nowrap" container spacing={2} columns={16}>
-          <Grid item xs={8}>
+          <Grid item xs={8} className="bioGrid">
             <h3 className="bio_title"> About</h3>
             <p className="description">{flavor_text_entries[0].flavor_text}</p>
             <Divider />
@@ -56,7 +56,7 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
             <p className="bio_para">{base_happiness}</p>
           </Grid>
           <Divider orientation="vertical" variant="middle" />
-          <Grid item xs={8}>
+          <Grid item xs={8} className="bioGrid">
             <h3 className="bio_title">Growth Rate</h3>
             <p className="bio_para">{growth_rate.name}</p>
             <Divider />
