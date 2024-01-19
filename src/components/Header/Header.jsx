@@ -17,7 +17,7 @@ function Header({ optionData }) {
             alt="pokemon ball"
             style={{ height: '40px', width: '40px', borderRadius: '50%', paddingRight: '8px' }}
           />
-          <Typography variant='h5'>Pokedéx</Typography>
+          <Typography variant='h5'>Pokédex</Typography>
           <Grid container spacing={2}>
             <Grid item xs={4}>
               {/* <NavLink to="/"> */}
