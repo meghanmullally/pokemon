@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Divider, Tooltip, CardMedia } from '@mui/material';
-import PokemonTypeIcons from '../TypeIcons';
+// import PokemonTypeIcons from '../TypeIcons';
 import PokemonTypeNameIcons from '../TypeNameIcons';
 import './PokemonSideCard.css';
 
@@ -20,20 +20,19 @@ const PokemonSideCard = ({ pokemonData, pokemonDetails }) => {
         <>
             <Card elevation={0} className="pokemonSideCardContainer">
                 <div className="pokemonID">
-                    #{String(pokemonDetails.id).padStart(3, "0")}
+                    #{String(pokemonDetails.id).padStart(3, "0")} {name}
                 </div>
+                {/* <div className="pokemonName">
+                    <h3>{name}</h3>
+                </div> */}
                 <div className="imgContainer">
                     <CardMedia
                         component="img"
                         alt="pokemon image"
-                        // className="cardMedia"
                         image={
                             pokemonData && pokemonData[id - 1] && pokemonData[id - 1].sprite
                         }
                     />
-                </div>
-                <div className="pokemonName">
-                    <h3>{name}</h3>
                 </div>
                 <div className="pokeType">
                     {types &&
@@ -45,7 +44,6 @@ const PokemonSideCard = ({ pokemonData, pokemonDetails }) => {
                             </Tooltip>
                         ))}
                 </div>
-                <Divider />
                 {/* pokemonSideCard End */}
             </Card>
         </>
