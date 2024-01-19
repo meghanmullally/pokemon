@@ -30,20 +30,19 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
       <Paper elevation={0} className="bio_paper" >
         <Grid wrap="nowrap" container spacing={2} columns={16}>
           <Grid item xs={8} className="bioGrid">
-            <h3 className="bio_title"> About</h3>
+            <h3 className="bio_title">About</h3>
             <p className="description">{flavor_text_entries[0].flavor_text}</p>
             <Divider />
             <h3 className="bio_title"> Generation</h3>
             <p className="bio_para">{generation.name}</p>
             <Divider />
-            <h3 className="bio_title">Height:</h3>
+            <h3 className="bio_title">Height</h3>
             <p className="bio_para">
               {pokemonHeight} m / {pokemonHeightFeet} "
             </p>
-            <h3 className="bio_title">Weight:</h3>
+            <h3 className="bio_title">Weight</h3>
             <p className="bio_para">
-              {" "}
-              {pokemonWeight} kg / {pokemonWeightLbs} lbs{" "}
+              {pokemonWeight} kg / {pokemonWeightLbs} lbs
             </p>
             <Divider />
             <h3 className="bio_title">Habitat</h3>
@@ -66,7 +65,7 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
             <h3 className="bio_title">Hatch Counter</h3>
             <p className="bio_para">{hatch_counter}</p>
             <Divider />
-            <h3 className="bio_title"> Abilities: </h3>
+            <h3 className="bio_title"> Abilities </h3>
             <ul className="ability_btn">
               {abilities.map((ability) => (
                 <Button
@@ -79,7 +78,7 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
               ))}
             </ul>
             <Divider />
-            <h3 className="bio_title">Egg Group: </h3>
+            <h3 className="bio_title">Egg Group</h3>
             <ul className="egg_btn">
               {egg_groups.map((group) => (
                 <Button variant="outlined" key={group.name}>
