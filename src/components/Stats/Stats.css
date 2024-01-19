@@ -1,5 +1,5 @@
 .stat_container {
-    margin: .2rem;
+    padding: 4px;
 }
 
 .stat_row {
@@ -9,6 +9,6 @@
 
 .stat_name,
 .stat_base_stat {
-    padding-bottom: 10px;
+    padding-bottom: 8px;
     font-variant-caps: small-caps;
 }
