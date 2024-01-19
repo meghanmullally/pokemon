@@ -1,0 +1,15 @@
+.moveContainer {
+    display: blocflexk;
+    flex-direction: column;
+    margin: 2rem;
+    padding: 1rem;
+    /* margin: 0 2.5rem 2rem 4.5rem;     */
+}
+
+.moveList {
+    width: auto;
+    height: 100%;
+    overflow: auto;
+    text-align: left;
+    text-transform: uppercase;
+}
