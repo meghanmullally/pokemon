@@ -23,7 +23,15 @@
 
 .bio_para {
     display: flex;
-    justify-content: right;
+    /* flex-direction: row; */
+    /* align-items: center; */
+}
+
+.bioInfo {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 20px 0;
 }
 
 .ability_btn,

@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Divider, Tooltip, Button, Grid } from "@mui/material";
+import { Paper, Divider, Typography, Button, Grid } from "@mui/material";
 import "./Bio.css";
 
 export default function Bio({ pokemonDetails, pokemonSpecies }) {
@@ -28,42 +28,77 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
   return (
     <>
       <Paper elevation={0} className="bio_paper" >
-        <Grid wrap="nowrap" container spacing={2} columns={16}>
+        <Grid wrap="nowrap" container spacing={1} columns={16}>
           <Grid item xs={8} className="bioGrid">
             <h3 className="bio_title">About</h3>
             <p className="description">{flavor_text_entries[0].flavor_text}</p>
             <Divider />
-            <h3 className="bio_title"> Generation</h3>
-            <p className="bio_para">{generation.name}</p>
+            {/* <h3 className="bio_title"> Generation</h3>
+            <p className="bio_para">{generation.name}</p> */}
+            <div className="bioInfo">
+              <strong>Generation: </strong>
+              <span>{generation.name}</span>
+            </div>
             <Divider />
-            <h3 className="bio_title">Height</h3>
+            <div className="bioInfo">
+              <strong>Height: </strong>
+              <span>{pokemonHeight} m / {pokemonHeightFeet} "</span>
+              <br></br>
+              <strong>Weight: </strong>
+              <span>{pokemonWeight} kg / {pokemonWeightLbs} lbs</span>
+            </div>
+            {/* <h3 className="bio_title">Height</h3>
             <p className="bio_para">
               {pokemonHeight} m / {pokemonHeightFeet} "
-            </p>
-            <h3 className="bio_title">Weight</h3>
+            </p> */}
+            {/* <h3 className="bio_title">Weight</h3>
             <p className="bio_para">
               {pokemonWeight} kg / {pokemonWeightLbs} lbs
-            </p>
+            </p> */}
             <Divider />
-            <h3 className="bio_title">Habitat</h3>
-            <p className="bio_para">{habitat.name}</p>
+            <div className="bioInfo">
+              <strong>Habitat: </strong>
+              <span>{habitat.name}</span>
+            </div>
             <Divider />
-            <h3 className="bio_title">Capture Rate</h3>
-            <p className="bio_para">{capture_rate}</p>
+            <div className="bioInfo">
+            <strong>Capture Rate: </strong>
+              <span>{capture_rate}</span>
+            {/* <h3 className="bio_title">Capture Rate</h3>
+            <p className="bio_para">{capture_rate}</p> */}
+            </div>
             <Divider />
-            <h3 className="bio_title">Base Happiness</h3>
-            <p className="bio_para">{base_happiness}</p>
+            <div className="bioInfo">
+            <strong>Base Happiness: </strong>
+              <span>{base_happiness}</span>
+            {/* <h3 className="bio_title">Base Happiness</h3>
+            <p className="bio_para">{base_happiness}</p> */}
+            </div>
+            {/* <h3 className="bio_title">Habitat</h3>
+            <p className="bio_para">{habitat.name}</p> */}
           </Grid>
           <Divider orientation="vertical" variant="middle" />
           <Grid item xs={8} className="bioGrid">
-            <h3 className="bio_title">Growth Rate</h3>
-            <p className="bio_para">{growth_rate.name}</p>
+          <div className="bioInfo">
+            <strong>Growth Rate: </strong>
+              <span>{growth_rate.name}</span>
+            {/* <h3 className="bio_title">Growth Rate</h3>
+            <p className="bio_para">{growth_rate.name}</p> */}
+            </div>
             <Divider />
-            <h3 className="bio_title">Gender Ratio</h3>
-            <p className="bio_para">{gender_rate}</p>
+            <div className="bioInfo">
+            <strong>Gender Ratio: </strong>
+              <span>{gender_rate}</span>
+            {/* <h3 className="bio_title">Gender Ratio</h3>
+            <p className="bio_para">{gender_rate}</p> */}
+            </div>
             <Divider />
-            <h3 className="bio_title">Hatch Counter</h3>
-            <p className="bio_para">{hatch_counter}</p>
+            <div className="bioInfo">
+            <strong>Hatch Counter: </strong>
+              <span>{hatch_counter}</span>
+            {/* <h3 className="bio_title">Hatch Counter</h3>
+            <p className="bio_para">{hatch_counter}</p> */}
+            </div>
             <Divider />
             <h3 className="bio_title"> Abilities </h3>
             <ul className="ability_btn">
