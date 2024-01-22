@@ -1,5 +1,6 @@
 import React from "react";
-import { Paper, Divider, Typography, Button, Grid } from "@mui/material";
+import { Paper, Divider, Typography, Button, Grid, Tooltip } from "@mui/material";
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import "./Bio.css";
 
 export default function Bio({ pokemonDetails, pokemonSpecies }) {
@@ -100,7 +101,13 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
             <p className="bio_para">{hatch_counter}</p> */}
             </div>
             <Divider />
-            <h3 className="bio_title"> Abilities </h3>
+            <h3 className="abilityTitle"> Abilities 
+            <Tooltip title="Abilities are a game mechanic introduced in Gen-III, which causes a passive effect during battle or the overworld. 
+            Pokemon usually have one ability and the most any species or form can have are three: two normal Abilities and one Hidden Ability." 
+            arrow>
+              <InfoOutlinedIcon className="infoIcon"/>
+              </Tooltip>
+            </h3>
             <ul className="ability_btn">
               {abilities.map((ability) => (
                 <Button

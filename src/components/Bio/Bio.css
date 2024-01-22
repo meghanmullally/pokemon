@@ -35,6 +35,17 @@
     text-transform: capitalize;
 }
 
+.abilityTitle {
+    display: flex;
+    justify-content: space-between;
+    text-transform: capitalize; 
+}
+
+/* .infoIcon {
+    display: flex;
+    justify-content: space-evenly;
+} */
+
 .ability_btn,
 .egg_btn {
     display: flex;
