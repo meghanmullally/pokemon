@@ -1,15 +1,24 @@
 import React from 'react';
-import {  Paper, Button } from '@mui/material';
+import {  Paper, Button, Tooltip } from '@mui/material';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+
 import './Moves.css';
 
 
 
 const Moves = ({ pokemonDetails }) => {
-
   return (
     <>
       <Paper className="moveContainer">
-        <h3 className="bio_title">Moves: </h3>
+        <h3 className="movesTitle">
+          Moves:
+          <Tooltip
+            title="moves..."
+            arrow
+          >
+            <InfoOutlinedIcon className="infoIcon" />
+          </Tooltip>
+        </h3>
         <ul className="moveList">
           {pokemonDetails.moves.map((move) => (
             <Button

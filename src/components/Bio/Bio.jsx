@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Divider, Typography, Button, Grid, Tooltip } from "@mui/material";
+import { Paper, Divider, Button, Grid, Tooltip } from "@mui/material";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import "./Bio.css";
 
