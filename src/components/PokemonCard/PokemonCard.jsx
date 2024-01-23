@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Divider, Paper } from "@mui/material";
+// import PokemonTypeIcons from '../TypeIcons';
 // import { TYPE_COLORS } from '../../constants/pokemon';
 import "./PokemonCard.css";
 
@@ -37,8 +38,7 @@ export default function PokemonCard(props) {
           >
             <CardMedia
               component="img"
-              alt="pokemon image"
-              height={{ height: "100%" }}
+              alt={name}
               image={sprite} // default image
             />
             <Divider variant="middle" />

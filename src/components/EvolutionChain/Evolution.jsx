@@ -14,8 +14,7 @@ export default function Evolution({ evolutionData }) {
   return (
     <>
       <Paper>
-        <Typography gutterBottom variant="h3">Evolution Chain</Typography>
-        <div className="evoContainer">
+        <Typography gutterBottom variant="h4">Evolution Chain</Typography>
           <div className="evoPoke">
             {evolutionData.map((pokemon) => {
               const { id } = pokemon;
@@ -36,7 +35,6 @@ export default function Evolution({ evolutionData }) {
               }
             })}
           </div>
-        </div>
       </Paper>
     </>
   );
