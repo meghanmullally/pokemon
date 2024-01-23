@@ -1,38 +1,67 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import { Card, Divider, Tooltip, Paper, Box, Button, Grid, CardMedia, CircularProgress } from '@mui/material';
-// import CardMedia from '@mui/material/CardMedia';
-import PokemonTypeIcons from '../TypeIcons';
+import { Divider, Paper, Box } from '@mui/material';
+// import PokemonTypeIcons from '../TypeIcons';
+import PokemonSideCard from '../PokemonSideCard/PokemonSideCard';
 import Bio from '../Bio/Bio';
 import Stats from '../Stats/Stats';
-import './Pokemon.css';
 import { TYPE_COLORS } from '../../constants/pokemon';
 import Evolution from '../EvolutionChain/Evolution';
-// import ErrorPage from './Error';
+import Moves from '../Moves/Moves';
+import LoadingMessage from '../LoadingMessage/LoadingMessage';
+import './Pokemon.css';
 
 
 const Pokemon = ({ pokemonData }) => {
+  const params = useParams();
+  let { pokemonId } = params;
+
+  // initial evo chain
+  const initEvolutionChain = [];
+
   // Main Pokemon Details
   const [pokemonDetails, setPokemonDetails] = useState(null);
+  const [evolutionChain, setEvolutionChain] = useState(initEvolutionChain);
   // Pokemon Species Details for Bio 
   const [pokemonSpecies, setPokemonSpecies] = useState(null);
+  
 
-  console.log("pokemonDetails:", pokemonDetails);
+  const evolutionList = [];
+  
+  // Evolution Chain Recursive function 
+  const buildEvolution = (chain) => {
+    const {url} = chain.species;
+    const regex = /\/(\d+)\/?/;
+    const check = url.match(regex);
+    const {name} = chain.species;
 
-  const params = useParams();
-  console.log("params = ", params);
-  let { pokemonId } = params;
+  const pokemonEvolved = {
+    id: parseInt(check[1]),
+    name: name,
+  };
+  evolutionList.push(pokemonEvolved);
+
+  if (chain.evolves_to.length !== 0) {
+    // Return the result of the recursive call
+    return buildEvolution(chain.evolves_to[0]);
+  }
+
+  return evolutionList;
+};
+
+
 
   useEffect(() => {
     // pokemonUrl can take pokemon name or id, using name since that is what comes back in the fetch in app.js
     const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
-    // url for Evo
+    // url for specific pokemon details
     const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`;
+    // url for Evo
+    const evolutionChainUrl = `https://pokeapi.co/api/v2/evolution-chain/${pokemonId}/`;
 
     fetch(pokemonUrl)
       .then((response) => response.json())
       .then((data) => {
-        console.log("In Pokemon - pokemonDetails = ", data);
         setPokemonDetails(data);
       })
       .catch((error) => {
@@ -43,40 +72,31 @@ const Pokemon = ({ pokemonData }) => {
     fetch(speciesUrl)
       .then((response) => response.json())
       .then((data) => {
-        console.log("In Pokemon - species data = ", data);
         setPokemonSpecies(data);
       })
       .catch((error) => {
         console.error("Error fetching Pokemon species data:", error);
-        // Handle the error, show an error message, or redirect to an error page
+      });
+
+    fetch(evolutionChainUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        const { chain } = data;
+
+        buildEvolution(chain);
+        setEvolutionChain(evolutionList);
+        console.log("UPDATED EVO LIST", evolutionList);
+      })
+      .catch((error) => {
+        console.error("Error fetching Evo Data:", error);
       });
   }, [pokemonId]);
 
-  if (!pokemonDetails || !pokemonSpecies) {
-    // come back to this and add a loading circle
-    return (
-      <div className="circularProgress">
-        Loading....
-        {/* <CircularProgress color="primary" variant="indeterminate" /> */}
-      </div>
-    );
-  }
-
   console.log("------------------------------");
-  console.log("In Pokemon - pokemon details, pokemon species");
-  console.log("pokemonDetails =", pokemonDetails);
-  console.log("pokemonSpecies =", pokemonSpecies);
+  console.log("IN POKEMON - pokemonDetails =", pokemonDetails);
+  console.log("IN POKEMON -  pokemonSpecies =", pokemonSpecies);
+  console.log("IN POKEMON - pokemonData =", pokemonData);
 
-  // checking for both pokemonDetails and pokemonSpecies
-  if (!pokemonDetails || !pokemonSpecies) {
-    console.log("No pokemonDetails or pokemonSpecies found");
-    return null; // or some loading indicator
-  }
-
-  console.log("-------------------------------");
-  console.log("Im in the pokemon function");
-  console.log("pokemonDetails=", pokemonDetails);
-  console.log("pokemonData:", pokemonData);
 
   // Type Colors and Card Background Color
   const getBorderColor = (types) => {
@@ -97,7 +117,8 @@ const Pokemon = ({ pokemonData }) => {
     }
   };
 
-  return (
+// build bio 
+  const bioBuild = () =>  (
     <>
       <Box
         style={{
@@ -108,73 +129,37 @@ const Pokemon = ({ pokemonData }) => {
         }}
       >
         <div className="pokemonContainer">
-          <Card className="pokemonCardContainer">
-            <div className="pokemonSideCard">
-              <div className="pokemonID">
-                #{String(pokemonDetails.id).padStart(3, "0")}
-              </div>
-              <div className="imgContainer">
-                <CardMedia
-                  component="img"
-                  alt="pokemon image"
-                  className="cardMedia"
-                  image={
-                    pokemonData &&
-                    pokemonData[pokemonId - 1] &&
-                    pokemonData[pokemonId - 1].sprite
-                  }
-                />
-              </div>
-              <div className="pokemonName">
-                <h3>{pokemonDetails.name}</h3>
-              </div>
-              <div className="pokeType">
-                {pokemonDetails &&
-                  pokemonDetails.types.map((type) => (
-                    <Tooltip key={type.type.name} title={type.type.name} arrow>
-                      <div className="pokeTypeBG">
-                        <PokemonTypeIcons types={[type]} />
-                      </div>
-                    </Tooltip>
-                  ))}
-              </div>
-              <Divider />
-              <div className="statsInfo">
-                <Stats pokemonDetails={pokemonDetails} />
-              </div>
-            </div>
-            {/* pokemonSideCard End */}
-          </Card>
-
-          <div className="detailContainer">
-            <Bio
+            <Paper className="pokemonStatsBioCard">
+              <div className="statsTypeInfo">
+            <PokemonSideCard
+              pokemonData={pokemonData}
               pokemonDetails={pokemonDetails}
-              pokemonSpecies={pokemonSpecies}
             />
-          </div>
-        </div>{" "}
-        {/* Pokemone Container div  */}
+            <Divider />
+              <Stats pokemonDetails={pokemonDetails} />
+            </div>
+          <div className="bioContainer">
+          <Bio
+            pokemonDetails={pokemonDetails}
+            pokemonSpecies={pokemonSpecies}
+            />
+        </div>
+            </Paper>
+      </div> 
+      {/* Pokemon Container div (pokemonSideCard and Bio) */}
         {/* Moves Container */}
-        <Paper className="moveContainer">
-          <h3 className="bio_title">Moves: </h3>
-          <ul className="moveList">
-            {pokemonDetails.moves.map((move) => (
-              <Button
-                id="moveBtn"
-                variant="outlined"
-                key={move.move.name}
-                size="small"
-              >
-                {move.move.name}
-              </Button>
-            ))}
-          </ul>
-        </Paper>
+        <Moves pokemonDetails={pokemonDetails}/>
         {/* Evolution Container */}
         <div className="evolutionContainer">
-          <Evolution pokemonSpecies={pokemonSpecies} />
+          <Evolution evolutionData={evolutionChain} />
         </div>
       </Box>
+    </>
+  );
+
+  return (
+    <>
+    {(!pokemonDetails || !pokemonSpecies || evolutionChain.length === 0) ? <LoadingMessage /> : bioBuild()}        
     </>
   );
 };
