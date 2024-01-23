@@ -1,17 +1,11 @@
 import React from 'react';
-import { Card, Divider, Tooltip, CardMedia } from '@mui/material';
+import { Card, Tooltip, CardMedia } from '@mui/material';
 // import PokemonTypeIcons from '../TypeIcons';
 import PokemonTypeNameIcons from '../TypeNameIcons';
 import './PokemonSideCard.css';
 
 
 const PokemonSideCard = ({ pokemonData, pokemonDetails }) => {
-
-    console.log("------------------------------");
-    console.log("side pokemon Card pokemonData", pokemonData);
-    console.log("side pokemon Card pokemonDetails", pokemonDetails);
-
-    const { sprite } = pokemonData;
     const { id, name, types } = pokemonDetails;
 
 

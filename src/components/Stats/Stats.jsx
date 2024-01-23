@@ -5,8 +5,6 @@ import "./Stats.css";
 export default function Stats({ pokemonDetails }) {
   const { stats } = pokemonDetails;
 
-  console.log("IN STATS -----", stats);
-
   // normalizing the range
   const min = 0;
   // individual stats are typically capped at 255 and total at 510

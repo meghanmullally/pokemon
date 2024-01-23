@@ -5,24 +5,20 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { POKEMON_LIMIT } from "../../constants/pokemon";
 import "./Evolution.css";
 
-
 export default function Evolution({ evolutionData }) {
-  //   const { evolutionData } = props;
 
   console.log("--------------------------------");
-  console.log("IN EVOLUTION COMP");
-  console.log("evolutionData", evolutionData);
+  console.log("IN EVOLUTION");
+  console.log("evolution data", evolutionData);
 
   return (
     <>
       <Paper>
-        <Typography variant="h3">Evolution Chain</Typography>
+        <Typography gutterBottom variant="h3">Evolution Chain</Typography>
         <div className="evoContainer">
           <div className="evoPoke">
             {evolutionData.map((pokemon) => {
-              const { id, name, sprite } = pokemon;
-              console.log("id", id);
-              console.log("pokemon", pokemon);
+              const { id } = pokemon;
 
               if (parseInt(id) > POKEMON_LIMIT) {
                 return null;
