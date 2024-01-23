@@ -6,6 +6,11 @@
     /* margin: 0 2.5rem 2rem 4.5rem;     */
 }
 
+.movesTitle {
+    display: flex;
+    justify-content: space-between;
+}
+
 .moveList {
     width: auto;
     height: 100%;
