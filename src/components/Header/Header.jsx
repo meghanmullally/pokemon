@@ -1,8 +1,6 @@
 import React from 'react';
 import { AppBar, Toolbar, Grid, Typography } from '@mui/material';
-// import { NavLink } from 'react-router-dom';
 import Search from '../Search/Search';
-// import PokemonHeaderImg from '../img/pokedex_logo.svg';
 
 
 
@@ -20,17 +18,6 @@ function Header({ optionData }) {
           <Typography variant='h5'>Pokédex</Typography>
           <Grid container spacing={2}>
             <Grid item xs={4}>
-              {/* <NavLink to="/"> */}
-              {/* </NavLink> */}
-              {/* <img
-                src={PokemonHeaderImg}
-                alt="Pokemon Header"
-                style=
-                {{
-                    height: '100px',
-                    width: '200px'
-                }}
-            /> */}
             </Grid>
             <Search optionData={optionData}/>
           </Grid>
