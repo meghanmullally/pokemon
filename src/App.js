@@ -1,10 +1,8 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import Pokedex from "./components/Pokedex/Pokedex";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Pokedex from "./components/Pokedex/Pokedex";
 import Pokemon from "./components/Pokemon/Pokemon";
-// import ErrorPage from './components/Error';
-import RootLayout from "./Root";
 
 function App() {
   // give variable name, then set it with function..place in memory to useState to keep track of it...
@@ -12,6 +10,8 @@ function App() {
   const [pokemonData, setPokemonData] = useState([]);
   // help to determine if data is still being fetched or if it has loaded successfully
   const [loading, setLoading] = useState(true);
+  // for search bar
+  const [optionData, setOptionData] = useState([]);
 
   // Pokemon Image
   const generatedPokemonImageUrl = (id) => {
@@ -29,35 +29,36 @@ function App() {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        const modifiedPokemonData = {};
 
         data.results.forEach((pokemon, index) => {
           const pokemonImgId = (index + 1).toString();
           const sprite = generatedPokemonImageUrl(pokemonImgId);
 
-          modifiedPokemonData[index + 1] = {
+          pokemonData[index + 1] = {
             id: index + 1,
             name: pokemon.name,
             sprite: sprite,
+            searched: false
           };
+
+          optionData.push(pokemonData[index + 1]);
+
         });
 
-        console.log("modifiedPokemonData =", modifiedPokemonData);
-        setPokemonData(Object.values(modifiedPokemonData));
+        setPokemonData(pokemonData);
+        setOptionData(optionData);
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching Pokemon Data", error);
         setLoading(false);
       });
-  }, []);
-
-  console.log("pokemonData ", pokemonData);
+  }, [pokemonData, optionData]);
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: !loading ? <Pokedex pokemonData={pokemonData} /> : null,
+      element: !loading && <Pokedex pokemonData={pokemonData} optionData={optionData}/>,
     },
     {
       path: "/pokemon/:pokemonId",
@@ -67,7 +68,6 @@ function App() {
 
   return (
     <div className="App">
-      <RootLayout />
       <RouterProvider router={router} />
       <br />
       {/* <a href="https://icons8.com/icon/63311/pokeball">Pokeball</a> icon by <a href="https://icons8.com">Icons8</a> */}
