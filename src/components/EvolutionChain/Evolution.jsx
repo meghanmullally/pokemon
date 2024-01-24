@@ -15,14 +15,14 @@ export default function Evolution({ evolutionData }) {
       <Paper>
         <Typography gutterBottom variant="h4">Evolution Chain</Typography>
           <div className="evoPoke">
-            {evolutionData.map((pokemon, index) => {
+            {evolutionData.map((pokemon) => {
               const { id } = pokemon;
 
               if (parseInt(id) > POKEMON_LIMIT) {
                 return null;
               } else {
                 return (
-                  <React.Fragment key={index}>
+                  <React.Fragment key={pokemon.id}>
                     <div className="evoCard">
                       <PokemonCard pokemonId={pokemon} />
                     </div>
