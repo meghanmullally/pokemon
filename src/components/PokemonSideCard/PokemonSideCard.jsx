@@ -1,13 +1,11 @@
 import React from 'react';
 import { Card, Tooltip, CardMedia } from '@mui/material';
-// import PokemonTypeIcons from '../TypeIcons';
 import PokemonTypeNameIcons from '../TypeNameIcons';
 import './PokemonSideCard.css';
 
 
-const PokemonSideCard = ({pokemonDetails }) => {
+const PokemonSideCard = ({ pokemonDetails }) => {
     const { name, types, sprites } = pokemonDetails;
-
 
     return (
         <>
@@ -15,9 +13,6 @@ const PokemonSideCard = ({pokemonDetails }) => {
                 <div className="pokemonID">
                     #{String(pokemonDetails.id).padStart(3, "0")} {name}
                 </div>
-                {/* <div className="pokemonName">
-                    <h3>{name}</h3>
-                </div> */}
                 <div className="imgContainer">
                     <CardMedia
                         component="img"
@@ -39,7 +34,6 @@ const PokemonSideCard = ({pokemonDetails }) => {
             </Card>
         </>
     );
-
 
 }
 
