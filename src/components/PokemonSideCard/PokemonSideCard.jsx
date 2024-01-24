@@ -5,9 +5,8 @@ import PokemonTypeNameIcons from '../TypeNameIcons';
 import './PokemonSideCard.css';
 
 
-const PokemonSideCard = ({ pokemonData, pokemonDetails }) => {
-    const { id, name, types } = pokemonDetails;
-
+const PokemonSideCard = ({pokemonDetails }) => {
+    const { name, types, sprites } = pokemonDetails;
 
 
     return (
@@ -22,10 +21,8 @@ const PokemonSideCard = ({ pokemonData, pokemonDetails }) => {
                 <div className="imgContainer">
                     <CardMedia
                         component="img"
-                        alt="pokemon image"
-                        image={
-                            pokemonData && pokemonData[id - 1] && pokemonData[id - 1].sprite
-                        }
+                        alt={`${name} pokemon image`}
+                        image={sprites.front_default}
                     />
                 </div>
                 <div className="pokeType">

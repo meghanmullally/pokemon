@@ -27,7 +27,7 @@ export default function PokemonCard(props) {
   // };
 
   return (
-    <>
+    <React.Fragment key={pokemonId}>
       <NavLink className="nav-link" to={{ pathname: `/pokemon/${id}` }}>
         <Paper className="pokemonCardPaper">
           <Card
@@ -38,7 +38,7 @@ export default function PokemonCard(props) {
           >
             <CardMedia
               component="img"
-              alt={name}
+              alt={`${name} pokemon image`}
               image={sprite} // default image
             />
             <Divider variant="middle" />
@@ -50,6 +50,6 @@ export default function PokemonCard(props) {
           </Card>
         </Paper>
       </NavLink>
-    </>
+    </React.Fragment>
   );
 }
