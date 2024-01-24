@@ -8,22 +8,21 @@ import "./Evolution.css";
 export default function Evolution({ evolutionData }) {
 
   console.log("--------------------------------");
-  console.log("IN EVOLUTION");
-  console.log("evolution data", evolutionData);
+  console.log("IN EVOLUTION - evolution data", evolutionData);
 
   return (
     <>
       <Paper>
         <Typography gutterBottom variant="h4">Evolution Chain</Typography>
           <div className="evoPoke">
-            {evolutionData.map((pokemon) => {
+            {evolutionData.map((pokemon, index) => {
               const { id } = pokemon;
 
               if (parseInt(id) > POKEMON_LIMIT) {
                 return null;
               } else {
                 return (
-                  <React.Fragment key={pokemon.id}>
+                  <React.Fragment key={index}>
                     <div className="evoCard">
                       <PokemonCard pokemonId={pokemon} />
                     </div>
