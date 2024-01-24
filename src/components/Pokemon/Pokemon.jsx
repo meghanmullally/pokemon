@@ -12,52 +12,58 @@ import LoadingMessage from '../LoadingMessage/LoadingMessage';
 import './Pokemon.css';
 
 
-const Pokemon = ({ pokemonData }) => {
+const Pokemon = () => {
   const params = useParams();
   let { pokemonId } = params;
+
+console.log("params", params)
 
   // initial evo chain
   const initEvolutionChain = [];
 
   // Main Pokemon Details
   const [pokemonDetails, setPokemonDetails] = useState(null);
+  // Pokemon Evolution Chain
   const [evolutionChain, setEvolutionChain] = useState(initEvolutionChain);
-  // Pokemon Species Details for Bio 
+  // Pokemon Species Details for Bio
   const [pokemonSpecies, setPokemonSpecies] = useState(null);
-  
 
-  const evolutionList = [];
-  
-  // Evolution Chain Recursive function 
-  const buildEvolution = (chain) => {
-    const {url} = chain.species;
+  // const evolutionList = [];
+
+  // Evolution Chain Recursive function
+  const buildEvolution = (chain, evolutionList = []) => {
+
+    // Destructuring assignment: Extracts the 'name' and 'url' properties from 'chain.species'
+    const { name, url } = chain.species;
+
+    // Regular expression to match and extract the numeric part from the 'url'
     const regex = /\/(\d+)\/?/;
     const check = url.match(regex);
-    const {name} = chain.species;
 
-  const pokemonEvolved = {
-    id: parseInt(check[1]),
-    name: name,
+    // Creating an object representing the evolved Pokemon with 'id' and 'name'
+    const pokemonEvolved = {
+      id: check[1],
+      name: name,
+    };
+
+    // Adding the evolved Pokemon to the 'evolutionList' array
+    evolutionList.push(pokemonEvolved);
+
+  // Checking if there are further evolutions in the chain
+    if (chain.evolves_to.length !== 0) {
+     // If true, make a recursive call to 'buildEvolution' with the next evolution and the updated 'evolutionList'
+      return buildEvolution(chain.evolves_to[0], evolutionList);
+    }
+
+  // If no further evolutions, return the final 'evolutionList'
+    return evolutionList;
   };
-  evolutionList.push(pokemonEvolved);
-
-  if (chain.evolves_to.length !== 0) {
-    // Return the result of the recursive call
-    return buildEvolution(chain.evolves_to[0]);
-  }
-
-  return evolutionList;
-};
-
-
 
   useEffect(() => {
     // pokemonUrl can take pokemon name or id, using name since that is what comes back in the fetch in app.js
     const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
     // url for specific pokemon details
     const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`;
-    // url for Evo
-    const evolutionChainUrl = `https://pokeapi.co/api/v2/evolution-chain/${pokemonId}/`;
 
     fetch(pokemonUrl)
       .then((response) => response.json())
@@ -73,30 +79,28 @@ const Pokemon = ({ pokemonData }) => {
       .then((response) => response.json())
       .then((data) => {
         setPokemonSpecies(data);
+
+        fetch(data.evolution_chain.url)
+          .then((response) => response.json())
+          .then((data) => {
+            const { chain } = data;
+
+            const evolutionList = buildEvolution(chain);
+            setEvolutionChain(evolutionList);
+            console.log("UPDATED EVO LIST", evolutionList);
+          })
+          .catch((error) => {
+            console.error("Error fetching Evo Data:", error);
+          });
       })
       .catch((error) => {
         console.error("Error fetching Pokemon species data:", error);
-      });
-
-    fetch(evolutionChainUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        const { chain } = data;
-
-        buildEvolution(chain);
-        setEvolutionChain(evolutionList);
-        console.log("UPDATED EVO LIST", evolutionList);
-      })
-      .catch((error) => {
-        console.error("Error fetching Evo Data:", error);
       });
   }, [pokemonId]);
 
   console.log("------------------------------");
   console.log("IN POKEMON - pokemonDetails =", pokemonDetails);
   console.log("IN POKEMON -  pokemonSpecies =", pokemonSpecies);
-  console.log("IN POKEMON - pokemonData =", pokemonData);
-
 
   // Type Colors and Card Background Color
   const getBorderColor = (types) => {
@@ -117,8 +121,8 @@ const Pokemon = ({ pokemonData }) => {
     }
   };
 
-// build bio 
-  const bioBuild = () =>  (
+  // build bio
+  const bioBuild = () => (
     <>
       <Box
         style={{
@@ -129,26 +133,25 @@ const Pokemon = ({ pokemonData }) => {
         }}
       >
         <div className="pokemonContainer">
-            <Paper className="pokemonStatsBioCard">
-              <div className="statsTypeInfo">
-            <PokemonSideCard
-              pokemonData={pokemonData}
-              pokemonDetails={pokemonDetails}
-            />
-            <Divider />
+          <Paper className="pokemonStatsBioCard">
+            <div className="statsTypeInfo">
+              <PokemonSideCard
+                pokemonDetails={pokemonDetails}
+              />
+              <Divider />
               <Stats pokemonDetails={pokemonDetails} />
             </div>
-          <div className="bioContainer">
-          <Bio
-            pokemonDetails={pokemonDetails}
-            pokemonSpecies={pokemonSpecies}
-            />
+            <div className="bioContainer">
+              <Bio
+                pokemonDetails={pokemonDetails}
+                pokemonSpecies={pokemonSpecies}
+              />
+            </div>
+          </Paper>
         </div>
-            </Paper>
-      </div> 
-      {/* Pokemon Container div (pokemonSideCard and Bio) */}
+        {/* Pokemon Container div (pokemonSideCard and Bio) */}
         {/* Moves Container */}
-        <Moves pokemonDetails={pokemonDetails}/>
+        <Moves pokemonDetails={pokemonDetails} />
         {/* Evolution Container */}
         <div className="evolutionContainer">
           <Evolution evolutionData={evolutionChain} />
@@ -159,7 +162,11 @@ const Pokemon = ({ pokemonData }) => {
 
   return (
     <>
-    {(!pokemonDetails || !pokemonSpecies || evolutionChain.length === 0) ? <LoadingMessage /> : bioBuild()}        
+      {!pokemonDetails || !pokemonSpecies || evolutionChain.length === 0 ? (
+        <LoadingMessage />
+      ) : (
+        bioBuild()
+      )}
     </>
   );
 };
