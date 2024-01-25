@@ -3,10 +3,16 @@ import { Paper, Divider, Button, Grid, Tooltip } from "@mui/material";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import "./Bio.css";
 
-export default function Bio({ pokemonDetails, pokemonSpecies }) {
+export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDetails }) {
   const { abilities, height, weight } = pokemonDetails;
-  const { egg_groups, capture_rate, growth_rate, gender_rate, habitat, generation, base_happiness, hatch_counter, flavor_text_entries } = pokemonSpecies;
+  const { egg_groups, capture_rate, growth_rate, gender_rate, habitat, generation, base_happiness, hatch_counter, flavor_text_entries, genera, shape } = pokemonSpecies;
+  const { characteristicDescription } = characteristicDetails || {};
 
+  const englishFlavorText = flavor_text_entries.find((entry) => entry.language.name === 'en');
+  // Use the first English entry if found, otherwise use an empty string
+  const flavorText = englishFlavorText ? englishFlavorText.flavor_text : '';
+
+  
   // Pokemon Height & Weight
   let pokemonHeight = null;
   let pokemonWeight = null;
@@ -32,8 +38,15 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
         <Grid wrap="nowrap" container spacing={1} columns={16}>
           <Grid item xs={8} className="bioGrid">
             <h3 className="bio_title">About</h3>
-            <p className="description">{flavor_text_entries[0].flavor_text}</p>
+            <p className="description">{flavorText}</p>
             <Divider />
+            <div className="bioInfo">
+              <strong>Characteristic: </strong>
+                    <span>
+                      {characteristicDescription}
+                      </span>
+                </div>
+              <Divider/>
             <div className="bioInfo">
               <strong>Generation: </strong>
               <span>{generation.name}</span>
@@ -64,6 +77,16 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
           </Grid>
           <Divider orientation="vertical" variant="middle" />
           <Grid item xs={8} className="bioGrid">
+          <div className="bioInfo">
+            <strong>Genus: </strong>
+              <span>{genera[7].genus}</span>
+            </div>
+            <Divider />
+            <div className="bioInfo">
+            <strong>Shape: </strong>
+              <span>{shape.name}</span>
+            </div>
+            <Divider />
           <div className="bioInfo">
             <strong>Growth Rate: </strong>
               <span>{growth_rate.name}</span>
