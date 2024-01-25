@@ -62,7 +62,7 @@ function App() {
     },
     {
       path: "/pokemon/:pokemonId",
-      element: <Pokemon pokemonData={pokemonData} />,
+      element: <Pokemon />,
     },
   ]);
 
