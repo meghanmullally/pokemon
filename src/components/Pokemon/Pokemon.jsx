@@ -16,8 +16,6 @@ const Pokemon = () => {
   const params = useParams();
   let { pokemonId } = params;
 
-console.log("params", params)
-
   // initial evo chain
   const initEvolutionChain = [];
 
@@ -27,6 +25,7 @@ console.log("params", params)
   const [evolutionChain, setEvolutionChain] = useState(initEvolutionChain);
   // Pokemon Species Details for Bio
   const [pokemonSpecies, setPokemonSpecies] = useState(null);
+  const [characteristicDetails, setCharacteristicDetails] = useState(null);
 
   // const evolutionList = [];
 
@@ -64,6 +63,8 @@ console.log("params", params)
     const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
     // url for specific pokemon details
     const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`;
+    // url for pokemon characteristic 
+    const characteristicUrl = `https://pokeapi.co/api/v2/characteristic/${pokemonId}/`;
 
     fetch(pokemonUrl)
       .then((response) => response.json())
@@ -72,6 +73,21 @@ console.log("params", params)
       })
       .catch((error) => {
         console.error("Error fetching Pokemon data:", error);
+        // Handle the error, show an error message, or redirect to an error page
+      });
+
+    fetch(characteristicUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        // Finding the English description
+        const englishDescription = data.descriptions.find((desc) => desc.language.name === 'en');
+        const characteristicDescription = englishDescription ? englishDescription.description : '';
+
+        // Set state with the data including the English description
+        setCharacteristicDetails({ ...data, characteristicDescription });
+      })
+      .catch((error) => {
+        console.error("Error fetching characteristic data:", error);
         // Handle the error, show an error message, or redirect to an error page
       });
 
@@ -137,7 +153,7 @@ console.log("params", params)
             <div className="statsTypeInfo">
               <PokemonSideCard
                 pokemonDetails={pokemonDetails}
-              />
+                />
               <Divider />
               <Stats pokemonDetails={pokemonDetails} />
             </div>
@@ -145,6 +161,7 @@ console.log("params", params)
               <Bio
                 pokemonDetails={pokemonDetails}
                 pokemonSpecies={pokemonSpecies}
+                characteristicDetails={characteristicDetails}
               />
             </div>
           </Paper>
