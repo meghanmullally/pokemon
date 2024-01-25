@@ -41,10 +41,12 @@
     text-transform: capitalize; 
 }
 
-/* .infoIcon {
+.bmiInfo {
     display: flex;
-    justify-content: space-evenly;
-} */
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 20px 0;
+}
 
 .ability_btn,
 .egg_btn {

@@ -17,13 +17,13 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
 
   if (pokemonDetails) {
     // The pokemon's height in decimetres which is converted into metres by dividing by 10
-    pokemonHeight = height / 10;
+    pokemonHeight = (height / 10).toFixed(2);
     // for an approximate result, multiply the length value by 3.281
-    pokemonHeightFeet = (height / 10) * 3.28;
+    pokemonHeightFeet = ((height / 10) * 3.281).toFixed(2);
     // The pokemon's weight in hectograms which is converted into kilograms by dividing by 10
-    pokemonWeight = weight / 10;
+    pokemonWeight = (weight / 10).toFixed(2);
     // for an approximate result, multiply the mass value by 2.205
-    pokemonWeightLbs = (weight * 0.2205).toFixed(1);
+    pokemonWeightLbs = (weight * 0.2205).toFixed(2);
   }
 
   return (
@@ -34,28 +34,18 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
             <h3 className="bio_title">About</h3>
             <p className="description">{flavor_text_entries[0].flavor_text}</p>
             <Divider />
-            {/* <h3 className="bio_title"> Generation</h3>
-            <p className="bio_para">{generation.name}</p> */}
             <div className="bioInfo">
               <strong>Generation: </strong>
               <span>{generation.name}</span>
             </div>
             <Divider />
-            <div className="bioInfo">
+            <div className="bmiInfo">
               <strong>Height: </strong>
-              <span>{pokemonHeight} m / {pokemonHeightFeet} "</span>
+              <span>{pokemonHeight} m / {pokemonHeightFeet} ft </span>
               <br></br>
               <strong>Weight: </strong>
               <span>{pokemonWeight} kg / {pokemonWeightLbs} lbs</span>
             </div>
-            {/* <h3 className="bio_title">Height</h3>
-            <p className="bio_para">
-              {pokemonHeight} m / {pokemonHeightFeet} "
-            </p> */}
-            {/* <h3 className="bio_title">Weight</h3>
-            <p className="bio_para">
-              {pokemonWeight} kg / {pokemonWeightLbs} lbs
-            </p> */}
             <Divider />
             <div className="bioInfo">
               <strong>Habitat: </strong>
@@ -65,40 +55,28 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
             <div className="bioInfo">
             <strong>Capture Rate: </strong>
               <span>{capture_rate}</span>
-            {/* <h3 className="bio_title">Capture Rate</h3>
-            <p className="bio_para">{capture_rate}</p> */}
             </div>
             <Divider />
             <div className="bioInfo">
             <strong>Base Happiness: </strong>
               <span>{base_happiness}</span>
-            {/* <h3 className="bio_title">Base Happiness</h3>
-            <p className="bio_para">{base_happiness}</p> */}
             </div>
-            {/* <h3 className="bio_title">Habitat</h3>
-            <p className="bio_para">{habitat.name}</p> */}
           </Grid>
           <Divider orientation="vertical" variant="middle" />
           <Grid item xs={8} className="bioGrid">
           <div className="bioInfo">
             <strong>Growth Rate: </strong>
               <span>{growth_rate.name}</span>
-            {/* <h3 className="bio_title">Growth Rate</h3>
-            <p className="bio_para">{growth_rate.name}</p> */}
             </div>
             <Divider />
             <div className="bioInfo">
             <strong>Gender Ratio: </strong>
               <span>{gender_rate}</span>
-            {/* <h3 className="bio_title">Gender Ratio</h3>
-            <p className="bio_para">{gender_rate}</p> */}
             </div>
             <Divider />
             <div className="bioInfo">
             <strong>Hatch Counter: </strong>
               <span>{hatch_counter}</span>
-            {/* <h3 className="bio_title">Hatch Counter</h3>
-            <p className="bio_para">{hatch_counter}</p> */}
             </div>
             <Divider />
             <h3 className="abilityTitle"> Abilities 
@@ -110,13 +88,14 @@ export default function Bio({ pokemonDetails, pokemonSpecies }) {
             </h3>
             <ul className="ability_btn">
               {abilities.map((ability) => (
-                <Button
-                  color={ability.is_hidden ? "secondary" : "primary"}
-                  variant={ability.is_hidden ? "outlined" : "outlined"}
-                  key={ability.ability.name}
-                >
-                  {ability.ability.name}
-                </Button>
+                <Tooltip key={ability.ability.name} title={ability.is_hidden ? "Hidden Ability" : "Normal Ability"} arrow>
+                  <Button
+                    color={ability.is_hidden ? "secondary" : "primary"}
+                    variant={ability.is_hidden ? "outlined" : "outlined"}
+                    >
+                    {ability.ability.name}
+                    </Button>
+                </Tooltip>
               ))}
             </ul>
             <Divider />
