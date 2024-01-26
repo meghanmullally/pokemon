@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Tooltip, CardMedia } from '@mui/material';
-import PokemonTypeNameIcons from '../TypeNameIcons';
+import PokemonTypeNameIcons from '../Type/TypeNameIcons';
 import './PokemonSideCard.css';
 
 
@@ -11,7 +11,7 @@ const PokemonSideCard = ({ pokemonDetails }) => {
         <>
             <Card elevation={0} className="pokemonSideCardContainer">
                 <div className="pokemonID">
-                    #{String(pokemonDetails.id).padStart(3, "0")} {name}
+                    #{String(pokemonDetails.id).padStart(4, "0")} {name}
                 </div>
                 <div className="imgContainer">
                     <CardMedia
