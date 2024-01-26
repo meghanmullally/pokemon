@@ -9,6 +9,7 @@ import { TYPE_COLORS } from '../../constants/pokemon';
 import Evolution from '../EvolutionChain/Evolution';
 import Moves from '../Moves/Moves';
 import LoadingMessage from '../LoadingMessage/LoadingMessage';
+import Header from '../Header/Header';
 import './Pokemon.css';
 
 
@@ -179,11 +180,14 @@ const Pokemon = () => {
 
   return (
     <>
+    <React.Fragment>
+      <Header/>
       {!pokemonDetails || !pokemonSpecies || evolutionChain.length === 0 ? (
         <LoadingMessage />
       ) : (
         bioBuild()
       )}
+    </React.Fragment>
     </>
   );
 };
