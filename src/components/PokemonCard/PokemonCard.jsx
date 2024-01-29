@@ -14,6 +14,7 @@ export default function PokemonCard(props) {
   // Destructuring properties from pokemonId
   const { id, name, sprite } = pokemonId;
 
+  // console.log("Sprite URL:", sprite);
   // Type Colors and Card Background Color
   // const getBackgroundColor = (types) => {
   //     if (types && types.length > 0) {
@@ -27,19 +28,20 @@ export default function PokemonCard(props) {
   // };
 
   return (
-    <React.Fragment key={pokemonId}>
+    <React.Fragment key={pokemonId.id}>
       <NavLink className="nav-link" to={{ pathname: `/pokemon/${id}` }}>
         <Paper className="pokemonCardPaper">
-          <Card
+          <Card className="pokeCard"
           // style=
           // {
           //     { backgroundColor: pokemonDetails ? getBackgroundColor(pokemonDetails.types) : 'white30' }
           // }
           >
             <CardMedia
+              className="pokeCardImg"
               component="img"
               alt={`${name} pokemon image`}
-              image={sprite} // default image
+              src={sprite} // default image
             />
             <Divider variant="middle" />
             <CardContent>

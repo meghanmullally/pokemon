@@ -5,3 +5,15 @@
 .pokemonCardPaper {
     margin-top: 15px;
 }
+
+.pokeCard {
+    display: flex;
+    flex-direction: column;
+    text-transform: capitalize;
+}
+
+.pokeCardImg {
+    background-size: contain;
+    width: auto;
+    height: auto;
+}
