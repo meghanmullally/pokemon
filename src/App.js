@@ -1,17 +1,21 @@
-import "./App.css";
 import { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { pokemonActions } from './components/PokemonSlice';
+import { useAppDispatch } from "./app/hooks";
 import Pokedex from "./components/Pokedex/Pokedex";
 import Pokemon from "./components/Pokemon/Pokemon";
+// import { POKEMON_LIMIT } from "./constants/pokemon";
+import "./App.css";
+
 
 function App() {
-  // give variable name, then set it with function..place in memory to useState to keep track of it...
-  // example in Max's react course - destructoring
-  const [pokemonData, setPokemonData] = useState([]);
+  
+  const pokemonData ={};
+  const searchOptionData = [];
+  const dispatch = useAppDispatch();
+
   // help to determine if data is still being fetched or if it has loaded successfully
   const [loading, setLoading] = useState(true);
-  // for search bar
-  const [optionData, setOptionData] = useState([]);
 
   // Pokemon Image
   const generatedPokemonImageUrl = (id) => {
@@ -23,7 +27,7 @@ function App() {
 
   useEffect(() => {
     // the Pokémon API (PokeAPI) contains information on the first 898 Pokémon species, which includes all Pokémon from Generations I to VIII.
-    const POKEMON_LIMIT = 24;
+    const POKEMON_LIMIT = 50;
     const url = `https://pokeapi.co/api/v2/pokemon?limit=${POKEMON_LIMIT}`;
 
     fetch(url)
@@ -41,29 +45,23 @@ function App() {
             searched: false
           };
 
-          optionData.push(pokemonData[index + 1]);
+          searchOptionData.push(pokemonData[index + 1]);
 
         });
 
-        setPokemonData(pokemonData);
-        setOptionData(optionData);
+        dispatch(pokemonActions.setPokemonData(pokemonData));
+        dispatch(pokemonActions.setSearchOptionData(searchOptionData));
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching Pokemon Data", error);
         setLoading(false);
       });
-  }, [pokemonData, optionData]);
+  }, [pokemonData, searchOptionData]);
 
   const router = createBrowserRouter([
-    {
-      path: "/",
-      element: !loading && <Pokedex pokemonData={pokemonData} optionData={optionData}/>,
-    },
-    {
-      path: "/pokemon/:pokemonId",
-      element: <Pokemon />,
-    },
+    { path: "/", element: !loading && <Pokedex pokemonData={pokemonData} searchOptionData={searchOptionData}/> },
+    { path: "/pokemon/:pokemonId", element: <Pokemon /> },
   ]);
 
   return (

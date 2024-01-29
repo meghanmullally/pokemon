@@ -5,7 +5,7 @@ import Search from '../Search/Search';
 
 
 
-function Header({ optionData }) {
+function Header({ searchOptionData }) {
 
   return (
     <>
@@ -22,7 +22,7 @@ function Header({ optionData }) {
           <Grid container spacing={2}>
             <Grid item xs={4}>
             </Grid>
-            <Search optionData={optionData}/>
+            <Search searchOptionData={searchOptionData}/>
           </Grid>
         </Toolbar>
       </AppBar>
