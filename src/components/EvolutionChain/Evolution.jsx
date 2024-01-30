@@ -7,24 +7,21 @@ import "./Evolution.css";
 
 export default function Evolution({ evolutionData }) {
 
-  console.log("--------------------------------");
-  console.log("IN EVOLUTION - evolution data", evolutionData);
-
   return (
     <>
-      <Paper>
+      <Paper className="evoContainer">
         <Typography gutterBottom variant="h4">Evolution Chain</Typography>
           <div className="evoPoke">
             {evolutionData.map((pokemon) => {
               const { id } = pokemon;
-
+            
               if (parseInt(id) > POKEMON_LIMIT) {
                 return null;
               } else {
                 return (
                   <React.Fragment key={pokemon.id}>
                     <div className="evoCard">
-                      <PokemonCard pokemonId={pokemon} />
+                      <PokemonCard pokemonId={pokemon.id} />
                     </div>
                     <div className="evoArrow">
                       <KeyboardArrowRightIcon />
