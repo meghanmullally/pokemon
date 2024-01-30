@@ -1,5 +1,5 @@
 .moveContainer {
-    display: blocflexk;
+    display: block;
     flex-direction: column;
     margin: 2rem;
     padding: 1rem;

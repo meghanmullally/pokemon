@@ -1,5 +1,12 @@
 .evoContainer {
-/* add later */
+    display: block;
+    flex-direction: column;
+}
+
+.evoCard {
+    max-width: 205px;
+    width: 175px;
+    height:  auto;
 }
 
 .evoPoke {
@@ -12,5 +19,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 4px;
+    /* padding: 0 4px; */
 }
