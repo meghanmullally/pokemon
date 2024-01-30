@@ -1,7 +1,6 @@
 import React from 'react';
 import {  Paper, Button, Tooltip } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-
 import './Moves.css';
 
 
