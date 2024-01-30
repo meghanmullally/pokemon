@@ -57,7 +57,7 @@ const PokemonTypeNameIcons = ({ types }) => {
             key={typeIndex}
             src={getTypeNameIconUrl(typeInfo.type.name)}
             alt={typeInfo.type.name}
-            style={{ width: 'auto', height: 'auto'}}
+            style={{ width: 'auto', height: 'auto' }}
           />
         )
       }

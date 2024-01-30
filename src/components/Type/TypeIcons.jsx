@@ -47,10 +47,10 @@ const getTypeIconUrl = (typeName) => {
 
 const PokemonTypeIcons = ({ types }) => {
 
- // Check if types is defined and is an array
- if (!Array.isArray(types) || types.length === 0) {
-  return null; // or handle it according to your requirements
-}
+  // Check if types is defined and is an array
+  if (!Array.isArray(types) || types.length === 0) {
+    return null; // or handle it according to your requirements
+  }
 
   return (
     <div>
@@ -62,7 +62,7 @@ const PokemonTypeIcons = ({ types }) => {
             key={typeIndex}
             src={getTypeIconUrl(typeInfo.type.name)}
             alt={typeInfo.type.name}
-            style={{ width: '50px', height: '50px'}}
+            style={{ width: '50px', height: '50px' }}
           />
         )
       }
