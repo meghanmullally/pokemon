@@ -40,12 +40,13 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
             <h3 className="bio_title">About</h3>
             <p className="description">{flavorText}</p>
             <Divider />
-            <div className="bioInfo">
+          
+            {characteristicDetails && characteristicDescription && (<div className="bioInfo">
               <strong>Characteristic: </strong>
                     <span>
                       {characteristicDescription}
                       </span>
-                </div>
+                </div>)} 
               <Divider/>
             <div className="bioInfo">
               <strong>Generation: </strong>
