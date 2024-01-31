@@ -12,3 +12,11 @@
     justify-content: space-evenly;
     padding-bottom: 8px;
 }
+
+.recentSearch {
+    padding-bottom: 4px;
+}
+
+.avatar { 
+    margin: 0 8px;
+}

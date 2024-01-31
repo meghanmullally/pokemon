@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Grid, Typography } from '@mui/material';
+import { AppBar, Toolbar, Grid, Typography, Avatar, AvatarGroup, Tooltip } from '@mui/material';
 import { NavLink, useNavigate } from "react-router-dom";
 import Search from '../Search/Search';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -57,14 +57,18 @@ function Header() {
               </div>
             </Grid>
             <Grid item xs={4}>
-          <Typography variant="body2">Recent Searches:</Typography>
-          <ul>
-            {historyData.map((pokemon) => (
-              <li key={pokemon.id}>
-                {pokemon.name}
-              </li>
-            ))}
-          </ul>
+          <Typography variant="body2" className='recentSearch'>Recent Searches:</Typography>
+          <AvatarGroup max={8}>
+            {historyData.map((pokemon) => {
+              return (
+                <Tooltip key={pokemon.name} title={pokemon.name} arrow>
+                <NavLink to={`/pokemon/${pokemon.id}`}>
+                  <Avatar alt={`${pokemon.name}`} src={pokemon.sprite} className='avatar'/>
+                </NavLink>
+              </Tooltip>
+            );
+          })}
+          </AvatarGroup>
           </Grid>
             </Grid>
         </Toolbar>
