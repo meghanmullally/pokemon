@@ -49,6 +49,12 @@ function App() {
 
         });
 
+        searchOptionData.sort((a, b) => {
+          const nameA = a.name.toUpperCase();
+          const nameB = b.name.toUpperCase();
+          return nameA <= nameB ? -1 : 1;
+      });
+
         dispatch(pokemonActions.setPokemonData(pokemonData));
         dispatch(pokemonActions.setSearchOptionData(searchOptionData));
         setLoading(false);
