@@ -1,32 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Divider, Paper, Box } from '@mui/material';
-// import PokemonTypeIcons from '../TypeIcons';
 import PokemonSideCard from '../PokemonSideCard/PokemonSideCard';
 import Bio from '../Bio/Bio';
 import Stats from '../Stats/Stats';
-import { TYPE_COLORS } from '../../constants/pokemon';
+import { POKEMON_LIMIT, TYPE_COLORS } from '../../constants/pokemon';
 import Evolution from '../EvolutionChain/Evolution';
 import Moves from '../Moves/Moves';
 import LoadingMessage from '../LoadingMessage/LoadingMessage';
 import Header from '../Header/Header';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { pokemonActions } from '../PokemonSlice';
 import './Pokemon.css';
 
 
 const Pokemon = () => {
+  const dispatch = useAppDispatch();
+  const pokemonData = useAppSelector(state => state.pokemon.pokemonData);
+
   const params = useParams();
   let { pokemonId } = params;
 
+
+  const navigate = useNavigate();
+
+  if (parseInt(pokemonId) > POKEMON_LIMIT) {
+    navigate(`/`);
+
+    pokemonId = '1';
+  }
+
   // initial evo chain
   const initEvolutionChain = [];
+  const initDetails = [];
+  const initSpecies = [];
+  const initCharacteristic = [];
 
   // Main Pokemon Details
-  const [pokemonDetails, setPokemonDetails] = useState(null);
+  const [pokemonDetails, setPokemonDetails] = useState(initDetails);
   // Pokemon Evolution Chain
   const [evolutionChain, setEvolutionChain] = useState(initEvolutionChain);
   // Pokemon Species Details for Bio
-  const [pokemonSpecies, setPokemonSpecies] = useState(null);
-  const [characteristicDetails, setCharacteristicDetails] = useState(null);
+  const [pokemonSpecies, setPokemonSpecies] = useState(initSpecies);
+  const [characteristicDetails, setCharacteristicDetails] = useState(initCharacteristic);
 
   // const evolutionList = [];
 
@@ -49,13 +65,13 @@ const Pokemon = () => {
     // Adding the evolved Pokemon to the 'evolutionList' array
     evolutionList.push(pokemonEvolved);
 
-  // Checking if there are further evolutions in the chain
+    // Checking if there are further evolutions in the chain
     if (chain.evolves_to.length !== 0) {
-     // If true, make a recursive call to 'buildEvolution' with the next evolution and the updated 'evolutionList'
+      // If true, make a recursive call to 'buildEvolution' with the next evolution and the updated 'evolutionList'
       return buildEvolution(chain.evolves_to[0], evolutionList);
     }
 
-  // If no further evolutions, return the final 'evolutionList'
+    // If no further evolutions, return the final 'evolutionList'
     return evolutionList;
   };
 
@@ -66,6 +82,22 @@ const Pokemon = () => {
     const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`;
     // url for pokemon characteristic 
     const characteristicUrl = `https://pokeapi.co/api/v2/characteristic/${pokemonId}/`;
+
+
+    // update history
+    if (Object.keys(pokemonData).length !== 0) {
+      const findPokemon = pokemonData[pokemonId];
+
+      const pokemonFound = {
+        searched: true,
+        ...findPokemon
+      };
+
+      if (findPokemon) {
+        pokemonFound.searched = true;
+        dispatch(pokemonActions.updateHistory(pokemonFound));
+      }
+    }
 
     fetch(pokemonUrl)
       .then((response) => response.json())
@@ -104,7 +136,6 @@ const Pokemon = () => {
 
             const evolutionList = buildEvolution(chain);
             setEvolutionChain(evolutionList);
-            console.log("UPDATED EVO LIST", evolutionList);
           })
           .catch((error) => {
             console.error("Error fetching Evo Data:", error);
@@ -114,10 +145,6 @@ const Pokemon = () => {
         console.error("Error fetching Pokemon species data:", error);
       });
   }, [pokemonId]);
-
-  console.log("------------------------------");
-  console.log("IN POKEMON - pokemonDetails =", pokemonDetails);
-  console.log("IN POKEMON -  pokemonSpecies =", pokemonSpecies);
 
   // Type Colors and Card Background Color
   const getBorderColor = (types) => {
@@ -154,7 +181,7 @@ const Pokemon = () => {
             <div className="statsTypeInfo">
               <PokemonSideCard
                 pokemonDetails={pokemonDetails}
-                />
+              />
               <Divider />
               <Stats pokemonDetails={pokemonDetails} />
             </div>
@@ -180,14 +207,14 @@ const Pokemon = () => {
 
   return (
     <>
-    <React.Fragment>
-      <Header/>
-      {!pokemonDetails || !pokemonSpecies || evolutionChain.length === 0 ? (
-        <LoadingMessage />
-      ) : (
-        bioBuild()
-      )}
-    </React.Fragment>
+      <React.Fragment>
+        <Header />
+        {!pokemonDetails || !pokemonSpecies || evolutionChain.length === 0 ? (
+          <LoadingMessage />
+        ) : (
+          bioBuild()
+        )}
+      </React.Fragment>
     </>
   );
 };
