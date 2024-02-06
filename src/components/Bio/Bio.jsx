@@ -12,7 +12,7 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
   // Use the first English entry if found, otherwise use an empty string
   const flavorText = englishFlavorText ? englishFlavorText.flavor_text : '';
 
-  
+
   // Pokemon Height & Weight
   let pokemonHeight = null;
   let pokemonWeight = null;
@@ -40,14 +40,14 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
             <h3 className="bio_title">About</h3>
             <p className="description">{flavorText}</p>
             <Divider />
-          
+
             {characteristicDetails && characteristicDescription && (<div className="bioInfo">
               <strong>Characteristic: </strong>
-                    <span>
-                      {characteristicDescription}
-                      </span>
-                </div>)} 
-              <Divider/>
+              <span>
+                {characteristicDescription}
+              </span>
+            </div>)}
+            <Divider />
             <div className="bioInfo">
               <strong>Generation: </strong>
               <span>{generation.name}</span>
@@ -67,47 +67,47 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
             </div>
             <Divider />
             <div className="bioInfo">
-            <strong>Capture Rate: </strong>
+              <strong>Capture Rate: </strong>
               <span>{capture_rate}</span>
             </div>
             <Divider />
             <div className="bioInfo">
-            <strong>Base Happiness: </strong>
+              <strong>Base Happiness: </strong>
               <span>{base_happiness}</span>
             </div>
           </Grid>
           <Divider orientation="vertical" variant="middle" />
           <Grid item xs={8} className="bioGrid">
-          <div className="bioInfo">
-            <strong>Genus: </strong>
+            <div className="bioInfo">
+              <strong>Genus: </strong>
               <span>{genera[7].genus}</span>
             </div>
             <Divider />
             <div className="bioInfo">
-            <strong>Shape: </strong>
+              <strong>Shape: </strong>
               <span>{shape.name}</span>
             </div>
             <Divider />
-          <div className="bioInfo">
-            <strong>Growth Rate: </strong>
+            <div className="bioInfo">
+              <strong>Growth Rate: </strong>
               <span>{growth_rate.name}</span>
             </div>
             <Divider />
             <div className="bioInfo">
-            <strong>Gender Ratio: </strong>
+              <strong>Gender Ratio: </strong>
               <span>{gender_rate}</span>
             </div>
             <Divider />
             <div className="bioInfo">
-            <strong>Hatch Counter: </strong>
+              <strong>Hatch Counter: </strong>
               <span>{hatch_counter}</span>
             </div>
             <Divider />
-            <h3 className="abilityTitle"> Abilities 
-            <Tooltip title="Abilities are a game mechanic introduced in Gen-III, which causes a passive effect during battle or the overworld. 
-            Pokemon usually have one ability and the most any species or form can have are three: two normal Abilities and one Hidden Ability." 
-            arrow>
-              <InfoOutlinedIcon className="infoIcon"/>
+            <h3 className="abilityTitle"> Abilities
+              <Tooltip title="Abilities are a game mechanic introduced in Gen-III, which causes a passive effect during battle or the overworld. 
+            Pokemon usually have one ability and the most any species or form can have are three: two normal Abilities and one Hidden Ability."
+                arrow>
+                <InfoOutlinedIcon className="infoIcon" />
               </Tooltip>
             </h3>
             <ul className="ability_btn">
@@ -116,9 +116,9 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
                   <Button
                     color={ability.is_hidden ? "secondary" : "primary"}
                     variant={ability.is_hidden ? "outlined" : "outlined"}
-                    >
+                  >
                     {ability.ability.name}
-                    </Button>
+                  </Button>
                 </Tooltip>
               ))}
             </ul>
