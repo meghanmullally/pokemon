@@ -22,9 +22,9 @@ function Header() {
     const findPokemon = searchOptionData.find((element) => element.name === term);
 
     if (findPokemon) {
-      const pokemonSearched = { ...findPokemon };
-      pokemonSearched.searched = true;
-      dispatch(pokemonActions.updateHistory(pokemonSearched));
+      const searchPokemon = { ...findPokemon };
+      searchPokemon.searched = true;
+      dispatch(pokemonActions.updateHistory(searchPokemon));
       navigate(`/pokemon/${findPokemon.id}`);
     }
   };
