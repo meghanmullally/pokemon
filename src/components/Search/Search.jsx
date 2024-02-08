@@ -42,6 +42,7 @@ export default function Search({ onChange, label }) {
               type: 'search',
             }}
             onChange={onChange}
+            onSelect={onChange}
           />
         )}
       />
