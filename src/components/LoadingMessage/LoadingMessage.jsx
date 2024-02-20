@@ -5,7 +5,7 @@ import { CircularProgress } from '@mui/material';
 const LoadingMessage = () => {
   return (
     <>
-       <CircularProgress color="primary" variant="indeterminate" />
+      <CircularProgress color="primary" variant="indeterminate" />
     </>
   );
 };
