@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -10,8 +10,8 @@ export default function Search({ onChange, label }) {
   const searchOptionData = useAppSelector(state => state.pokemon.searchOptionData);
   const historyData = useAppSelector(state => state.pokemon.historyData);
   const latestSearches = [];
-
-
+  
+  
   return (
     <Stack spacing={2} sx={{ width: 300 }} className='autoCompleteContainer'>
       <Autocomplete
@@ -36,6 +36,7 @@ export default function Search({ onChange, label }) {
         renderInput={(params) => (
           <TextField
             {...params}
+            variant='standard'
             label={label}
             InputProps={{
               ...params.InputProps,

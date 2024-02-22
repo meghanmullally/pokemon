@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { pokemonActions } from './components/PokemonSlice';
 import { useAppDispatch } from "./app/hooks";
@@ -35,7 +35,7 @@ function App() {
       .then((data) => {
 
         data.results.forEach((pokemon, index) => {
-          const pokemonImgId = (index + 1).toString();
+          let pokemonImgId = (index + 1).toString();
           const sprite = generatedPokemonImageUrl(pokemonImgId);
 
           pokemonData[index + 1] = {
@@ -44,9 +44,7 @@ function App() {
             sprite: sprite,
             searched: false
           };
-
           searchOptionData.push(pokemonData[index + 1]);
-
         });
 
         searchOptionData.sort((a, b) => {
