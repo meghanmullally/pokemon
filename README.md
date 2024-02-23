@@ -1,75 +1,54 @@
-# Getting Started with Create React App
+# Pokémon App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+After a break of 2.5 years, I decided to get back into coding with a project centered around Pokémon. This application is built using React.js, JavaScript, Redux, and Material UI. The goal of this project is to reacquaint myself with coding and pick up new skills, for example on Redux.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Autocomplete Search:** Easily find Pokémon using the Material UI Autocomplete feature for a seamless searching experience.
 
-### `npm start`
+- **Detailed Pokémon Profiles:** Dive into comprehensive profiles with detailed information, moves, and evolution chains.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Potential Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```React.js```
+```JavaScript```
+```Redux```
+```Material UI```
 
-### `npm test`
+## Lessons Learned
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Return to Front-End:** Embraced the changes and advancements in the world of front-end development.
 
-### `npm run build`
+- **PokeAPI Connection:** Chose the PokeAPI for my first project back, blending passion for exploration with coding skills.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Redux Exploration:** Delved into the world of Redux, gaining insights into its application for efficient state management.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Potential Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Trainer Profiles:** Get ready for a personal touch with trainer profiles, adding a new dimension to your Pokémon adventures.
 
-### `npm run eject`
+- **Catch 'Em All:** Introduce a "Catch" feature, allowing you to add captured Pokémon to your trainer profile.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Expanded Content:** Explore new sections dedicated to items and locations, enhancing the depth of your Pokémon exploration.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Run Locally
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Clone the repository to your local machine.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. Install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. Start the server
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+  npm run start
+```
+4. Open ```http://localhost:3000/``` in your web browser to view app
 
-### Code Splitting
+## Credits
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-
-Resources: 
-
-pokemon icon by https://icons8.com
+- Pokémon icon by [Icons8](https://icons8.com/)
+- Pokémon data provided by [PokeAPI](https://pokeapi.co/)

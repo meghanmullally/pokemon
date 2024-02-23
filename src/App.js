@@ -18,10 +18,10 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   // Pokemon Image
-  const generatedPokemonImageUrl = (id) => {
-    const defaultPokemonImageUrl = "src/img/default_pokemon.png";
-    return id
-      ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+  const generatedPokemonImageUrl = (inputID) => {
+    const defaultPokemonImageUrl = `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${inputID}.svg`;
+    return inputID
+      ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${inputID}.png`
       : defaultPokemonImageUrl;
   };
 
