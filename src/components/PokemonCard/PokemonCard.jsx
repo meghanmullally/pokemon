@@ -2,8 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Divider, Paper, Typography, Card, CardContent, CardMedia } from "@mui/material";
 import { useAppSelector } from "../../app/hooks";
-import PokemonTypeNameIcons from "../Type/TypeNameIcons";
-import { TYPE_COLORS } from '../../constants/pokemon';
+// import PokemonTypeNameIcons from "../Type/TypeNameIcons";
+// import { TYPE_COLORS } from '../../constants/pokemon';
 import "./PokemonCard.css";
 
 export default function PokemonCard(props) {
