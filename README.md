@@ -8,7 +8,7 @@ After a break of 2.5 years, I decided to get back into coding with a project cen
 
 - **Detailed Pokémon Profiles:** Dive into comprehensive profiles with detailed information, moves, and evolution chains.
 
-## Potential Features
+## Technologies
 
 ```React.js```
 ```JavaScript```
@@ -23,7 +23,7 @@ After a break of 2.5 years, I decided to get back into coding with a project cen
 
 - **Redux Exploration:** Delved into the world of Redux, gaining insights into its application for efficient state management.
 
-## Potential Features
+## Potential Future Features
 
 - **Trainer Profiles:** Get ready for a personal touch with trainer profiles, adding a new dimension to your Pokémon adventures.
 
