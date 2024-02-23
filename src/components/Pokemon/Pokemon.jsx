@@ -144,7 +144,7 @@ const Pokemon = () => {
       .catch((error) => {
         console.error("Error fetching Pokemon species data:", error);
       });
-  }, [pokemonId]);
+  }, [pokemonId, buildEvolution, dispatch, pokemonData]);
 
   // Type Colors and Card Background Color
   const getBorderColor = (types) => {

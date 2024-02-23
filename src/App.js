@@ -4,7 +4,7 @@ import { pokemonActions } from './components/PokemonSlice';
 import { useAppDispatch } from "./app/hooks";
 import Pokedex from "./components/Pokedex/Pokedex";
 import Pokemon from "./components/Pokemon/Pokemon";
-// import { POKEMON_LIMIT } from "./constants/pokemon";
+import { POKEMON_LIMIT } from "./constants/pokemon";
 import "./App.css";
 
 
@@ -27,7 +27,6 @@ function App() {
 
   useEffect(() => {
     // the Pokémon API (PokeAPI) contains information on the first 898 Pokémon species, which includes all Pokémon from Generations I to VIII.
-    const POKEMON_LIMIT = 50;
     const url = `https://pokeapi.co/api/v2/pokemon?limit=${POKEMON_LIMIT}`;
 
     fetch(url)
