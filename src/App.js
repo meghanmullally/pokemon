@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { pokemonActions } from './components/PokemonSlice';
 import { useAppDispatch } from "./app/hooks";
@@ -29,6 +29,13 @@ function App() {
     // the Pokémon API (PokeAPI) contains information on the first 898 Pokémon species, which includes all Pokémon from Generations I to VIII.
     const url = `https://pokeapi.co/api/v2/pokemon?limit=${POKEMON_LIMIT}`;
 
+  // Use useMemo to memoize the initialization of memoizedPokemonData
+  const memoizedPokemonData = useMemo(() => ({}), []);
+
+  // Use useMemo to memoize the initialization of memoizedSearchOptionData
+  const memoizedSearchOptionData = useMemo(() => [], []);
+
+
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
@@ -52,15 +59,15 @@ function App() {
           return nameA <= nameB ? -1 : 1;
       });
 
-        dispatch(pokemonActions.setPokemonData(pokemonData));
-        dispatch(pokemonActions.setSearchOptionData(searchOptionData));
+        dispatch(pokemonActions.setPokemonData(memoizedPokemonData));
+        dispatch(pokemonActions.setSearchOptionData(memoizedSearchOptionData));
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching Pokemon Data", error);
         setLoading(false);
       });
-  }, [pokemonData, searchOptionData, dispatch]);
+  }, [dispatch]);
 
   const router = createBrowserRouter([
     { path: "/", element: !loading && <Pokedex pokemonData={pokemonData} searchOptionData={searchOptionData}/> },

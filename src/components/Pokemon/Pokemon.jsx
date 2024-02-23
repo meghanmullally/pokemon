@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { Divider, Paper, Box } from '@mui/material';
 import PokemonSideCard from '../PokemonSideCard/PokemonSideCard';
@@ -47,7 +47,7 @@ const Pokemon = () => {
   // const evolutionList = [];
 
   // Evolution Chain Recursive function
-  const buildEvolution = (chain, evolutionList = []) => {
+  const buildEvolution = useCallback((chain, evolutionList = []) => {
 
     // Destructuring assignment: Extracts the 'name' and 'url' properties from 'chain.species'
     const { name, url } = chain.species;
@@ -73,7 +73,7 @@ const Pokemon = () => {
 
     // If no further evolutions, return the final 'evolutionList'
     return evolutionList;
-  };
+  }, []);
 
   useEffect(() => {
     // pokemonUrl can take pokemon name or id, using name since that is what comes back in the fetch in app.js
