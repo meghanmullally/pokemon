@@ -61,7 +61,7 @@ function App() {
         console.error("Error fetching Pokemon Data", error);
         setLoading(false);
       });
-  }, [pokemonData, searchOptionData]);
+  }, [pokemonData, searchOptionData, dispatch]);
 
   const router = createBrowserRouter([
     { path: "/", element: !loading && <Pokedex pokemonData={pokemonData} searchOptionData={searchOptionData}/> },
