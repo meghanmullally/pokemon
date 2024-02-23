@@ -18,12 +18,14 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   // Pokemon Image
-  const generatedPokemonImageUrl = (inputID) => {
+  // useMemo ensures that the function is only recreated when the inputID dependency changes.
+  const generatedPokemonImageUrl = useMemo(() => (inputID) => {
     const defaultPokemonImageUrl = `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${inputID}.svg`;
     return inputID
       ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${inputID}.png`
       : defaultPokemonImageUrl;
-  };
+  }, []);
+  
 
   useEffect(() => {
     // the Pokémon API (PokeAPI) contains information on the first 898 Pokémon species, which includes all Pokémon from Generations I to VIII.
