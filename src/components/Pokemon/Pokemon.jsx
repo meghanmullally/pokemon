@@ -144,6 +144,7 @@ const Pokemon = () => {
       .catch((error) => {
         console.error("Error fetching Pokemon species data:", error);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokemonId, buildEvolution, dispatch, pokemonData]);
 
   // Type Colors and Card Background Color

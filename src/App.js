@@ -55,6 +55,7 @@ function App() {
         console.error("Error fetching Pokemon Data", error);
         setLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, generatedPokemonImageUrl, pokemonData, searchOptionData]);
 
   const router = createBrowserRouter([
