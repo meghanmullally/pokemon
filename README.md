@@ -2,6 +2,8 @@
 
 After a break of 2.5 years, I decided to get back into coding with a project centered around Pokémon. This application is built using React.js, JavaScript, Redux, and Material UI. The goal of this project is to reacquaint myself with coding and pick up new skills, for example on Redux.
 
+**Deployment**: [Pokémon App](https://poketrainercentral.netlify.app/)
+
 ## Features
 
 - **Autocomplete Search:** Easily find Pokémon using the Material UI Autocomplete feature for a seamless searching experience.
