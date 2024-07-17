@@ -40,7 +40,7 @@ const Pokemon = () => {
   const [pokemonDetails, setPokemonDetails] = useState(initDetails);
   // Pokemon Evolution Chain
   const [evolutionChain, setEvolutionChain] = useState(initEvolutionChain);
-  // Pokemon Species Details for Bio
+  // Pokemon Species Details for Bio - stored in comp state
   const [pokemonSpecies, setPokemonSpecies] = useState(initSpecies);
   const [characteristicDetails, setCharacteristicDetails] = useState(initCharacteristic);
 
@@ -205,6 +205,8 @@ const Pokemon = () => {
       </Box>
     </>
   );
+
+  console.log('pokemonSpecies', pokemonSpecies);
 
   return (
     <>
