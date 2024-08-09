@@ -3,7 +3,6 @@
     flex-direction: column;
     margin: 2rem;
     padding: 1rem;
-    /* margin: 0 2.5rem 2rem 4.5rem;     */
 }
 
 .movesTitle {
@@ -17,4 +16,8 @@
     overflow: auto;
     text-align: left;
     text-transform: uppercase;
+}
+
+#moveBtn {
+    margin: 0 8px 8px 0px;
 }
