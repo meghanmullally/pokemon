@@ -1,23 +1,38 @@
 .evoContainer {
-    display: block;
+    display: flex;
     flex-direction: column;
+    margin: 2rem;
+    padding: 1rem;
 }
 
 .evoCard {
     max-width: 205px;
     width: 175px;
-    height:  auto;
+    height: auto;
 }
 
 .evoPoke {
     display: flex;
-    justify-content: space-evenly;
-    padding: 0 8px 24px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .evoArrow {
     display: flex;
-    justify-content: center;
     align-items: center;
-    /* padding: 0 4px; */
+}
+
+/* Media query for tablets and smaller screens */
+@media (max-width: 1024px) {
+    .evoContainer {
+        margin: 1rem; 
+        padding: 0.5rem; 
+    }
+
+    .evoPoke {
+        flex-direction: column; 
+        align-items: center;
+        justify-content: space-around;
+    }
 }

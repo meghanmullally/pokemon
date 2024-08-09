@@ -35,8 +35,8 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
   return (
     <>
       <Paper elevation={0} className="bio_paper" >
-        <Grid wrap="nowrap" container spacing={1} columns={16}>
-          <Grid item xs={8} className="bioGrid">
+      <Grid container spacing={1} columns={16}>
+          <Grid xs={12} md={8} l={6} className="bioGrid">
             <h3 className="bio_title">About</h3>
             <p className="description">{flavorText}</p>
             <Divider />
@@ -76,8 +76,7 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
               <span>{base_happiness}</span>
             </div>
           </Grid>
-          <Divider orientation="vertical" variant="middle" />
-          <Grid item xs={8} className="bioGrid">
+          <Grid item xs={12} md={8} l={6} className="bioGrid">
             <div className="bioInfo">
               <strong>Genus: </strong>
               <span>{genera[7].genus}</span>
