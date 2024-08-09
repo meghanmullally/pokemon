@@ -178,7 +178,7 @@ const Pokemon = () => {
         }}
       >
         <div className="pokemonContainer">
-          <Paper className="pokemonStatsBioCard">
+          <Paper className="pokemonStatsBioPaper">
             <div className="statsTypeInfo">
               <PokemonSideCard
                 pokemonDetails={pokemonDetails}
@@ -195,12 +195,9 @@ const Pokemon = () => {
             </div>
           </Paper>
         </div>
-        {/* Pokemon Container div (pokemonSideCard and Bio) */}
-        {/* Moves Container */}
+        <div className="evoMoveContainer">
+        <Evolution evolutionData={evolutionChain} />
         <Moves pokemonDetails={pokemonDetails} />
-        {/* Evolution Container */}
-        <div className="evolutionContainer">
-          <Evolution evolutionData={evolutionChain} />
         </div>
       </Box>
     </>
