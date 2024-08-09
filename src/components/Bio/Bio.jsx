@@ -36,7 +36,7 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
     <>
       <Paper elevation={0} className="bio_paper" >
       <Grid container spacing={1} columns={16}>
-          <Grid xs={12} md={8} l={6} className="bioGrid">
+          <Grid item xs={12} md={8} l={6} className="bioGrid">
             <h3 className="bio_title">About</h3>
             <p className="description">{flavorText}</p>
             <Divider />
