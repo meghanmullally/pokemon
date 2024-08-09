@@ -203,8 +203,6 @@ const Pokemon = () => {
     </>
   );
 
-  console.log('pokemonSpecies', pokemonSpecies);
-
   return (
     <>
       <React.Fragment>
