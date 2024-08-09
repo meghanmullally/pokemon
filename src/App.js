@@ -28,27 +28,30 @@ function App() {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
+        const newPokemonData = {};
+        const newSearchOptionData = [];
+  
         data.results.forEach((pokemon, index) => {
           let pokemonImgId = (index + 1).toString();
           const sprite = generatedPokemonImageUrl(pokemonImgId);
 
-          pokemonData[index + 1] = {
+          newPokemonData[index + 1] = {
             id: index + 1,
             name: pokemon.name,
             sprite: sprite,
             searched: false
           };
-          searchOptionData.push(pokemonData[index + 1]);
+          newSearchOptionData.push(newPokemonData[index + 1]);
         });
 
-        searchOptionData.sort((a, b) => {
+        newSearchOptionData.sort((a, b) => {
           const nameA = a.name.toUpperCase();
           const nameB = b.name.toUpperCase();
           return nameA <= nameB ? -1 : 1;
         });
 
-        dispatch(pokemonActions.setPokemonData(pokemonData));
-        dispatch(pokemonActions.setSearchOptionData(searchOptionData));
+        dispatch(pokemonActions.setPokemonData(newPokemonData));
+        dispatch(pokemonActions.setSearchOptionData(newSearchOptionData));
         setLoading(false);
       })
       .catch((error) => {
@@ -56,7 +59,7 @@ function App() {
         setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, generatedPokemonImageUrl, pokemonData, searchOptionData]);
+  }, [dispatch]);
 
   const router = createBrowserRouter([
     { path: "/", element: !loading && <Pokedex pokemonData={pokemonData} searchOptionData={searchOptionData} /> },
