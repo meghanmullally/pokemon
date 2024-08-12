@@ -22,7 +22,7 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
   let pokemonWeightLbs = null;
 
   if (pokemonDetails) {
-    // The pokemon's height in decimetres which is converted into metres by dividing by 10
+    // The pokemon's height in decimeters which is converted into metres by dividing by 10
     pokemonHeight = (height / 10).toFixed(2);
     // for an approximate result, multiply the length value by 3.281
     pokemonHeightFeet = ((height / 10) * 3.281).toFixed(2);
@@ -36,7 +36,7 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
     <>
       <Paper elevation={0} className="bio_paper" >
       <Grid container spacing={1} columns={16}>
-          <Grid xs={12} md={8} l={6} className="bioGrid">
+          <Grid item xs={12} md={8} l={6} className="bioGrid">
             <h3 className="bio_title">About</h3>
             <p className="description">{flavorText}</p>
             <Divider />
@@ -56,7 +56,6 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
             <div className="bmiInfo">
               <strong>Height: </strong>
               <span>{pokemonHeight} m / {pokemonHeightFeet} ft </span>
-              <br></br>
               <strong>Weight: </strong>
               <span>{pokemonWeight} kg / {pokemonWeightLbs} lbs</span>
             </div>
