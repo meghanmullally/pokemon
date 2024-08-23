@@ -11,7 +11,7 @@ const PokemonSideCard = ({ pokemonDetails }) => {
         <>
             <Card elevation={0} className="pokemonSideCardContainer">
                 <div className="pokemonID">
-                    #{String(pokemonDetails.id).padStart(4, "0")} {name}
+                    #{pokemonDetails.id} {name}
                 </div>
                 <div className="imgContainer">
                     <CardMedia
