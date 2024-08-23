@@ -1,6 +1,5 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useAppSelector } from '../../app/hooks';
 import './Search.css';
@@ -13,7 +12,7 @@ export default function Search({ onChange, label }) {
   
   
   return (
-    <Stack spacing={2} sx={{ width: 300 }} className='autoCompleteContainer'>
+    <div className='searchContainer'>
       <Autocomplete
         freeSolo
         id="searchPokemon"
@@ -36,6 +35,7 @@ export default function Search({ onChange, label }) {
         renderInput={(params) => (
           <TextField
             {...params}
+            className='searchInput'
             variant='standard'
             label={label}
             InputProps={{
@@ -47,6 +47,6 @@ export default function Search({ onChange, label }) {
           />
         )}
       />
-    </Stack>
+    </div>
   );
 }
