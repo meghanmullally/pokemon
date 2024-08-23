@@ -1,15 +1,26 @@
-.headerLogo {
-    border-radius: 50%;
-    margin-left: 4px;
+.toolbar {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.headerLeft {
+    display: flex;
+    align-items: center;
+}
+
+.pokedex,
+.headerLogos {
+    height: 70px;
+    margin-left: 10px; 
 }
 
 .searchBar {
     display: flex;
     justify-content: center;
-    padding: 0 20px;
-    margin: 5px 0;
-    flex: 1;
     align-items: center;
+    flex: 1;
 }
 
 .searchIcon {
@@ -22,27 +33,32 @@
     text-align: right;
 }
 
-.pokedex {
-    height: 70px;
-    margin-left: 10px;
-}
-
 .avatar {
     height: 40px;
     width: 40px;
     border-radius: 50%;
     margin: 0 4px;
+    overflow: hidden;
+    background-color: whitesmoke;
 }
 
-.toolbar {
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.avatar img {
+    height: auto;
+    width: 55%;
+    object-fit: cover;
 }
 
-.toolbar .logoContainer,
-.toolbar .avatarContainer {
-    display: flex;
-    align-items: center;
+@media (max-width: 600px) {
+    .searchBar {
+        padding: 0 10px;
+    }
+
+    .headerLogos {
+        height: 50px;
+    }
+
+    .avatar {
+        height: 30px;
+        width: 30px;
+    }
 }
