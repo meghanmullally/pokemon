@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Divider, Paper, Typography, Card, CardContent, CardMedia } from "@mui/material";
+import { Paper, Card, CardContent, CardMedia } from "@mui/material";
 import { useAppSelector } from "../../app/hooks";
 // import PokemonTypeNameIcons from "../Type/TypeNameIcons";
 // import { TYPE_COLORS } from '../../constants/pokemon';
@@ -29,22 +29,21 @@ export default function PokemonCard(props) {
 
   return (
     <React.Fragment key={pokemonId}>
-      <NavLink className="nav-link" to={{ pathname: `/pokemon/${id}` }}>
-        <Paper className="pokemonCardPaper">
-          <Card className="pokeCard" 
-          // style={{ backgroundColor: getBackgroundColor(types) }}
-          >
+      <NavLink className="nav-link" to={{ pathname: `/pokemon/${pokemonId}` }}>
+        <Paper elevation={6} className="pokePaper">
+          <Card>
+            {/* style={{ backgroundColor: getBackgroundColor(types) }}  */}
             <CardMedia
-              className="pokeCardImg"
-              component="img"
+              className="cardMedia"
+              image={sprite}
               alt={`${name} pokemon image`}
-              src={sprite} // default image
+              sx={{ backgroundSize: "contain" }}
             />
-            <Divider variant="middle" />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {name}
-              </Typography>
+            <CardContent className="cardContent">
+              <div className="pokemonTagContainer">
+                <div className="pokemonId">#{id}</div>
+                <div className="pokemonName">{name.toUpperCase()}</div>
+              </div>
             </CardContent>
           </Card>
         </Paper>
