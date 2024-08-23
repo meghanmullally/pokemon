@@ -1,22 +1,48 @@
 .headerLogo {
-    height: 40px;
-    width: 40px;
     border-radius: 50%;
-    padding-right: 4px; 
+    margin-left: 4px;
 }
-
 
 .searchBar {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding-bottom: 8px;
+    justify-content: center;
+    padding: 0 20px;
+    margin: 5px 0;
+    flex: 1;
+    align-items: center;
+}
+
+.searchIcon {
+    align-self: flex-end;
+    margin-bottom: 5px;
 }
 
 .recentSearch {
     padding-bottom: 4px;
+    text-align: right;
 }
 
-.avatar { 
-    margin: 0 8px;
+.pokedex {
+    height: 70px;
+    margin-left: 10px;
+}
+
+.avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin: 0 4px;
+}
+
+.toolbar {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toolbar .logoContainer,
+.toolbar .avatarContainer {
+    display: flex;
+    align-items: center;
 }
