@@ -1,3 +1,8 @@
+.bioTabs {
+    width: 100%;
+    margin-bottom: 16px; 
+}
+
 .bio_paper {
     display: flex;
     flex-direction: column;
@@ -12,7 +17,6 @@
 
 .bio_title {
     display: flex;
-    flex-direction: row;
     justify-content: left;
 }
 
@@ -35,13 +39,20 @@
 
 .abilityTitle {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    width: 100%;
     text-transform: capitalize;
+    margin-bottom: 16px; 
 }
+
+.infoIcon {
+    margin-left: 8px;
+}
+
 
 .bmiInfo {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     margin: 10px 0;
@@ -51,13 +62,16 @@
 .ability_btn,
 .egg_btn {
     display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 0.5rem;
 }
 
+/* Media Queries */
 @media (max-width: 768px) {
-    .bioInfo, .bmiInfo, .abilityTitle, .egg_btn {
+    .bioInfo, 
+    .bmiInfo, 
+    .abilityTitle, 
+    .egg_btn {
         flex-direction: column;
         align-items: flex-start; 
     }
@@ -77,29 +91,27 @@
 }
 
 @media (max-width: 390px) {
-    @media (max-width: 390px) {
-        .bio_paper {
-            flex-direction: column;
-        }
-    
-        .bioGrid {
-            width: 100%;
-            padding-right: 0; 
-        }
-    
-        .bioInfo,
-        .bmiInfo,
-        .ability_btn,
-        .egg_btn {
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 8px;
-            width: 100%;
-        }
-    
-        .ability_btn,
-        .egg_btn {
-            gap: 0.3rem; 
-        }
+    .bio_paper {
+        flex-direction: column;
     }
-}    
+
+    .bioGrid {
+        width: 100%;
+        padding-right: 0; 
+    }
+
+    .bioInfo,
+    .bmiInfo,
+    .ability_btn,
+    .egg_btn {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px;
+        width: 100%;
+    }
+
+    .ability_btn,
+    .egg_btn {
+        gap: 0.3rem; 
+    }
+}
