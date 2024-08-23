@@ -38,9 +38,9 @@ function Header() {
     <Tooltip key={pokemon.name} title={pokemon.name} arrow>
       <NavLink to={`/pokemon/${pokemon.id}`}>
         <Avatar
+          className="avatar"
           alt={pokemon.name}
           src={pokemon.sprite}
-          className="avatar"
         />
       </NavLink>
     </Tooltip>
