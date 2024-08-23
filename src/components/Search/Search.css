@@ -1,5 +1,14 @@
-.autoCompleteContainer {
+.searchContainer {
     display: flex;
-    margin-top: 15px;
-    background-color: white;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.searchInput {
+    width: 300px !important;
+    color: white !important;
 }
