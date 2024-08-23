@@ -1,19 +1,42 @@
+.pokePaper {
+    padding-top: 12px;
+}
+
+.cardMedia {
+    margin-top: 15%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: auto;
+    width: 130px;
+    height: 130px;
+}
+
+.cardContent {
+    text-align: center;
+}
+
+.pokemonTagContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 7px;
+    margin-top: 20px;
+    padding-bottom: 7px;
+    border-radius: 2px;
+}
+
+.pokemonId {
+    margin-right: 5px;
+    margin-left: 2px;
+}
+
+.pokemonId, .pokemonName {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bolder;
+    color: rgb(38, 38, 38);
+}
+
 .nav-link {
     text-decoration: none;
-}
-
-.pokemonCardPaper {
-    margin-top: 15px;
-}
-
-.pokeCard {
-    display: flex;
-    flex-direction: column;
-    text-transform: capitalize;
-}
-
-.pokeCardImg {
-    background-size: contain;
-    width: auto;
-    height: auto;
 }
