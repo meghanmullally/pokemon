@@ -47,7 +47,7 @@ const Moves = ({ pokemonDetails }) => {
       </Tabs>
 
       {activeTab === 0 && levelUpMoves.length > 0 && (
-        <div className="tabContent">
+        <div className="moveTabContent">
           <h3 className="bio_title">
             Moves Learned by Leveling Up
             <Tooltip
@@ -68,7 +68,7 @@ const Moves = ({ pokemonDetails }) => {
       )}
 
       {activeTab === 1 && tmMoves.length > 0 && (
-        <div className="tabContent">
+        <div className="moveTabContent">
           <h3 className="bio_title">
             TM/HM Moves
             <Tooltip
@@ -89,7 +89,7 @@ const Moves = ({ pokemonDetails }) => {
       )}
 
       {activeTab === 2 && eggMoves.length > 0 && (
-        <div className="tabContent">
+        <div className="moveTabContent">
           <h3 className="bio_title">
             Egg Moves
             <Tooltip
@@ -110,7 +110,7 @@ const Moves = ({ pokemonDetails }) => {
       )}
 
       {activeTab === 3 && tutorMoves.length > 0 && (
-        <div className="tabContent">
+        <div className="moveTabContent">
           <h3 className="bio_title">
             Tutor Moves
             <Tooltip
