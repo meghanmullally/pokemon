@@ -182,6 +182,7 @@ const Pokemon = () => {
             <div className="statsTypeInfo">
               <PokemonSideCard
                 pokemonDetails={pokemonDetails}
+                pokemonData={pokemonData[pokemonDetails.id]}
               />
               <Divider />
               <Stats pokemonDetails={pokemonDetails} />
