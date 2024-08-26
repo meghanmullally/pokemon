@@ -171,14 +171,14 @@ const Pokemon = () => {
     <>
       <Box
         style={{
-          margin: "40px",
+          margin: "2rem",
+          paddingTop: "1rem",
           borderWidth: "10px",
           background: `${getBorderColor(pokemonDetails.types)}`,
           borderRadius: "1rem",
         }}
       >
         <div className="pokemonContainer">
-          <Paper className="pokemonStatsBioPaper">
             <div className="statsTypeInfo">
               <PokemonSideCard
                 pokemonDetails={pokemonDetails}
@@ -194,7 +194,6 @@ const Pokemon = () => {
                 characteristicDetails={characteristicDetails}
               />
             </div>
-          </Paper>
         </div>
         <div className="evoMoveContainer">
         <Evolution evolutionData={evolutionChain} />
