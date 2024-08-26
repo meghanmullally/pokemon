@@ -44,8 +44,6 @@ const Pokemon = () => {
   const [pokemonSpecies, setPokemonSpecies] = useState(initSpecies);
   const [characteristicDetails, setCharacteristicDetails] = useState(initCharacteristic);
 
-  // const evolutionList = [];
-
   // Evolution Chain Recursive function
   const buildEvolution = useCallback((chain, evolutionList = []) => {
 
@@ -60,15 +58,17 @@ const Pokemon = () => {
     const pokemonEvolved = {
       id: check[1],
       name: name,
+      evolutionDetails: chain.evolution_details
     };
 
     // Adding the evolved Pokemon to the 'evolutionList' array
     evolutionList.push(pokemonEvolved);
 
-    // Checking if there are further evolutions in the chain
+    // Iterate over all possible evolutions
     if (chain.evolves_to.length !== 0) {
-      // If true, make a recursive call to 'buildEvolution' with the next evolution and the updated 'evolutionList'
-      return buildEvolution(chain.evolves_to[0], evolutionList);
+      chain.evolves_to.forEach(nextEvolution => {
+        buildEvolution(nextEvolution, evolutionList);
+      });
     }
 
     // If no further evolutions, return the final 'evolutionList'
@@ -179,25 +179,25 @@ const Pokemon = () => {
         }}
       >
         <div className="pokemonContainer">
-            <div className="statsTypeInfo">
-              <PokemonSideCard
-                pokemonDetails={pokemonDetails}
-                pokemonData={pokemonData[pokemonDetails.id]}
-              />
-              <Divider />
-              <Stats pokemonDetails={pokemonDetails} />
-            </div>
-            <div className="bioContainer">
-              <Bio
-                pokemonDetails={pokemonDetails}
-                pokemonSpecies={pokemonSpecies}
-                characteristicDetails={characteristicDetails}
-              />
-            </div>
+          <div className="statsTypeInfo">
+            <PokemonSideCard
+              pokemonDetails={pokemonDetails}
+              pokemonData={pokemonData[pokemonDetails.id]}
+            />
+            <Divider />
+            <Stats pokemonDetails={pokemonDetails} />
+          </div>
+          <div className="bioContainer">
+            <Bio
+              pokemonDetails={pokemonDetails}
+              pokemonSpecies={pokemonSpecies}
+              characteristicDetails={characteristicDetails}
+            />
+          </div>
         </div>
         <div className="evoMoveContainer">
-        <Evolution evolutionData={evolutionChain} />
-        <Moves pokemonDetails={pokemonDetails} />
+          <Evolution evolutionData={evolutionChain} />
+          <Moves pokemonDetails={pokemonDetails} />
         </div>
       </Box>
     </>

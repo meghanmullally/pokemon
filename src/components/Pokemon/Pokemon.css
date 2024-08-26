@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    margin: 1rem;
-    padding: 1rem;
+    margin: 2rem;
+    border-radius: inherit;
     background-color: white;
 }
 
