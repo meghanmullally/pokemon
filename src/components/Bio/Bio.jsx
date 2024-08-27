@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Paper, Divider, Button, Tabs, Tab, Tooltip, Box } from "@mui/material";
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import "./Bio.css";
 
 export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDetails }) {
@@ -17,9 +17,9 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
   };
 
   // Find the first English flavor text entry
-  const englishFlavorText = flavor_text_entries.find((entry) => entry.language.name === 'en');
+  const englishFlavorText = flavor_text_entries.find((entry) => entry.language.name === "en");
   // Use the first English entry if found, otherwise use an empty string
-  const flavorText = englishFlavorText ? englishFlavorText.flavor_text : '';
+  const flavorText = englishFlavorText ? englishFlavorText.flavor_text : "";
 
   // Pokemon Height & Weight
   let pokemonHeight = null;
@@ -44,7 +44,12 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
     <>
       <Paper elevation={0} className="bio_paper">
         {/* Tabs for navigation */}
-        <Tabs value={tabValue} onChange={handleChange} variant="fullWidth" aria-label="bio tabs">
+        <Tabs
+          value={tabValue}
+          onChange={handleChange}
+          variant="fullWidth"
+          aria-label="bio tabs"
+        >
           <Tab label="Overview" />
           <Tab label="Physical Stats" />
           <Tab label="Abilities & Egg Group" />
@@ -56,27 +61,43 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
         {tabValue === 0 && (
           <Box className="tabContent">
             <h3 className="bio_title">About</h3>
-            <p className="description">{flavorText}</p>
-            <Divider />
-            <div className="bioInfo">
-              <strong>Genus: </strong>
-              <span>{genera[7].genus}</span>
-            </div>
-            <Divider />
-            <div className="bioInfo">
-              <strong>Generation: </strong>
-              <span>{generation.name}</span>
-            </div>
-            <Divider />
-            <div className="bioInfo">
-              <strong>Growth Rate: </strong>
-              <span>{growth_rate.name}</span>
-            </div>
-            <Divider />
-            <div className="bioInfo">
-              <strong>Shape: </strong>
-              <span>{shape.name}</span>
-            </div>
+            {flavorText && <p className="description">{flavorText}</p>}
+            {genera && genera[7] && genera[7].genus && (
+              <>
+                <Divider />
+                <div className="bioInfo">
+                  <strong>Genus: </strong>
+                  <span>{genera[7].genus}</span>
+                </div>
+              </>
+            )}
+            {generation && generation.name && (
+              <>
+                <Divider />
+                <div className="bioInfo">
+                  <strong>Generation: </strong>
+                  <span>{generation.name}</span>
+                </div>
+              </>
+            )}
+            {growth_rate && growth_rate.name && (
+              <>
+                <Divider />
+                <div className="bioInfo">
+                  <strong>Growth Rate: </strong>
+                  <span>{growth_rate.name}</span>
+                </div>
+              </>
+            )}
+            {shape && shape.name && (
+              <>
+                <Divider />
+                <div className="bioInfo">
+                  <strong>Shape: </strong>
+                  <span>{shape.name}</span>
+                </div>
+              </>
+            )}
           </Box>
         )}
 
@@ -84,30 +105,54 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
         {tabValue === 1 && (
           <Box className="tabContent">
             <h3 className="bio_title">Physical Stats</h3>
-            <div className="bioInfo">
-              <strong>Height: </strong>
-              <span>{pokemonHeight} m / {pokemonHeightFeet} ft </span>
-            </div>
-            <Divider />
-            <div className="bioInfo">
-              <strong>Weight: </strong>
-              <span>{pokemonWeight} kg / {pokemonWeightLbs} lbs</span>
-            </div>
-            <Divider />
-            <div className="bioInfo">
-              <strong>Capture Rate: </strong>
-              <span>{capture_rate}</span>
-            </div>
-            <Divider />
-            <div className="bioInfo">
-              <strong>Base Happiness: </strong>
-              <span>{base_happiness}</span>
-            </div>
-            <Divider />
-            <div className="bioInfo">
-              <strong>Gender Ratio: </strong>
-              <span>{gender_rate}</span>
-            </div>
+            {pokemonHeight && (
+              <>
+                <div className="bioInfo">
+                  <strong>Height: </strong>
+                  <span>
+                    {pokemonHeight} m / {pokemonHeightFeet} ft
+                  </span>
+                </div>
+                <Divider />
+              </>
+            )}
+            {pokemonWeight && (
+              <>
+                <div className="bioInfo">
+                  <strong>Weight: </strong>
+                  <span>
+                    {pokemonWeight} kg / {pokemonWeightLbs} lbs
+                  </span>
+                </div>
+                <Divider />
+              </>
+            )}
+            {capture_rate !== undefined && (
+              <>
+                <div className="bioInfo">
+                  <strong>Capture Rate: </strong>
+                  <span>{capture_rate}</span>
+                </div>
+                <Divider />
+              </>
+            )}
+            {base_happiness !== undefined && (
+              <>
+                <div className="bioInfo">
+                  <strong>Base Happiness: </strong>
+                  <span>{base_happiness}</span>
+                </div>
+                <Divider />
+              </>
+            )}
+            {gender_rate !== undefined && (
+              <>
+                <div className="bioInfo">
+                  <strong>Gender Ratio: </strong>
+                  <span>{gender_rate}</span>
+                </div>
+              </>
+            )}
           </Box>
         )}
 
@@ -125,27 +170,39 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
               </Tooltip>
             </h3>
 
-            <ul className="ability_btn">
-              {abilities.map((ability) => (
-                <Tooltip key={ability.ability.name} title={ability.is_hidden ? "Hidden Ability" : "Normal Ability"} arrow>
-                  <Button
-                    color={ability.is_hidden ? "secondary" : "primary"}
-                    variant={ability.is_hidden ? "outlined" : "outlined"}
+            {abilities && abilities.length > 0 && (
+              <ul className="ability_btn">
+                {abilities.map((ability) => (
+                  <Tooltip
+                    key={ability.ability.name}
+                    title={
+                      ability.is_hidden ? "Hidden Ability" : "Normal Ability"
+                    }
+                    arrow
                   >
-                    {ability.ability.name}
-                  </Button>
-                </Tooltip>
-              ))}
-            </ul>
-            <Divider />
-            <h3 className="bio_title">Egg Group</h3>
-            <ul className="egg_btn">
-              {egg_groups.map((group) => (
-                <Button variant="outlined" key={group.name}>
-                  {group.name}
-                </Button>
-              ))}
-            </ul>
+                    <Button
+                      color={ability.is_hidden ? "secondary" : "primary"}
+                      variant={ability.is_hidden ? "outlined" : "outlined"}
+                    >
+                      {ability.ability.name}
+                    </Button>
+                  </Tooltip>
+                ))}
+              </ul>
+            )}
+            {egg_groups && egg_groups.length > 0 && (
+              <>
+                <Divider />
+                <h3 className="bio_title">Egg Group</h3>
+                <ul className="egg_btn">
+                  {egg_groups.map((group) => (
+                    <Button variant="outlined" key={group.name}>
+                      {group.name}
+                    </Button>
+                  ))}
+                </ul>
+              </>
+            )}
           </Box>
         )}
 
@@ -153,22 +210,30 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
         {tabValue === 3 && (
           <Box className="tabContent">
             <h3 className="bio_title">Additional Info</h3>
-            {characteristicDetails && characteristicDescription && (
+            {characteristicDescription && (
+              <>
+                <div className="bioInfo">
+                  <strong>Characteristic: </strong>
+                  <span>{characteristicDescription}</span>
+                </div>
+                <Divider />
+              </>
+            )}
+            {habitat && habitat.name && (
+              <>
+                <div className="bioInfo">
+                  <strong>Habitat: </strong>
+                  <span>{habitat.name}</span>
+                </div>
+                <Divider />
+              </>
+            )}
+            {hatch_counter !== undefined && (
               <div className="bioInfo">
-                <strong>Characteristic: </strong>
-                <span>{characteristicDescription}</span>
+                <strong>Hatch Counter: </strong>
+                <span>{hatch_counter}</span>
               </div>
             )}
-            <Divider />
-            <div className="bioInfo">
-              <strong>Habitat: </strong>
-              <span>{habitat.name}</span>
-            </div>
-            <Divider />
-            <div className="bioInfo">
-              <strong>Hatch Counter: </strong>
-              <span>{hatch_counter}</span>
-            </div>
           </Box>
         )}
       </Paper>
