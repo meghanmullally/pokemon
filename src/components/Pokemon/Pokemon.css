@@ -15,7 +15,8 @@
 
 .bioContainer {
     margin: 12px;
-    padding-left: 2rem;
+    max-width: 525px;
+    width: auto;
 }
 
 /* Move / Evo Comp Styling */
