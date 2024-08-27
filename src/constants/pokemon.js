@@ -1,4 +1,6 @@
-export const POKEMON_LIMIT = 898;
+// export const POKEMON_LIMIT = 898;
+export const POKEMON_LIMIT = 1010;
+
 
 const TYPE_COLORS = {
   normal: "#A8A77A",
