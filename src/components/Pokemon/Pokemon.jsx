@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import { Divider, Paper, Box } from '@mui/material';
+import { Divider, Box } from '@mui/material';
 import PokemonSideCard from '../PokemonSideCard/PokemonSideCard';
 import Bio from '../Bio/Bio';
 import Stats from '../Stats/Stats';
