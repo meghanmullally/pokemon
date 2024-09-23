@@ -22,7 +22,8 @@
 
 .description {
     display: flex;
-    text-align: justify;
+    text-align: left;
+    text-wrap: wrap;
 }
 
 .bio_para {

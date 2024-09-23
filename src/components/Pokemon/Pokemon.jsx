@@ -21,7 +21,6 @@ const Pokemon = () => {
   const params = useParams();
   let { pokemonId } = params;
 
-
   const navigate = useNavigate();
 
   if (parseInt(pokemonId) > POKEMON_LIMIT) {
@@ -149,21 +148,20 @@ const Pokemon = () => {
 
   // Type Colors and Card Background Color
   const getBorderColor = (types) => {
-    if (types && types.length === 2) {
-      const firstType = types[0].type.name;
-      const secondType = types[1].type.name;
-      let color1 = TYPE_COLORS[firstType] || "white"; // Default to white if color is not found
-      let color2 = TYPE_COLORS[secondType] || "white";
-      return `linear-gradient(to bottom, ${color1} 15%, ${color2} 75%)`;
-      // Add 80 (hexadecimal for 128, which is 50% opacity) to the color
-    } else if (types && types.length === 1) {
-      const singleType = types[0].type.name;
-      const color = TYPE_COLORS[singleType] || "white";
-      return color;
-    } else {
-      // Handle the case when types is undefined or an empty array
-      return "white30"; // You can provide a default color or handle it as needed
+    // ?. optional chaining ensures if null / undefined code wont throw error & will go to next condition
+    if (types?.length === 2) {
+      // Extract the colors for both types using map
+      const [firstType, secondType] = types.map(t => TYPE_COLORS[t.type.name] || "white");
+  
+      // Return a linear gradient combining both colors
+      return `linear-gradient(to bottom, ${firstType} 15%, ${secondType} 75%)`;
+    } else if (types?.length === 1) {
+      // If there's only one type, return its corresponding color
+      return TYPE_COLORS[types[0].type.name] || "white";
     }
+  
+    // If types is undefined or an empty array, return a default color (white)
+    return "white";
   };
 
   // build bio
