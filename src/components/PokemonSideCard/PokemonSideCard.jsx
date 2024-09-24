@@ -6,8 +6,7 @@ import './PokemonSideCard.css';
 
 const PokemonSideCard = ({ pokemonDetails, pokemonData }) => {
     const { name, types } = pokemonDetails;
-     // Fallback to an empty object if pokemonData is undefined
-    const {sprite} = pokemonData || {};
+    const {sprite} = pokemonData;
 
 
     return (
