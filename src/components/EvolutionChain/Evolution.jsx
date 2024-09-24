@@ -9,14 +9,14 @@ import "./Evolution.css";
 export default function Evolution({ evolutionData }) {
   return (
     <Paper className="evoContainer">
-        <h3 className="evoTitle">Evolution Chain
+      <h3 className="evoTitle">Evolution Chain
         <Tooltip
           title="An evolution chain shows the sequence of Pokémon evolutions, starting from a base form and progressing through its evolutionary stages."
           arrow
         >
           <InfoOutlinedIcon className="infoIcon" />
         </Tooltip>
-        </h3>
+      </h3>
       <div className="evoPoke">
         {evolutionData.map((pokemon, index) => {
           const { id } = pokemon;
