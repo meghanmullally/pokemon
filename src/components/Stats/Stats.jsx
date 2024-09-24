@@ -9,7 +9,7 @@ export default function Stats({ pokemonDetails }) {
   const min = 0;
   // individual stats are typically capped at 255 and total at 510
   const max = 225;
-  const normalise = (value) => ((value - min) * 100) / (max - min);
+  const normalize = (value) => ((value - min) * 100) / (max - min);
 
   // Function to set color based on the stat
   const getColor = (statName) => {
@@ -44,7 +44,7 @@ export default function Stats({ pokemonDetails }) {
             </div>
             <LinearProgress
               variant="determinate"
-              value={normalise(stat.base_stat)}
+              value={normalize(stat.base_stat)}
               sx={{
                 width: "100%",
                 height: "14px",

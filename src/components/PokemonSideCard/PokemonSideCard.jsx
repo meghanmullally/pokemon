@@ -10,7 +10,6 @@ const PokemonSideCard = ({ pokemonDetails, pokemonData }) => {
     const { sprite } = pokemonData || {};
 
 
-
     return (
         <>
             <Card elevation={0} className="pokemonSideCardContainer">

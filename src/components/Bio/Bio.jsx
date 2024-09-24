@@ -32,9 +32,6 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
   // For an approximate result, multiply the mass value by 2.205
   const pokemonWeightLbs = weight ? (weight * 0.2205).toFixed(2) : null;
 
-  let pokemonHeight = null;
-  let pokemonWeight = null;
-
   return (
     <>
       <Paper elevation={0} className="bio_paper">
