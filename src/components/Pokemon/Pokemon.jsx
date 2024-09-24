@@ -108,21 +108,29 @@ const Pokemon = () => {
         // Handle the error, show an error message, or redirect to an error page
       });
 
-    fetch(characteristicUrl)
-      .then((response) => response.json())
+      fetch(characteristicUrl)
+      .then((response) => {
+        if (!response.ok) {
+          // Log and handle 404 errors
+          console.warn(`Characteristic not found for Pokémon with ID ${pokemonId}`);
+          setCharacteristicDetails(null);  // Set to null if characteristic is not found
+          return null;  // Exit early if no characteristic data
+        }
+        return response.json();  // Only attempt to parse if the response is OK
+      })
       .then((data) => {
-        // Finding the English description
-        const englishDescription = data.descriptions.find((desc) => desc.language.name === 'en');
-        const characteristicDescription = englishDescription ? englishDescription.description : '';
-
-        // Set state with the data including the English description
-        setCharacteristicDetails({ ...data, characteristicDescription });
+        if (data) {
+          // Find the English description only if data exists
+          const englishDescription = data.descriptions?.find((desc) => desc.language.name === 'en');
+          const characteristicDescription = englishDescription ? englishDescription.description : 'No characteristic description available';
+          setCharacteristicDetails({ ...data, characteristicDescription });
+        }
       })
       .catch((error) => {
-        console.error("Error fetching characteristic data:", error);
-        // Handle the error, show an error message, or redirect to an error page
+        console.error("Error fetching characteristic data:", error.message);
+        setCharacteristicDetails(null);  // Fallback in case of an error
       });
-
+      
     fetch(speciesUrl)
       .then((response) => response.json())
       .then((data) => {
