@@ -7,17 +7,18 @@ const Moves = ({ pokemonDetails }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   // Destructure different move types
-  const { moves } = pokemonDetails;
+  // Fallback to an empty array if moves is undefined
+  const { moves = [] } = pokemonDetails || {};
 
   // Group and sort moves by category
-  const levelUpMoves = moves
-    .filter(move => move.version_group_details.some(detail => detail.move_learn_method.name === 'level-up'))
-    .sort((a, b) => {
-      const levelA = a.version_group_details.find(detail => detail.move_learn_method.name === 'level-up').level_learned_at;
-      const levelB = b.version_group_details.find(detail => detail.move_learn_method.name === 'level-up').level_learned_at;
+  const levelUpMoves = (moves || [])
+  .filter(move => move.version_group_details.some(detail => detail.move_learn_method.name === 'level-up'))
+  .sort((a, b) => {
+    const levelA = a.version_group_details.find(detail => detail.move_learn_method.name === 'level-up').level_learned_at;
+    const levelB = b.version_group_details.find(detail => detail.move_learn_method.name === 'level-up').level_learned_at;
       // Sort in ascending order
-      return levelA - levelB;
-    });
+    return levelA - levelB;
+  });
 
   const tmMoves = moves.filter(move => move.version_group_details.some(detail => detail.move_learn_method.name === 'machine'));
   const eggMoves = moves.filter(move => move.version_group_details.some(detail => detail.move_learn_method.name === 'egg'));
