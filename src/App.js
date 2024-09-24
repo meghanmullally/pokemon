@@ -14,7 +14,7 @@ function App() {
   const dispatch = useAppDispatch();
   // help to determine if data is still being fetched or if it has loaded successfully
   const [loading, setLoading] = useState(true);
-  
+
   // Pokemon Image
   const generatedPokemonImageUrl = (inputId) => {
 
@@ -22,14 +22,14 @@ function App() {
 
     if (parseInt(inputId) <= 649) {
       // this source only goes up to 649 pokemon when this project was implemented 
-        url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${inputId}.svg`;
+      url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${inputId}.svg`;
     } else {
       // this source goes up to 1010 pokemon when this project was implemented 
-        url = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${inputId}.png`;
+      url = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${inputId}.png`;
     }
 
     return url;
-};
+  };
 
   useEffect(() => {
     const url = `https://pokeapi.co/api/v2/pokemon?limit=${POKEMON_LIMIT}`;
@@ -39,7 +39,7 @@ function App() {
       .then((data) => {
         const newPokemonData = {};
         const newSearchOptionData = [];
-  
+
         data.results.forEach((pokemon, index) => {
           let pokemonImgId = (index + 1).toString();
           const sprite = generatedPokemonImageUrl(pokemonImgId);
