@@ -21,15 +21,15 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
   // Use the first English entry if found, otherwise use an empty string
   const flavorText = englishFlavorText ? englishFlavorText.flavor_text : "Flavor text not available";
 
-// Pokemon Height & Weight
+  // Pokemon Height & Weight
 
-// The pokemon's height in decimeters which is converted into meters by dividing by 10  
+  // The pokemon's height in decimeters which is converted into meters by dividing by 10  
   const pokemonHeight = height ? (height / 10).toFixed(2) : null;
-// For an approximate result, multiply the length value by 3.281
+  // For an approximate result, multiply the length value by 3.281
   const pokemonHeightFeet = height ? ((height / 10) * 3.281).toFixed(2) : null;
-// The pokemon's weight in hectograms which is converted into kilograms by dividing by 10
+  // The pokemon's weight in hectograms which is converted into kilograms by dividing by 10
   const pokemonWeight = weight ? (weight / 10).toFixed(2) : null;
-// For an approximate result, multiply the mass value by 2.205
+  // For an approximate result, multiply the mass value by 2.205
   const pokemonWeightLbs = weight ? (weight * 0.2205).toFixed(2) : null;
 
   return (

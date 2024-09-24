@@ -108,7 +108,7 @@ const Pokemon = () => {
         // Handle the error, show an error message, or redirect to an error page
       });
 
-      fetch(characteristicUrl)
+    fetch(characteristicUrl)
       .then((response) => {
         if (!response.ok) {
           // Log and handle 404 errors
@@ -130,7 +130,7 @@ const Pokemon = () => {
         console.error("Error fetching characteristic data:", error.message);
         setCharacteristicDetails(null);  // Fallback in case of an error
       });
-      
+
     fetch(speciesUrl)
       .then((response) => response.json())
       .then((data) => {
@@ -160,14 +160,14 @@ const Pokemon = () => {
     if (types?.length === 2) {
       // Extract the colors for both types using map
       const [firstType, secondType] = types.map(t => TYPE_COLORS[t.type.name] || "white");
-  
+
       // Return a linear gradient combining both colors
       return `linear-gradient(to bottom, ${firstType} 15%, ${secondType} 75%)`;
     } else if (types?.length === 1) {
       // If there's only one type, return its corresponding color
       return TYPE_COLORS[types[0].type.name] || "white";
     }
-  
+
     // If types is undefined or an empty array, return a default color (white)
     return "white";
   };

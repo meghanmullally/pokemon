@@ -3,8 +3,8 @@ import { Paper, Typography, LinearProgress } from "@mui/material";
 import "./Stats.css";
 
 export default function Stats({ pokemonDetails }) {
-// Fallback to an empty array if stats is undefined
-const { stats = [] } = pokemonDetails || {};  
+  // Fallback to an empty array if stats is undefined
+  const { stats = [] } = pokemonDetails || {};
 
   // normalizing the range
   const min = 0;
