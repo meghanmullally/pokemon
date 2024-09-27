@@ -164,12 +164,11 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
 
             {abilities && abilities.length > 0 && (
               <ul className="ability_btn">
-                {abilities.map((ability) => (
+                {abilities.map((ability, index) => (
                   <Tooltip
-                    key={ability.ability.name}
-                    title={
-                      ability.is_hidden ? "Hidden Ability" : "Normal Ability"
-                    }
+                  // Ensures each key is unique by appending the index
+                    key={`${ability.ability.name}-${index}`}
+                    title={ability.is_hidden ? "Hidden Ability" : "Normal Ability"}
                     arrow
                   >
                     <Button
