@@ -158,9 +158,9 @@ const Pokemon = () => {
       .catch((error) => {
         console.error("Error fetching Pokemon species data:", error);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     // if empty will render once 
     // if there are variables in the array and the variable changes it will render again
+    // eslint-disable-next-line
   }, []);
 
   // Type Colors and Card Background Color
