@@ -161,7 +161,7 @@ const Pokemon = () => {
     // if empty will render once 
     // if there are variables in the array and the variable changes it will render again
     // eslint-disable-next-line
-  }, []);
+  }, [buildEvolution, dispatch, pokemonData, pokemonId]);
 
   // Type Colors and Card Background Color
   const getBorderColor = (types) => {
