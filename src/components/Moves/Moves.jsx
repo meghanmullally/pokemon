@@ -3,11 +3,8 @@ import { Paper, Tab, Tabs, Tooltip } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import './Moves.css';
 
-const Moves = ({ pokemonDetails }) => {
+const Moves = ({ moves }) => {
   const [activeTab, setActiveTab] = useState(0);
-
-  // Destructure different move types
-  const { moves } = pokemonDetails;
 
   // Group and sort moves by category
   const levelUpMoves = (moves || [])
