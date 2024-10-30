@@ -158,8 +158,10 @@ const Pokemon = () => {
       .catch((error) => {
         console.error("Error fetching Pokemon species data:", error);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pokemonId, buildEvolution, dispatch, pokemonData]);
+    // if empty will render once 
+    // if there are variables in the array and the variable changes it will render again
+    // eslint-disable-next-line
+  }, [buildEvolution, dispatch, pokemonData, pokemonId]);
 
   // Type Colors and Card Background Color
   const getBorderColor = (types) => {
@@ -210,7 +212,7 @@ const Pokemon = () => {
         </div>
         <div className="evoMoveContainer">
           <Evolution evolutionData={evolutionChain} />
-          <Moves pokemonDetails={pokemonDetails} />
+          <Moves moves={pokemonDetails.moves} />
         </div>
       </Box>
     </>
