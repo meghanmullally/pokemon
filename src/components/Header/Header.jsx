@@ -53,7 +53,7 @@ function Header() {
           <Grid item>
             <NavLink to="/" onClick={resetFilterTerm}>
               <Hidden mdDown>
-                <img src="https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png" className="pokedex" alt="pokedex logo" />
+                <img src="/pokedex_logo.png" className="pokedex" alt="pokedex logo" />
               </Hidden>
               <img
                 className="headerLogos"
