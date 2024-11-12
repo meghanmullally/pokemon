@@ -8,11 +8,7 @@ import { POKEMON_LIMIT } from "./constants/pokemon";
 import "./App.css";
 
 function App() {
-
-  const pokemonData = {};
-  const searchOptionData = [];
   const dispatch = useAppDispatch();
-  // help to determine if data is still being fetched or if it has loaded successfully
   const [loading, setLoading] = useState(true);
 
   // Pokemon Image
@@ -32,46 +28,60 @@ function App() {
   };
 
   useEffect(() => {
+    // Fetch basic data for all Pokémon
     const url = `https://pokeapi.co/api/v2/pokemon?limit=${POKEMON_LIMIT}`;
 
     fetch(url)
       .then((response) => response.json())
-      .then((data) => {
+      .then(async (data) => {
         const newPokemonData = {};
         const newSearchOptionData = [];
 
-        data.results.forEach((pokemon, index) => {
-          let pokemonImgId = (index + 1).toString();
-          const sprite = generatedPokemonImageUrl(pokemonImgId);
+        // Use `Promise.all` to fetch detailed data for each Pokémon
+        await Promise.all(
+          data.results.map(async (pokemon, index) => {
+            const pokemonId = index + 1;
+            const pokemonDetailsUrl = pokemon.url;  // URL to fetch each Pokémon's details
 
-          newPokemonData[index + 1] = {
-            id: index + 1,
-            name: pokemon.name,
-            sprite: sprite,
-            searched: false
-          };
-          newSearchOptionData.push(newPokemonData[index + 1]);
-        });
+            // Fetch detailed data for each Pokémon to get types and other details
+            const pokemonDetailsResponse = await fetch(pokemonDetailsUrl);
+            const pokemonDetails = await pokemonDetailsResponse.json();
 
+            const sprite = generatedPokemonImageUrl(pokemonId);
+
+            newPokemonData[pokemonId] = {
+              id: pokemonId,
+              name: pokemon.name,
+              sprite: sprite,
+              types: pokemonDetails.types,
+              searched: false
+            };
+
+            newSearchOptionData.push(newPokemonData[pokemonId]);
+          })
+        );
+
+        // Sort search options alphabetically
         newSearchOptionData.sort((a, b) => {
           const nameA = a.name.toUpperCase();
           const nameB = b.name.toUpperCase();
           return nameA <= nameB ? -1 : 1;
         });
 
+        // Dispatch data to Redux store
         dispatch(pokemonActions.setPokemonData(newPokemonData));
         dispatch(pokemonActions.setSearchOptionData(newSearchOptionData));
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching Pokemon Data", error);
+        console.error("Error fetching Pokémon Data", error);
         setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   const router = createBrowserRouter([
-    { path: "/", element: !loading && <Pokedex pokemonData={pokemonData} searchOptionData={searchOptionData} /> },
+    { path: "/", element: !loading && <Pokedex /> },
     { path: "/pokemon/:pokemonId", element: <Pokemon /> },
   ]);
 

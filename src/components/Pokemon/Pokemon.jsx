@@ -77,16 +77,12 @@ const Pokemon = () => {
   useEffect(() => {
     // pokemonUrl can take pokemon name or id, using name since that is what comes back in the fetch in app.js
     const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
-    // url for specific pokemon details
     const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`;
-    // url for pokemon characteristic 
     const characteristicUrl = `https://pokeapi.co/api/v2/characteristic/${pokemonId}/`;
 
-
-    // update history
+    // Update search history in Redux if pokemonData is loaded
     if (Object.keys(pokemonData).length !== 0) {
       const findPokemon = pokemonData[pokemonId];
-
       const pokemonFound = {
         searched: true,
         ...findPokemon
@@ -102,18 +98,27 @@ const Pokemon = () => {
       .then((response) => response.json())
       .then((data) => {
         setPokemonDetails(data);
+
+        // Dispatch action to update Redux store with detailed data including `types`
+        dispatch(pokemonActions.updatePokemonDetails({
+          id: pokemonId,
+          details: {
+            types: data.types, // Add types to the redux store
+            sprite: data.sprites.other['official-artwork'].front_default,
+            name: data.name,
+          }
+        }));
       })
       .catch((error) => {
         console.error("Error fetching Pokemon data:", error);
-        // Handle the error, show an error message, or redirect to an error page
       });
 
-      fetch(characteristicUrl)
+    fetch(characteristicUrl)
       .then((response) => {
         if (!response.ok) {
           console.warn(`Characteristic not found for Pokémon with ID ${pokemonId}`);
-          setCharacteristicDetails(null);  // Safely set to null
-          return null;  // Exit early if no characteristic data
+          setCharacteristicDetails(null);
+          return null;
         }
         return response.json();
       })
@@ -125,17 +130,15 @@ const Pokemon = () => {
           const characteristicDescription = englishDescription
             ? englishDescription.description
             : 'No characteristic description available';
-    
           setCharacteristicDetails({ ...data, characteristicDescription });
         } else {
           console.warn('No characteristic descriptions available.');
-          // Safely set to null if descriptions don't exist
           setCharacteristicDetails(null);
         }
       })
       .catch((error) => {
         console.error("Error fetching characteristic data:", error);
-        setCharacteristicDetails(null);  // Set to null in case of an error
+        setCharacteristicDetails(null);
       });
 
     fetch(speciesUrl)
@@ -158,9 +161,6 @@ const Pokemon = () => {
       .catch((error) => {
         console.error("Error fetching Pokemon species data:", error);
       });
-    // if empty will render once 
-    // if there are variables in the array and the variable changes it will render again
-    // eslint-disable-next-line
   }, [buildEvolution, dispatch, pokemonData, pokemonId]);
 
   // Type Colors and Card Background Color
