@@ -15,7 +15,7 @@ export default function PokemonCard(props) {
   const { id, name, sprite, types } = pokemonData[pokemonId] || {};
 
   // Type Colors and Card Background Color with 50% opacity
-  const getBorderColor = (types) => {
+  const getBackgroundColor = (types) => {
     if (types?.length >= 2) {
       // Extract colors for each type and add '80' for 50% opacity
       const colors = types.map((t) => `${TYPE_COLORS[t.type.name] || "white"}80`);
@@ -28,11 +28,23 @@ export default function PokemonCard(props) {
     return "white"; // Default color
   };
 
+// Type Colors and Card Background Color single color
+// const getBackgroundColor = (types) => {
+//   if (types && types.length > 0) {
+//     const firstType = types[0].type.name;  // Extract the primary type's name
+//     const color = TYPE_COLORS[firstType] || 'white'; // Default to white if color is not found
+//     return `${color}30`; // Add '30' for a slight transparency effect
+//   } else {
+//     // Handle the case when types is undefined or an empty array
+//     return 'white'; // Provide a default color
+//   }
+// };
+
   return (
     <React.Fragment key={pokemonId}>
       <NavLink className="nav-link" to={{ pathname: `/pokemon/${pokemonId}` }}>
         <Paper elevation={6} className="pokePaper">
-          <Card style={{ background: getBorderColor(types) }}> {/* Use the gradient as the background */}
+          <Card style={{ background: getBackgroundColor(types) }}> 
             <CardMedia
               className="cardMedia"
               image={sprite}
