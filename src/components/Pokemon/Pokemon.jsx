@@ -165,20 +165,20 @@ const Pokemon = () => {
 
   // Type Colors and Card Background Color
   const getBorderColor = (types) => {
-    // ?. optional chaining ensures if null / undefined code wont throw error & will go to next condition
     if (types?.length === 2) {
-      // Extract the colors for both types using map
       const [firstType, secondType] = types.map(t => TYPE_COLORS[t.type.name] || "white");
-
-      // Return a linear gradient combining both colors
-      return `linear-gradient(to bottom, ${firstType} 15%, ${secondType} 75%)`;
+  
+      // Create a smoother blend between two colors with a hint of white in the middle
+      return `linear-gradient(to bottom, ${firstType} 20%, rgba(255, 255, 255, 0.6) 50%, ${secondType} 80%)`;
     } else if (types?.length === 1) {
-      // If there's only one type, return its corresponding color
-      return TYPE_COLORS[types[0].type.name] || "white";
+      const primaryType = TYPE_COLORS[types[0].type.name] || "white";
+  
+      // Use only the single type color with no blending
+      return primaryType;
     }
-
-    // If types is undefined or an empty array, return a default color (white)
-    return "white";
+  
+    // Default for no types
+    return "white"; 
   };
 
   // build bio
