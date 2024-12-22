@@ -15,7 +15,6 @@ export default function PokemonCard({ pokemonId }) {
 
 
   const { id, name, sprite, types } = pokemonData[pokemonId] || {};
-  console.log("PokemonCard props:", { id, name, sprite, types });
 
   return (
     <React.Fragment key={pokemonId}>
