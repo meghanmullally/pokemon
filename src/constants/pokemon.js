@@ -2,7 +2,7 @@
 export const POKEMON_LIMIT = 1010;
 
 
-const TYPE_COLORS = {
+export const TYPE_COLORS = {
   normal: "#A8A77A",
   fire: "#EE8130",
   water: "#6390F0",
@@ -22,5 +22,3 @@ const TYPE_COLORS = {
   steel: "#B7B7CE",
   fairy: "#D685AD",
 };
-
-export { TYPE_COLORS };

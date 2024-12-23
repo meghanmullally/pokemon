@@ -23,6 +23,16 @@ const pokemonSlice = createSlice({
         },
         updateFilterSearch(state, action) {
             state.filterSearch = action.payload;
+        },
+        updatePokemonDetails(state, action) {
+            const { id, details } = action.payload;
+            if (state.pokemonData[id]) {
+                state.pokemonData[id] = {
+                    ...state.pokemonData[id],
+                    // Merge new details like `types` with existing data
+                    ...details,
+                };
+            }
         }
     }
 });

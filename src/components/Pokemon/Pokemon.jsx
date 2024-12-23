@@ -77,16 +77,12 @@ const Pokemon = () => {
   useEffect(() => {
     // pokemonUrl can take pokemon name or id, using name since that is what comes back in the fetch in app.js
     const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
-    // url for specific pokemon details
     const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`;
-    // url for pokemon characteristic 
     const characteristicUrl = `https://pokeapi.co/api/v2/characteristic/${pokemonId}/`;
 
-
-    // update history
+    // Update search history in Redux if pokemonData is loaded
     if (Object.keys(pokemonData).length !== 0) {
       const findPokemon = pokemonData[pokemonId];
-
       const pokemonFound = {
         searched: true,
         ...findPokemon
@@ -102,18 +98,27 @@ const Pokemon = () => {
       .then((response) => response.json())
       .then((data) => {
         setPokemonDetails(data);
+
+        // Dispatch action to update Redux store with detailed data including `types`
+        dispatch(pokemonActions.updatePokemonDetails({
+          id: pokemonId,
+          details: {
+            types: data.types, // Add types to the redux store
+            sprite: data.sprites.other['official-artwork'].front_default,
+            name: data.name,
+          }
+        }));
       })
       .catch((error) => {
         console.error("Error fetching Pokemon data:", error);
-        // Handle the error, show an error message, or redirect to an error page
       });
 
-      fetch(characteristicUrl)
+    fetch(characteristicUrl)
       .then((response) => {
         if (!response.ok) {
           console.warn(`Characteristic not found for Pokémon with ID ${pokemonId}`);
-          setCharacteristicDetails(null);  // Safely set to null
-          return null;  // Exit early if no characteristic data
+          setCharacteristicDetails(null);
+          return null;
         }
         return response.json();
       })
@@ -125,17 +130,15 @@ const Pokemon = () => {
           const characteristicDescription = englishDescription
             ? englishDescription.description
             : 'No characteristic description available';
-    
           setCharacteristicDetails({ ...data, characteristicDescription });
         } else {
           console.warn('No characteristic descriptions available.');
-          // Safely set to null if descriptions don't exist
           setCharacteristicDetails(null);
         }
       })
       .catch((error) => {
         console.error("Error fetching characteristic data:", error);
-        setCharacteristicDetails(null);  // Set to null in case of an error
+        setCharacteristicDetails(null);
       });
 
     fetch(speciesUrl)
@@ -158,27 +161,24 @@ const Pokemon = () => {
       .catch((error) => {
         console.error("Error fetching Pokemon species data:", error);
       });
-    // if empty will render once 
-    // if there are variables in the array and the variable changes it will render again
-    // eslint-disable-next-line
   }, [buildEvolution, dispatch, pokemonData, pokemonId]);
 
   // Type Colors and Card Background Color
   const getBorderColor = (types) => {
-    // ?. optional chaining ensures if null / undefined code wont throw error & will go to next condition
     if (types?.length === 2) {
-      // Extract the colors for both types using map
       const [firstType, secondType] = types.map(t => TYPE_COLORS[t.type.name] || "white");
-
-      // Return a linear gradient combining both colors
-      return `linear-gradient(to bottom, ${firstType} 15%, ${secondType} 75%)`;
+  
+      // Create a smoother blend between two colors with a hint of white in the middle
+      return `linear-gradient(to bottom, ${firstType} 20%, rgba(255, 255, 255, 0.6) 50%, ${secondType} 80%)`;
     } else if (types?.length === 1) {
-      // If there's only one type, return its corresponding color
-      return TYPE_COLORS[types[0].type.name] || "white";
+      const primaryType = TYPE_COLORS[types[0].type.name] || "white";
+  
+      // Use only the single type color with no blending
+      return primaryType;
     }
-
-    // If types is undefined or an empty array, return a default color (white)
-    return "white";
+  
+    // Default for no types
+    return "white"; 
   };
 
   // build bio

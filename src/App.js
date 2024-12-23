@@ -1,84 +1,61 @@
 import React, { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { pokemonActions } from './components/PokemonSlice';
 import { useAppDispatch } from "./app/hooks";
+import { pokemonActions } from "./components/PokemonSlice";
 import Pokedex from "./components/Pokedex/Pokedex";
 import Pokemon from "./components/Pokemon/Pokemon";
 import { POKEMON_LIMIT } from "./constants/pokemon";
+import { generatedPokemonImageUrl } from "./utils/pokemonHelpers";
 import "./App.css";
 
 function App() {
-
-  const pokemonData = {};
-  const searchOptionData = [];
   const dispatch = useAppDispatch();
-  // help to determine if data is still being fetched or if it has loaded successfully
   const [loading, setLoading] = useState(true);
 
-  // Pokemon Image
-  const generatedPokemonImageUrl = (inputId) => {
-
-    let url = "";
-
-    if (parseInt(inputId) <= 649) {
-      // this source only goes up to 649 pokemon when this project was implemented 
-      url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${inputId}.svg`;
-    } else {
-      // this source goes up to 1010 pokemon when this project was implemented 
-      url = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${inputId}.png`;
-    }
-
-    return url;
-  };
-
   useEffect(() => {
-    const url = `https://pokeapi.co/api/v2/pokemon?limit=${POKEMON_LIMIT}`;
-
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchPokemonData = async () => {
+      try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${POKEMON_LIMIT}`);
+        const data = await response.json();
+  
         const newPokemonData = {};
         const newSearchOptionData = [];
-
-        data.results.forEach((pokemon, index) => {
-          let pokemonImgId = (index + 1).toString();
-          const sprite = generatedPokemonImageUrl(pokemonImgId);
-
-          newPokemonData[index + 1] = {
-            id: index + 1,
-            name: pokemon.name,
-            sprite: sprite,
-            searched: false
-          };
-          newSearchOptionData.push(newPokemonData[index + 1]);
-        });
-
-        newSearchOptionData.sort((a, b) => {
-          const nameA = a.name.toUpperCase();
-          const nameB = b.name.toUpperCase();
-          return nameA <= nameB ? -1 : 1;
-        });
-
+  
+        await Promise.all(
+          data.results.map(async (pokemon, index) => {
+            const pokemonId = index + 1;
+            const pokemonDetailsResponse = await fetch(pokemon.url);
+            const pokemonDetails = await pokemonDetailsResponse.json();
+  
+            newPokemonData[pokemonId] = {
+              id: pokemonId,
+              name: pokemon.name,
+              sprite: generatedPokemonImageUrl(pokemonId),
+              types: pokemonDetails.types,
+            };
+            newSearchOptionData.push(newPokemonData[pokemonId]);
+          })
+        );
+  
         dispatch(pokemonActions.setPokemonData(newPokemonData));
-        dispatch(pokemonActions.setSearchOptionData(newSearchOptionData));
+      } catch (error) {
+        console.error("Error fetching Pokémon data:", error);
+      } finally {
         setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching Pokemon Data", error);
-        setLoading(false);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      }
+    };
+  
+    fetchPokemonData();
   }, [dispatch]);
 
   const router = createBrowserRouter([
-    { path: "/", element: !loading && <Pokedex pokemonData={pokemonData} searchOptionData={searchOptionData} /> },
+    { path: "/", element: !loading && <Pokedex /> },
     { path: "/pokemon/:pokemonId", element: <Pokemon /> },
   ]);
 
   return (
     <div className="App">
-      <RouterProvider router={router} />
-      <br />
+          {loading ? <p>Loading Pokémon...</p> : <RouterProvider router={router} />}
     </div>
   );
 }

@@ -3,29 +3,57 @@ import { Paper, Tab, Tabs, Tooltip } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import './Moves.css';
 
-const Moves = ({ moves }) => {
+// Define move categories and their descriptions
+const moveCategories = [
+  {
+    label: "Level Up Moves",
+    key: "level-up",
+    tooltip: "Moves that a Pokémon learns automatically as it levels up.",
+    filter: (move) => move.version_group_details.some(detail => detail.move_learn_method.name === "level-up"),
+    sort: (a, b) => {
+      const levelA = a.version_group_details.find(detail => detail.move_learn_method.name === "level-up").level_learned_at;
+      const levelB = b.version_group_details.find(detail => detail.move_learn_method.name === "level-up").level_learned_at;
+      return levelA - levelB;
+    },
+  },
+  {
+    label: "TM/HM Moves",
+    key: "machine",
+    tooltip: "Moves that can be taught to Pokémon using Technical Machines (TM) or Hidden Machines (HM).",
+    filter: (move) => move.version_group_details.some(detail => detail.move_learn_method.name === "machine"),
+  },
+  {
+    label: "Egg Moves",
+    key: "egg",
+    tooltip: "Moves that Pokémon can inherit from their parents when they are bred.",
+    filter: (move) => move.version_group_details.some(detail => detail.move_learn_method.name === "egg"),
+  },
+  {
+    label: "Tutor Moves",
+    key: "tutor",
+    tooltip: "Moves that can be taught to Pokémon by a Move Tutor.",
+    filter: (move) => move.version_group_details.some(detail => detail.move_learn_method.name === "tutor"),
+  },
+];
+
+const Moves = ({ moves = [] }) => {
   const [activeTab, setActiveTab] = useState(0);
 
-  // Group and sort moves by category
-  const levelUpMoves = (moves || [])
-    .filter(move => move.version_group_details.some(detail => detail.move_learn_method.name === 'level-up'))
-    .sort((a, b) => {
-      const levelA = a.version_group_details.find(detail => detail.move_learn_method.name === 'level-up').level_learned_at;
-      const levelB = b.version_group_details.find(detail => detail.move_learn_method.name === 'level-up').level_learned_at;
-      // Sort in ascending order
-      return levelA - levelB;
-    });
-
-  const tmMoves = moves.filter(move => move.version_group_details.some(detail => detail.move_learn_method.name === 'machine'));
-  const eggMoves = moves.filter(move => move.version_group_details.some(detail => detail.move_learn_method.name === 'egg'));
-  const tutorMoves = moves.filter(move => move.version_group_details.some(detail => detail.move_learn_method.name === 'tutor'));
+  // Helper function to filter and sort moves based on the category
+  const getFilteredMoves = (category) => {
+    let filteredMoves = moves.filter(category.filter);
+    if (category.sort) {
+      filteredMoves = filteredMoves.sort(category.sort);
+    }
+    return filteredMoves;
+  };
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
 
   return (
-    <Paper className='moveContainer'>
+    <Paper className="moveContainer">
       <h3 className="movesTitle">
         Moves
         <Tooltip
@@ -36,96 +64,47 @@ const Moves = ({ moves }) => {
         </Tooltip>
       </h3>
 
+      {/* Render Tabs */}
       <Tabs value={activeTab} onChange={handleTabChange} aria-label="moves tabs">
-        {levelUpMoves.length > 0 && <Tab label="Level Up Moves" />}
-        {tmMoves.length > 0 && <Tab label="TM/HM Moves" />}
-        {eggMoves.length > 0 && <Tab label="Egg Moves" />}
-        {tutorMoves.length > 0 && <Tab label="Tutor Moves" />}
+        {moveCategories.map((category, index) => {
+          const filteredMoves = getFilteredMoves(category);
+          return (
+            filteredMoves.length > 0 && <Tab key={category.key} label={category.label} />
+          );
+        })}
       </Tabs>
 
-      {activeTab === 0 && levelUpMoves.length > 0 && (
-        <div className="moveTabContent">
-          <h3 className="bio_title">
-            Moves Learned by Leveling Up
-            <Tooltip
-              title="Moves that a Pokémon learns automatically as it levels up."
-              arrow
-            >
-              <InfoOutlinedIcon className="infoIcon" />
-            </Tooltip>
-          </h3>
-          <ul className="moveList moveListContainer">
-            {levelUpMoves.map((move) => (
-              <li key={move.move.name} className="moveItem">
-                <strong>{move.move.name}</strong> (Level: {move.version_group_details.find(detail => detail.move_learn_method.name === 'level-up').level_learned_at})
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {activeTab === 1 && tmMoves.length > 0 && (
-        <div className="moveTabContent">
-          <h3 className="bio_title">
-            TM/HM Moves
-            <Tooltip
-              title="Moves that can be taught to Pokémon using Technical Machines (TM) or Hidden Machines (HM)."
-              arrow
-            >
-              <InfoOutlinedIcon className="infoIcon" />
-            </Tooltip>
-          </h3>
-          <ul className="moveList moveListContainer">
-            {tmMoves.map((move) => (
-              <li key={move.move.name} className="moveItem">
-                <strong>{move.move.name}</strong>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {activeTab === 2 && eggMoves.length > 0 && (
-        <div className="moveTabContent">
-          <h3 className="bio_title">
-            Egg Moves
-            <Tooltip
-              title="Moves that Pokémon can inherit from their parents when they are bred."
-              arrow
-            >
-              <InfoOutlinedIcon className="infoIcon" />
-            </Tooltip>
-          </h3>
-          <ul className="moveList moveListContainer">
-            {eggMoves.map((move) => (
-              <li key={move.move.name} className="moveItem">
-                <strong>{move.move.name}</strong>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {activeTab === 3 && tutorMoves.length > 0 && (
-        <div className="moveTabContent">
-          <h3 className="bio_title">
-            Tutor Moves
-            <Tooltip
-              title="Moves that can be taught to Pokémon by a Move Tutor."
-              arrow
-            >
-              <InfoOutlinedIcon className="infoIcon" />
-            </Tooltip>
-          </h3>
-          <ul className="moveList moveListContainer">
-            {tutorMoves.map((move) => (
-              <li key={move.move.name} className="moveItem">
-                <strong>{move.move.name}</strong>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {/* Render Content for the Active Tab */}
+      {moveCategories.map((category, index) => {
+        if (activeTab === index) {
+          const filteredMoves = getFilteredMoves(category);
+          return (
+            <div key={category.key} className="moveTabContent">
+              <h3 className="bio_title">
+                {category.label}
+                <Tooltip title={category.tooltip} arrow>
+                  <InfoOutlinedIcon className="infoIcon" />
+                </Tooltip>
+              </h3>
+              <ul className="moveList moveListContainer">
+                {filteredMoves.map((move) => (
+                  <li key={move.move.name} className="moveItem">
+                    <strong>{move.move.name}</strong>
+                    {category.key === "level-up" && (
+                      ` (Level: ${
+                        move.version_group_details.find(
+                          (detail) => detail.move_learn_method.name === "level-up"
+                        ).level_learned_at
+                      })`
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        }
+        return null;
+      })}
     </Paper>
   );
 };
