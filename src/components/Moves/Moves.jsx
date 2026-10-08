@@ -37,7 +37,7 @@ const moveCategories = [
 ];
 
 const Moves = ({ moves = [] }) => {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(null);
 
   // Helper function to filter and sort moves based on the category
   const getFilteredMoves = (category) => {
@@ -48,9 +48,19 @@ const Moves = ({ moves = [] }) => {
     return filteredMoves;
   };
 
+  const availableCategories = moveCategories.filter(
+    (category) => getFilteredMoves(category).length > 0
+  );
+
+  const currentTab = activeTab && availableCategories.find(c => c.key === activeTab)
+    ? activeTab
+    : availableCategories[0]?.key ?? null;
+
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
+
+  if (availableCategories.length === 0) return null;
 
   return (
     <Paper className="moveContainer">
@@ -64,46 +74,41 @@ const Moves = ({ moves = [] }) => {
         </Tooltip>
       </h3>
 
-      {/* Render Tabs */}
-      <Tabs value={activeTab} onChange={handleTabChange} aria-label="moves tabs">
-        {moveCategories.map((category, index) => {
-          const filteredMoves = getFilteredMoves(category);
-          return (
-            filteredMoves.length > 0 && <Tab key={category.key} label={category.label} />
-          );
-        })}
+      {/* Render Tabs — value is category key, not positional index */}
+      <Tabs value={currentTab} onChange={handleTabChange} aria-label="moves tabs">
+        {availableCategories.map((category) => (
+          <Tab key={category.key} value={category.key} label={category.label} />
+        ))}
       </Tabs>
 
       {/* Render Content for the Active Tab */}
-      {moveCategories.map((category, index) => {
-        if (activeTab === index) {
-          const filteredMoves = getFilteredMoves(category);
-          return (
-            <div key={category.key} className="moveTabContent">
-              <h3 className="bio_title">
-                {category.label}
-                <Tooltip title={category.tooltip} arrow>
-                  <InfoOutlinedIcon className="infoIcon" />
-                </Tooltip>
-              </h3>
-              <ul className="moveList moveListContainer">
-                {filteredMoves.map((move) => (
-                  <li key={move.move.name} className="moveItem">
-                    <strong>{move.move.name}</strong>
-                    {category.key === "level-up" && (
-                      ` (Level: ${
-                        move.version_group_details.find(
-                          (detail) => detail.move_learn_method.name === "level-up"
-                        ).level_learned_at
-                      })`
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          );
-        }
-        return null;
+      {availableCategories.map((category) => {
+        if (currentTab !== category.key) return null;
+        const filteredMoves = getFilteredMoves(category);
+        return (
+          <div key={category.key} className="moveTabContent">
+            <h3 className="bio_title">
+              {category.label}
+              <Tooltip title={category.tooltip} arrow>
+                <InfoOutlinedIcon className="infoIcon" />
+              </Tooltip>
+            </h3>
+            <ul className="moveList moveListContainer">
+              {filteredMoves.map((move) => (
+                <li key={move.move.name} className="moveItem">
+                  <strong>{move.move.name}</strong>
+                  {category.key === "level-up" && (
+                    ` (Level: ${
+                      move.version_group_details.find(
+                        (detail) => detail.move_learn_method.name === "level-up"
+                      )?.level_learned_at ?? '?'
+                    })`
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
       })}
     </Paper>
   );

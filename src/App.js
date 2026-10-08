@@ -4,6 +4,7 @@ import { useAppDispatch } from "./app/hooks";
 import { pokemonActions } from "./components/PokemonSlice";
 import Pokedex from "./components/Pokedex/Pokedex";
 import Pokemon from "./components/Pokemon/Pokemon";
+import LoadingMessage from "./components/LoadingMessage/LoadingMessage";
 import { POKEMON_LIMIT } from "./constants/pokemon";
 import { generatedPokemonImageUrl } from "./utils/pokemonHelpers";
 import "./App.css";
@@ -38,6 +39,7 @@ function App() {
         );
   
         dispatch(pokemonActions.setPokemonData(newPokemonData));
+        dispatch(pokemonActions.setSearchOptionData(newSearchOptionData));
       } catch (error) {
         console.error("Error fetching Pokémon data:", error);
       } finally {
@@ -55,7 +57,7 @@ function App() {
 
   return (
     <div className="App">
-          {loading ? <p>Loading Pokémon...</p> : <RouterProvider router={router} />}
+      {loading ? <LoadingMessage /> : <RouterProvider router={router} />}
     </div>
   );
 }

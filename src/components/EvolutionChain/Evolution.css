@@ -26,35 +26,104 @@
 }
 
 .evoCard {
-    max-width: 205px;
-    width: 175px;
+    max-width: 220px;
+    width: 200px;
     height: auto;
 }
 
 .evoPoke {
     display: flex;
     flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    padding: 0.5rem 0;
+}
+
+/* Each node: card + optional arrow + optional branches, all vertically centered */
+.evoNode {
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    gap: 12px;
+    align-self: center;
+    gap: 8px;
+}
+
+/* Single evolution — just flows inline */
+.evoSingle {
+    display: flex;
+    align-items: center;
+}
+
+/* Wrap branches in a grid — max 4 per row */
+.evoBranches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    max-width: 620px;
+    gap: 8px;
+    justify-items: center;
+    align-items: center;
+}
+
+.evoBranches .evoCard {
+    width: 140px;
+}
+
+.evoBranches .pokemonId,
+.evoBranches .pokemonName {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    font-size: 0.75rem;
 }
 
 .evoArrow {
     display: flex;
     align-items: center;
+    align-self: center;
+    color: #aaa;
+    flex-shrink: 0;
 }
 
 /* Media query for tablets and smaller screens */
 @media (max-width: 1024px) {
     .evoContainer {
-        margin: 1rem; 
-        padding: 0.5rem; 
+        margin: 1rem;
+        padding: 0.5rem;
     }
 
+    .evoCard {
+        width: 160px;
+    }
+}
+
+@media (max-width: 600px) {
     .evoPoke {
-        flex-direction: column; 
+        flex-direction: column;
         align-items: center;
-        justify-content: space-evenly;
+    }
+
+    .evoNode {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .evoBranches {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .evoBranches .evoCard {
+        width: 100%;
+        max-width: 150px;
+    }
+
+    .evoArrow {
+        transform: rotate(90deg);
+    }
+
+    .evoCard {
+        width: 140px;
     }
 }

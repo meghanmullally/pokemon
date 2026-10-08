@@ -7,8 +7,8 @@ export default function Stats({ pokemonDetails }) {
   const { stats = [] } = pokemonDetails || {};
   // normalizing the range
   const min = 0;
-  // individual stats are typically capped at 255 and total at 510
-  const max = 225;
+  // individual stats are capped at 255 (e.g. Blissey HP)
+  const max = 255;
   const normalize = (value) => ((value - min) * 100) / (max - min);
 
   // Function to set color based on the stat
@@ -31,11 +31,11 @@ export default function Stats({ pokemonDetails }) {
         {stats.map((stat) => (
           <div key={stat.stat.name} className="stat_container">
             <div className="stat_row">
-              <Typography variant="subtitle3" className="stat_name">
+              <Typography variant="subtitle2" className="stat_name">
                 {stat.stat.name}
               </Typography>
               <Typography
-                variant="subtitle3"
+                variant="subtitle2"
                 color="textSecondary"
                 className="stat_base_stat"
               >

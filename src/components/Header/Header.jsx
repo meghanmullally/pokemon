@@ -1,5 +1,5 @@
-import React from "react";
-import { AppBar, Toolbar, Grid, Typography, Avatar, AvatarGroup, Tooltip, Hidden } from "@mui/material";
+import React, { useRef } from "react";
+import { AppBar, Toolbar, Grid, Typography, Avatar, AvatarGroup, Tooltip } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { NavLink, useNavigate } from "react-router-dom";
 import Search from "../Search/Search";
@@ -13,21 +13,27 @@ function Header() {
   const historyData = useAppSelector((state) => state.pokemon.historyData);
   const reverseHistory = [...historyData].reverse();
   const dispatch = useAppDispatch();
+  const debounceTimer = useRef(null);
 
   const handleOnChange = (event) => {
     const term = event.target.value.toLowerCase();
-    dispatch(pokemonActions.updateFilterSearch(term));
 
-    const findPokemon = searchOptionData.find(
-      (element) => element.name === term
-    );
+    // Debounce filter dispatch so cards only update after typing stops
+    clearTimeout(debounceTimer.current);
+    debounceTimer.current = setTimeout(() => {
+      dispatch(pokemonActions.updateFilterSearch(term));
 
-    if (findPokemon) {
-      const searchPokemon = { ...findPokemon };
-      searchPokemon.searched = true;
-      dispatch(pokemonActions.updateHistory(searchPokemon));
-      navigate(`/pokemon/${findPokemon.id}`);
-    }
+      const findPokemon = searchOptionData.find(
+        (element) => element.name === term
+      );
+
+      if (findPokemon) {
+        const searchPokemon = { ...findPokemon };
+        searchPokemon.searched = true;
+        dispatch(pokemonActions.updateHistory(searchPokemon));
+        navigate(`/pokemon/${findPokemon.id}`);
+      }
+    }, 300);
   };
 
   const resetFilterTerm = () => {
@@ -52,9 +58,7 @@ function Header() {
         <Grid container spacing={2} alignItems="center">
           <Grid item>
             <NavLink to="/" onClick={resetFilterTerm}>
-              <Hidden mdDown>
-                <img src="/pokedex_logo.png" className="pokedex" alt="pokedex logo" />
-              </Hidden>
+              <img src="/pokedex_logo.png" className="pokedex" alt="pokedex logo" sx={{ display: { xs: 'none', md: 'block' } }} />
               <img
                 className="headerLogos"
                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/175.svg"
@@ -74,8 +78,7 @@ function Header() {
               </div>
             )}
           </Grid>
-          <Grid item>
-            <Hidden mdDown>
+          <Grid item sx={{ display: { xs: 'none', md: 'block' } }}>
               {reverseHistory.length > 0 && (
                 <Typography className="recentSearch">
                   Recently Searched...
@@ -84,7 +87,6 @@ function Header() {
               <AvatarGroup max={10}>
                 {historyAvatars}
               </AvatarGroup>
-            </Hidden>
           </Grid>
         </Grid>
       </Toolbar>

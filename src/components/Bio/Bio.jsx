@@ -5,7 +5,7 @@ import "./Bio.css";
 
 export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDetails }) {
   const { abilities, height, weight } = pokemonDetails;
-  const { egg_groups, capture_rate, growth_rate, gender_rate, habitat, generation, base_happiness, hatch_counter, flavor_text_entries, genera, shape } = pokemonSpecies;
+  const { egg_groups, capture_rate, growth_rate, gender_rate, habitat, generation, base_happiness, hatch_counter, flavor_text_entries = [], genera, shape } = pokemonSpecies;
   const { characteristicDescription } = characteristicDetails || {};
 
   // State to manage the currently selected tab
@@ -14,6 +14,13 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
   // Handler to change the selected tab
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
+  };
+
+  const getGenderRatio = (rate) => {
+    if (rate === -1) return "Genderless";
+    const femalePercent = ((rate / 8) * 100).toFixed(0);
+    const malePercent = (100 - femalePercent).toFixed(0);
+    return `${malePercent}% Male, ${femalePercent}% Female`;
   };
 
   // Find the first English flavor text entry
@@ -39,7 +46,9 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
         <Tabs
           value={tabValue}
           onChange={handleChange}
-          variant="fullWidth"
+          variant="scrollable"
+          scrollButtons="auto"
+          allowScrollButtonsMobile
           aria-label="bio tabs"
         >
           <Tab label="Overview" />
@@ -54,12 +63,12 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
           <Box className="tabContent">
             <h3 className="bio_title">About</h3>
             {flavorText && <p className="description">{flavorText}</p>}
-            {genera && genera[7] && genera[7].genus && (
+            {genera && genera.find(g => g.language.name === 'en')?.genus && (
               <>
                 <Divider />
                 <div className="bioInfo">
                   <strong>Genus: </strong>
-                  <span>{genera[7].genus}</span>
+                  <span>{genera.find(g => g.language.name === 'en').genus}</span>
                 </div>
               </>
             )}
@@ -141,7 +150,7 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
               <>
                 <div className="bioInfo">
                   <strong>Gender Ratio: </strong>
-                  <span>{gender_rate}</span>
+                  <span>{getGenderRatio(gender_rate)}</span>
                 </div>
               </>
             )}
@@ -173,7 +182,7 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
                   >
                     <Button
                       color={ability.is_hidden ? "secondary" : "primary"}
-                      variant={ability.is_hidden ? "outlined" : "outlined"}
+                      variant={ability.is_hidden ? "contained" : "outlined"}
                     >
                       {ability.ability.name}
                     </Button>
