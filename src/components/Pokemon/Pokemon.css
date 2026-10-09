@@ -36,6 +36,26 @@
 
     .bioContainer {
         flex-direction: column;
-        align-items: center
+        align-items: center;
+        max-width: 100%;
+    }
+
+    .evoMoveContainer {
+        margin: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .pokemonContainer {
+        margin: 0.5rem;
+    }
+
+    .bioContainer {
+        margin: 4px;
+        width: 100%;
+    }
+
+    .evoMoveContainer {
+        margin: 0.5rem;
     }
 }

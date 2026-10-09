@@ -6,8 +6,9 @@ import './PokemonSideCard.css';
 
 const PokemonSideCard = ({ pokemonDetails, pokemonData }) => {
     const { name, types } = pokemonDetails;
-    // Fallback to an empty object if pokemonData is undefined
-    const { sprite } = pokemonData || {};
+    const officialArtwork = pokemonDetails.sprites?.other?.['official-artwork']?.front_default;
+    const { sprite: reduxSprite } = pokemonData || {};
+    const sprite = officialArtwork || reduxSprite;
 
 
     return (

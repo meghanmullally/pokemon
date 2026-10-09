@@ -18,8 +18,6 @@ export default function Search({ onChange, label }) {
     (option, index, self) => index === self.findIndex((t) => t.name === option.name)
   );
 
-  const latestSearches = [];
-
   return (
     <div className='searchContainer'>
       <Autocomplete
@@ -29,16 +27,10 @@ export default function Search({ onChange, label }) {
         autoSelect
         options={uniqueSearchOptions.map((option) => option.name)}
         groupBy={(name) => {
-          let header = '';
           if (uniqueHistoryData.find(element => element.name === name)) {
-            if (!latestSearches.includes(name)) {
-              latestSearches.push(name);
-            }
-            header = 'Latest Searches';
-          } else {
-            header = name[0].toUpperCase();
+            return 'Latest Searches';
           }
-          return header;
+          return name[0].toUpperCase();
         }}
         renderInput={(params) => (
           <TextField

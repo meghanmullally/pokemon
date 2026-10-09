@@ -4,6 +4,7 @@ import { useAppDispatch } from "./app/hooks";
 import { pokemonActions } from "./components/PokemonSlice";
 import Pokedex from "./components/Pokedex/Pokedex";
 import Pokemon from "./components/Pokemon/Pokemon";
+import LoadingMessage from "./components/LoadingMessage/LoadingMessage";
 import { POKEMON_LIMIT } from "./constants/pokemon";
 import { generatedPokemonImageUrl } from "./utils/pokemonHelpers";
 import "./App.css";
@@ -20,22 +21,26 @@ function App() {
   
         const newPokemonData = {};
         const newSearchOptionData = [];
-  
-        await Promise.all(
-          data.results.map(async (pokemon, index) => {
-            const pokemonId = index + 1;
-            const pokemonDetailsResponse = await fetch(pokemon.url);
-            const pokemonDetails = await pokemonDetailsResponse.json();
-  
-            newPokemonData[pokemonId] = {
-              id: pokemonId,
-              name: pokemon.name,
-              sprite: generatedPokemonImageUrl(pokemonId),
-              types: pokemonDetails.types,
-            };
-            newSearchOptionData.push(newPokemonData[pokemonId]);
-          })
-        );
+        const BATCH_SIZE = 20;
+
+        for (let i = 0; i < data.results.length; i += BATCH_SIZE) {
+          const batch = data.results.slice(i, i + BATCH_SIZE);
+          await Promise.all(
+            batch.map(async (pokemon, batchIndex) => {
+              const pokemonId = i + batchIndex + 1;
+              const pokemonDetailsResponse = await fetch(pokemon.url);
+              const pokemonDetails = await pokemonDetailsResponse.json();
+
+              newPokemonData[pokemonId] = {
+                id: pokemonId,
+                name: pokemon.name,
+                sprite: generatedPokemonImageUrl(pokemonId),
+                types: pokemonDetails.types,
+              };
+              newSearchOptionData.push(newPokemonData[pokemonId]);
+            })
+          );
+        }
   
         dispatch(pokemonActions.setPokemonData(newPokemonData));
         dispatch(pokemonActions.setSearchOptionData(
@@ -58,7 +63,7 @@ function App() {
 
   return (
     <div className="App">
-          {loading ? <p>Loading Pokémon...</p> : <RouterProvider router={router} />}
+      {loading ? <LoadingMessage /> : <RouterProvider router={router} />}
     </div>
   );
 }

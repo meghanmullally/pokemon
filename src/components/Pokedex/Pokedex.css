@@ -1,3 +1,15 @@
 .pokedexContainer {
     padding: 20px 50px;
 }
+
+.sentinelContainer {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+@media (max-width: 600px) {
+    .pokedexContainer {
+        padding: 10px;
+    }
+}
