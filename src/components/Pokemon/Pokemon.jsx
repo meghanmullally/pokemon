@@ -95,7 +95,10 @@ const Pokemon = () => {
     }
 
     fetch(pokemonUrl)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) throw new Error(`Pokemon fetch failed: ${response.status}`);
+        return response.json();
+      })
       .then((data) => {
         setPokemonDetails(data);
 
@@ -142,7 +145,10 @@ const Pokemon = () => {
       });
 
     fetch(speciesUrl)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) throw new Error(`Species fetch failed: ${response.status}`);
+        return response.json();
+      })
       .then((data) => {
         setPokemonSpecies(data);
 

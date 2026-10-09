@@ -48,6 +48,16 @@
     object-fit: cover;
 }
 
+@media (max-width: 960px) {
+    .pokedex-hide-mobile {
+        display: none;
+    }
+
+    .history-hide-mobile {
+        display: none;
+    }
+}
+
 @media (max-width: 600px) {
     .searchBar {
         padding: 0 10px;

@@ -1,5 +1,5 @@
-import React from "react";
-import { AppBar, Toolbar, Grid, Typography, Avatar, AvatarGroup, Tooltip, Hidden } from "@mui/material";
+import React, { useRef, useEffect } from "react";
+import { AppBar, Toolbar, Grid, Typography, Avatar, AvatarGroup, Tooltip } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { NavLink, useNavigate } from "react-router-dom";
 import Search from "../Search/Search";
@@ -13,24 +13,33 @@ function Header() {
   const historyData = useAppSelector((state) => state.pokemon.historyData);
   const reverseHistory = [...historyData].reverse();
   const dispatch = useAppDispatch();
+  const debounceTimer = useRef(null);
+
+  useEffect(() => {
+    return () => clearTimeout(debounceTimer.current);
+  }, []);
 
   const handleOnChange = (event) => {
     const term = event.target.value.toLowerCase();
-    dispatch(pokemonActions.updateFilterSearch(term));
+    clearTimeout(debounceTimer.current);
+    debounceTimer.current = setTimeout(() => {
+      dispatch(pokemonActions.updateFilterSearch(term));
 
-    const findPokemon = searchOptionData.find(
-      (element) => element.name === term
-    );
+      const findPokemon = searchOptionData.find(
+        (element) => element.name === term
+      );
 
-    if (findPokemon) {
-      const searchPokemon = { ...findPokemon };
-      searchPokemon.searched = true;
-      dispatch(pokemonActions.updateHistory(searchPokemon));
-      navigate(`/pokemon/${findPokemon.id}`);
-    }
+      if (findPokemon) {
+        const searchPokemon = { ...findPokemon };
+        searchPokemon.searched = true;
+        dispatch(pokemonActions.updateHistory(searchPokemon));
+        navigate(`/pokemon/${findPokemon.id}`);
+      }
+    }, 300);
   };
 
   const resetFilterTerm = () => {
+    clearTimeout(debounceTimer.current);
     dispatch(pokemonActions.updateFilterSearch(""));
   };
 
@@ -52,9 +61,7 @@ function Header() {
         <Grid container spacing={2} alignItems="center">
           <Grid item>
             <NavLink to="/" onClick={resetFilterTerm}>
-              <Hidden mdDown>
-                <img src="/pokedex_logo.png" className="pokedex" alt="pokedex logo" />
-              </Hidden>
+              <img src="/pokedex_logo.png" className="pokedex pokedex-hide-mobile" alt="pokedex logo" />
               <img
                 className="headerLogos"
                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/175.svg"
@@ -74,8 +81,7 @@ function Header() {
               </div>
             )}
           </Grid>
-          <Grid item>
-            <Hidden mdDown>
+          <Grid item className="history-hide-mobile">
               {reverseHistory.length > 0 && (
                 <Typography className="recentSearch">
                   Recently Searched...
@@ -84,7 +90,6 @@ function Header() {
               <AvatarGroup max={10}>
                 {historyAvatars}
               </AvatarGroup>
-            </Hidden>
           </Grid>
         </Grid>
       </Toolbar>

@@ -16,6 +16,13 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
     setTabValue(newValue);
   };
 
+  const getGenderRatio = (rate) => {
+    if (rate === -1) return "Genderless";
+    const femalePercent = (rate / 8) * 100;
+    const malePercent = 100 - femalePercent;
+    return `${malePercent}% Male, ${femalePercent}% Female`;
+  };
+
   // Find the first English flavor text entry
   const englishFlavorText = flavor_text_entries.find((entry) => entry.language.name === "en");
   // Use the first English entry if found, otherwise use an empty string
@@ -141,7 +148,7 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
               <>
                 <div className="bioInfo">
                   <strong>Gender Ratio: </strong>
-                  <span>{gender_rate}</span>
+                  <span>{getGenderRatio(gender_rate)}</span>
                 </div>
               </>
             )}

@@ -38,6 +38,9 @@ function App() {
         );
   
         dispatch(pokemonActions.setPokemonData(newPokemonData));
+        dispatch(pokemonActions.setSearchOptionData(
+          newSearchOptionData.sort((a, b) => a.name.localeCompare(b.name))
+        ));
       } catch (error) {
         console.error("Error fetching Pokémon data:", error);
       } finally {
