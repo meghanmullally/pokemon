@@ -41,3 +41,27 @@
         padding: 10px;
     }
 }
+
+.locationAreasNav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 0 50px 16px;
+}
+
+.locationAreaLink {
+    padding: 4px 12px;
+    border-radius: 16px;
+    border: 1px solid currentColor;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #555;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.locationAreaLink:hover {
+    background: #555;
+    color: white;
+}

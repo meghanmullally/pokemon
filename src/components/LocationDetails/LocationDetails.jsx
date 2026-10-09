@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import './LocationDetails.css';
 import { Grid } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import { POKEMON_LIMIT } from '../../constants/pokemon';
 
@@ -12,6 +12,7 @@ export default function LocationDetails() {
 
     const [displayName, setDisplayName] = useState('');
     const [pokemonEncounters, setPokemonEncounters] = useState([]);
+    const [areas, setAreas] = useState([]);
 
     useEffect(() => {
         async function getLocationDetails() {
@@ -23,6 +24,7 @@ export default function LocationDetails() {
                 // Get the English display name, fallback to the URL slug
                 const englishName = locationData.names?.find(n => n.language?.name === 'en')?.name || locationName;
                 setDisplayName(englishName);
+                setAreas(locationData.areas || []);
 
                 // Step 2: fetch all areas in parallel so we don't need a separate click
                 const areaResponses = await Promise.all(
@@ -60,10 +62,21 @@ export default function LocationDetails() {
         e => parseInt(getId(e.pokemon.url)) <= POKEMON_LIMIT
     );
 
+    const formatAreaName = (name) => name.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+
     return (
         <React.Fragment>
             <Header />
             <h1 className="locationDetailsTitle">{displayName}</h1>
+            {areas.length > 1 && (
+                <div className="locationAreasNav">
+                    {areas.map(area => (
+                        <Link key={area.name} to={`/location-areas/${area.name}`} className="locationAreaLink">
+                            {formatAreaName(area.name)}
+                        </Link>
+                    ))}
+                </div>
+            )}
             <Grid
                 container
                 rowSpacing={2}
@@ -73,7 +86,6 @@ export default function LocationDetails() {
                 {filteredEncounters.map((encounter) => {
                     const pokemonId = getId(encounter.pokemon.url);
                     return (
-                        // Reuse the same PokemonCard from the Pokedex
                         <Grid item xs={12} sm={6} md={3} lg={3} xl={2} key={encounter.pokemon.name}>
                             <PokemonCard pokemonId={pokemonId} />
                         </Grid>

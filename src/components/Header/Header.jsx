@@ -73,6 +73,8 @@ function Header() {
             <NavLink to="/" onClick={resetFilterTerm} className="navLink">
               Pokédex
             </NavLink>
+          </Grid>
+          <Grid item>
             <NavLink to="/regions" className="navLink">
               Regions
             </NavLink>

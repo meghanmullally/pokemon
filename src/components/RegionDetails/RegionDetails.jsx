@@ -45,6 +45,8 @@ export default function RegionDetails() {
     const LocationCard = ({ location }) => (
         <Paper
             key={location.name}
+            component="button"
+            type="button"
             elevation={4}
             className="locationPaper"
             style={{ background: `${regionColor}18` }}

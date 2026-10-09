@@ -33,6 +33,8 @@ export default function Regions() {
                 {regions.map((region) => (
                     <Paper
                         key={region.name}
+                        component="button"
+                        type="button"
                         elevation={6}
                         className="regionPaper"
                         style={{ background: REGION_COLORS[region.name] || '#ccc' }}

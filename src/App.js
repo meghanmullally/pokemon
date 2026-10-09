@@ -61,7 +61,7 @@ function App() {
   }, [dispatch]);
 
   const router = createBrowserRouter([
-    { path: "/", element: !loading && <Pokedex /> },
+    { path: "/", element: loading ? <LoadingMessage /> : <Pokedex /> },
     { path: "/pokemon/:pokemonId", element: <Pokemon /> },
     { path: "/regions", element: <Regions/> },
     { path: "/regions/:regionName", element: <RegionDetails/> },
@@ -71,7 +71,7 @@ function App() {
 
   return (
     <div className="App">
-      {loading ? <LoadingMessage /> : <RouterProvider router={router} />}
+      <RouterProvider router={router} />
     </div>
   );
 }
