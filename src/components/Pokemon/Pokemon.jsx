@@ -112,7 +112,6 @@ const Pokemon = () => {
     fetch(characteristicUrl)
       .then((response) => {
         if (!response.ok) {
-          console.warn(`Characteristic not found for Pokémon with ID ${pokemonId}`);
           setCharacteristicDetails(null);
           return null;
         }
@@ -128,7 +127,6 @@ const Pokemon = () => {
             : 'No characteristic description available';
           setCharacteristicDetails({ ...data, characteristicDescription });
         } else {
-          console.warn('No characteristic descriptions available.');
           setCharacteristicDetails(null);
         }
       })
