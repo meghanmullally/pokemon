@@ -13,6 +13,7 @@ export default function LocationDetails() {
     const [displayName, setDisplayName] = useState('');
     const [pokemonEncounters, setPokemonEncounters] = useState([]);
     const [areas, setAreas] = useState([]);
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         async function getLocationDetails() {
@@ -47,6 +48,8 @@ export default function LocationDetails() {
                 setPokemonEncounters(allEncounters);
             } catch(error) {
                 console.error("Error fetching location details:", error);
+            } finally {
+                setLoaded(true);
             }
         }
 
@@ -77,21 +80,25 @@ export default function LocationDetails() {
                     ))}
                 </div>
             )}
-            <Grid
-                container
-                rowSpacing={2}
-                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                className="locationPokemonContainer"
-            >
-                {filteredEncounters.map((encounter) => {
-                    const pokemonId = getId(encounter.pokemon.url);
-                    return (
-                        <Grid item xs={12} sm={6} md={3} lg={3} xl={2} key={encounter.pokemon.name}>
-                            <PokemonCard pokemonId={pokemonId} />
-                        </Grid>
-                    );
-                })}
-            </Grid>
+            {loaded && filteredEncounters.length === 0 ? (
+                <p className="noEncountersMessage">No Pokémon encounters have been recorded for this location.</p>
+            ) : (
+                <Grid
+                    container
+                    rowSpacing={2}
+                    columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                    className="locationPokemonContainer"
+                >
+                    {filteredEncounters.map((encounter) => {
+                        const pokemonId = getId(encounter.pokemon.url);
+                        return (
+                            <Grid item xs={12} sm={6} md={3} lg={3} xl={2} key={encounter.pokemon.name}>
+                                <PokemonCard pokemonId={pokemonId} />
+                            </Grid>
+                        );
+                    })}
+                </Grid>
+            )}
         </React.Fragment>
     );
 }

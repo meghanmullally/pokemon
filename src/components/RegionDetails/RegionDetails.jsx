@@ -11,6 +11,7 @@ export default function RegionDetails() {
     const navigate = useNavigate();
 
     const [regionData, setRegionData] = useState({});
+    const [emptyLocations, setEmptyLocations] = useState(new Set());
 
     useEffect(() => {
         async function getRegionDetails() {
@@ -25,6 +26,39 @@ export default function RegionDetails() {
         }
         getRegionDetails();
     }, [regionName]);
+
+    useEffect(() => {
+        const locations = regionData.locations;
+        if (!locations?.length) return;
+
+        const BATCH_SIZE = 10;
+
+        async function checkBatch(batch) {
+            await Promise.all(batch.map(async (location) => {
+                try {
+                    const res = await fetch(`https://pokeapi.co/api/v2/location/${location.name}/`);
+                    const data = await res.json();
+                    const areaResponses = await Promise.all(
+                        (data.areas || []).map(a => fetch(a.url).then(r => r.json()))
+                    );
+                    const hasEncounters = areaResponses.some(a => a.pokemon_encounters?.length > 0);
+                    if (!hasEncounters) {
+                        setEmptyLocations(prev => new Set([...prev, location.name]));
+                    }
+                } catch {
+                    // silently skip on error
+                }
+            }));
+        }
+
+        async function checkAllLocations() {
+            for (let i = 0; i < locations.length; i += BATCH_SIZE) {
+                await checkBatch(locations.slice(i, i + BATCH_SIZE));
+            }
+        }
+
+        checkAllLocations();
+    }, [regionData.locations]);
 
     const displayName = regionData.names?.find(n => n.language?.name === 'en')?.name || regionName;
     const locations = regionData.locations || [];
@@ -42,19 +76,23 @@ export default function RegionDetails() {
 
     const formatName = (name) => name.replace(/-/g, ' ').toUpperCase();
 
-    const LocationCard = ({ location }) => (
-        <Paper
-            key={location.name}
-            component="button"
-            type="button"
-            elevation={4}
-            className="locationPaper"
-            style={{ background: `${regionColor}18` }}
-            onClick={() => navigate(`/locations/${location.name}`)}
-        >
-            <div className="locationName">{formatName(location.name)}</div>
-        </Paper>
-    );
+    const LocationCard = ({ location }) => {
+        const isEmpty = emptyLocations.has(location.name);
+        return (
+            <Paper
+                key={location.name}
+                component="button"
+                type="button"
+                elevation={isEmpty ? 1 : 4}
+                className={`locationPaper${isEmpty ? ' locationPaper--empty' : ''}`}
+                style={{ background: `${regionColor}18` }}
+                onClick={() => navigate(`/locations/${location.name}`)}
+            >
+                <div className="locationName">{formatName(location.name)}</div>
+                {isEmpty && <div className="noEncountersBadge">No Pokémon</div>}
+            </Paper>
+        );
+    };
 
     const LocationGroup = ({ title, locations }) => {
         if (locations.length === 0) return null;
