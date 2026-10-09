@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import './Regions.css';
-import { Card, CardContent, Paper } from '@mui/material';
+import { Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { REGION_COLORS } from '../../constants/pokemon';
 
@@ -31,14 +31,16 @@ export default function Regions() {
             <h1 className="regionsTitle">Regions</h1>
             <div className="regionContainer">
                 {regions.map((region) => (
-                    <Paper key={region.name} elevation={6} className="regionPaper" onClick={() => navigate(`/regions/${region.name}`)}>
-                        <Card style={{ background: REGION_COLORS[region.name] || '#ccc' }}>
-                            <CardContent className="cardRegionContent">
-                                <div className="regionName">
-                                    {region.name.toUpperCase()}
-                                </div>
-                            </CardContent>
-                        </Card>
+                    <Paper
+                        key={region.name}
+                        elevation={6}
+                        className="regionPaper"
+                        style={{ background: REGION_COLORS[region.name] || '#ccc' }}
+                        onClick={() => navigate(`/regions/${region.name}`)}
+                    >
+                        <div className="regionName">
+                            {region.name.toUpperCase()}
+                        </div>
                     </Paper>
                 ))}
             </div>

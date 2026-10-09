@@ -4,11 +4,29 @@
     text-transform: capitalize;
 }
 
+.locationGroup {
+    padding: 0 50px 20px;
+}
+
+.locationGroupTitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #444;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 6px;
+}
+
 .locationContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px 50px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+@media (max-width: 600px) {
+    .locationGroup {
+        padding: 0 10px 20px;
+    }
 }
 
 .locationPaper {

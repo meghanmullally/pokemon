@@ -4,11 +4,14 @@
     text-transform: capitalize;
 }
 
-.areaContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+.locationPokemonContainer {
     padding: 20px 50px;
+}
+
+@media (max-width: 600px) {
+    .locationPokemonContainer {
+        padding: 10px;
+    }
 }
 
 .locationPaper {
