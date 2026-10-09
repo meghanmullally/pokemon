@@ -18,8 +18,8 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
 
   const getGenderRatio = (rate) => {
     if (rate === -1) return "Genderless";
-    const femalePercent = ((rate / 8) * 100).toFixed(0);
-    const malePercent = (100 - femalePercent).toFixed(0);
+    const femalePercent = (rate / 8) * 100;
+    const malePercent = 100 - femalePercent;
     return `${malePercent}% Male, ${femalePercent}% Female`;
   };
 

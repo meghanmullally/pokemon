@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { AppBar, Toolbar, Grid, Typography, Avatar, AvatarGroup, Tooltip } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -15,10 +15,12 @@ function Header() {
   const dispatch = useAppDispatch();
   const debounceTimer = useRef(null);
 
+  useEffect(() => {
+    return () => clearTimeout(debounceTimer.current);
+  }, []);
+
   const handleOnChange = (event) => {
     const term = event.target.value.toLowerCase();
-
-    // Debounce filter dispatch so cards only update after typing stops
     clearTimeout(debounceTimer.current);
     debounceTimer.current = setTimeout(() => {
       dispatch(pokemonActions.updateFilterSearch(term));
@@ -37,6 +39,7 @@ function Header() {
   };
 
   const resetFilterTerm = () => {
+    clearTimeout(debounceTimer.current);
     dispatch(pokemonActions.updateFilterSearch(""));
   };
 
@@ -58,7 +61,7 @@ function Header() {
         <Grid container spacing={2} alignItems="center">
           <Grid item>
             <NavLink to="/" onClick={resetFilterTerm}>
-              <img src="/pokedex_logo.png" className="pokedex" alt="pokedex logo" sx={{ display: { xs: 'none', md: 'block' } }} />
+              <img src="/pokedex_logo.png" className="pokedex pokedex-hide-mobile" alt="pokedex logo" />
               <img
                 className="headerLogos"
                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/175.svg"
@@ -78,7 +81,7 @@ function Header() {
               </div>
             )}
           </Grid>
-          <Grid item sx={{ display: { xs: 'none', md: 'block' } }}>
+          <Grid item className="history-hide-mobile">
               {reverseHistory.length > 0 && (
                 <Typography className="recentSearch">
                   Recently Searched...
