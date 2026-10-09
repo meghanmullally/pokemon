@@ -30,8 +30,6 @@ const Pokemon = () => {
     }
   }, [pokemonId, navigate]);
 
-  // initial evo chain
-  const initEvolutionChain = [];
   const initDetails = [];
   const initSpecies = [];
   const initCharacteristic = [];
@@ -162,7 +160,7 @@ const Pokemon = () => {
         setEvolutionChain({});
         setFetchError(true);
       });
-  }, [buildEvolution, dispatch, pokemonId, retryCount]);
+  }, [buildEvolution, dispatch, pokemonId, retryCount]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Type Colors and Card Background Color
   const getBorderColor = (types) => {
