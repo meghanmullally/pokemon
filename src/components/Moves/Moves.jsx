@@ -75,7 +75,14 @@ const Moves = ({ moves = [] }) => {
       </h3>
 
       {/* Render Tabs — value is category key, not positional index */}
-      <Tabs value={currentTab} onChange={handleTabChange} aria-label="moves tabs">
+      <Tabs
+        value={currentTab}
+        onChange={handleTabChange}
+        variant="scrollable"
+        scrollButtons="auto"
+        allowScrollButtonsMobile
+        aria-label="moves tabs"
+      >
         {availableCategories.map((category) => (
           <Tab key={category.key} value={category.key} label={category.label} />
         ))}

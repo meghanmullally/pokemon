@@ -63,12 +63,12 @@ export default function Bio({ pokemonDetails, pokemonSpecies, characteristicDeta
           <Box className="tabContent">
             <h3 className="bio_title">About</h3>
             {flavorText && <p className="description">{flavorText}</p>}
-            {genera && genera.find(g => g.language.name === 'en')?.genus && (
+            {genera && genera.find(g => g.language?.name === 'en')?.genus && (
               <>
                 <Divider />
                 <div className="bioInfo">
                   <strong>Genus: </strong>
-                  <span>{genera.find(g => g.language.name === 'en').genus}</span>
+                  <span>{genera.find(g => g.language?.name === 'en')?.genus}</span>
                 </div>
               </>
             )}
