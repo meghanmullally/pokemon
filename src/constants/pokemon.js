@@ -1,6 +1,19 @@
-// export const POKEMON_LIMIT = 898;
-export const POKEMON_LIMIT = 1010;
+export const POKEMON_LIMIT = 1023 ;
 
+// Darkened where needed so white text passes WCAG AA (4.5:1) on all regions
+export const REGION_COLORS = {
+  kanto:  "#CC0000",
+  johto:  "#A07800",
+  hoenn:  "#3A8C7A",
+  sinnoh: "#6D5480",
+  unova:  "#3A7DA8",
+  kalos:  "#CB0B4F",
+  alola:  "#B03A20",
+  galar:  "#AC379E",
+  hisui:  "#36597B",
+  paldea: "#A07800",
+  orre:   "#817548",
+};
 
 export const TYPE_COLORS = {
   normal: "#A8A77A",

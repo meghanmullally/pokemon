@@ -1,0 +1,44 @@
+.regionDetailsTitle {
+    text-align: center;
+    padding: 20px 0 10px;
+    text-transform: capitalize;
+}
+
+.locationContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px 50px;
+}
+
+.locationPaper {
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70px;
+    padding: 12px;
+}
+
+.locationPaper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.cardLocationContent {
+    text-align: center;
+}
+
+.locationName {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: rgb(38, 38, 38);
+    padding: 8px 0;
+}
+
+@media (max-width: 600px) {
+    .locationContainer {
+        padding: 10px;
+    }
+}

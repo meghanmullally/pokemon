@@ -69,6 +69,14 @@ function Header() {
               />
             </NavLink>
           </Grid>
+          <Grid item className="pokedex-hide-mobile">
+            <NavLink to="/" onClick={resetFilterTerm} className="navLink">
+              Pokédex
+            </NavLink>
+            <NavLink to="/regions" className="navLink">
+              Regions
+            </NavLink>
+          </Grid>
           <Grid item xs>
             {searchOptionData && (
               <div className="searchBar">

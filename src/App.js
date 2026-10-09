@@ -4,6 +4,10 @@ import { useAppDispatch } from "./app/hooks";
 import { pokemonActions } from "./components/PokemonSlice";
 import Pokedex from "./components/Pokedex/Pokedex";
 import Pokemon from "./components/Pokemon/Pokemon";
+import Regions from "./components/Regions/Regions";
+import RegionDetails from "./components/RegionDetails/RegionDetails";
+import LocationDetails from "./components/LocationDetails/LocationDetails";
+import LocationArea from "./components/LocationArea/LocationArea";
 import LoadingMessage from "./components/LoadingMessage/LoadingMessage";
 import { POKEMON_LIMIT } from "./constants/pokemon";
 import { generatedPokemonImageUrl } from "./utils/pokemonHelpers";
@@ -59,6 +63,10 @@ function App() {
   const router = createBrowserRouter([
     { path: "/", element: !loading && <Pokedex /> },
     { path: "/pokemon/:pokemonId", element: <Pokemon /> },
+    { path: "/regions", element: <Regions/> },
+    { path: "/regions/:regionName", element: <RegionDetails/> },
+    { path: "/locations/:locationName", element: <LocationDetails/> },
+    { path: "/location-areas/:locationAreaName", element: <LocationArea /> }
   ]);
 
   return (
