@@ -1,6 +1,18 @@
-// export const POKEMON_LIMIT = 898;
-export const POKEMON_LIMIT = 1010;
+export const POKEMON_LIMIT = 1025;
 
+export const REGION_COLORS = {
+  kanto:  "#CC0000",
+  johto:  "#8A6600",
+  hoenn:  "#2E7362",
+  sinnoh: "#6D5480",
+  unova:  "#3A7DA8",
+  kalos:  "#CB0B4F",
+  alola:  "#B03A20",
+  galar:  "#AC379E",
+  hisui:  "#36597B",
+  paldea: "#8A6600",
+  orre:   "#6B5F38",
+};
 
 export const TYPE_COLORS = {
   normal: "#A8A77A",

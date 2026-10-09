@@ -1,0 +1,67 @@
+.locationDetailsTitle {
+    text-align: center;
+    padding: 20px 0 10px;
+    text-transform: capitalize;
+}
+
+.locationPokemonContainer {
+    padding: 20px 50px;
+}
+
+@media (max-width: 600px) {
+    .locationPokemonContainer {
+        padding: 10px;
+    }
+}
+
+.locationPaper {
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70px;
+    padding: 12px;
+}
+
+.locationPaper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.locationName {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: rgb(38, 38, 38);
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .areaContainer {
+        padding: 10px;
+    }
+}
+
+.locationAreasNav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 0 50px 16px;
+}
+
+.locationAreaLink {
+    padding: 4px 12px;
+    border-radius: 16px;
+    border: 1px solid currentColor;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #555;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.locationAreaLink:hover {
+    background: #555;
+    color: white;
+}

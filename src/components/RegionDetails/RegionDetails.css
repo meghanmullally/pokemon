@@ -1,0 +1,62 @@
+.regionDetailsTitle {
+    text-align: center;
+    padding: 20px 0 10px;
+    text-transform: capitalize;
+}
+
+.locationGroup {
+    padding: 0 50px 20px;
+}
+
+.locationGroupTitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #444;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 6px;
+}
+
+.locationContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+@media (max-width: 600px) {
+    .locationGroup {
+        padding: 0 10px 20px;
+    }
+}
+
+.locationPaper {
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70px;
+    padding: 12px;
+}
+
+.locationPaper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.cardLocationContent {
+    text-align: center;
+}
+
+.locationName {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: rgb(38, 38, 38);
+    padding: 8px 0;
+}
+
+@media (max-width: 600px) {
+    .locationContainer {
+        padding: 10px;
+    }
+}

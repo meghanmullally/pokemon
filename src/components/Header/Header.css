@@ -72,3 +72,22 @@
         width: 30px;
     }
 }
+.navLink {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-right: 1.5rem;
+    opacity: 0.85;
+    transition: opacity 0.15s ease;
+}
+
+.navLink:hover {
+    opacity: 1;
+}
+
+.navLink.active {
+    opacity: 1;
+    border-bottom: 2px solid white;
+    padding-bottom: 2px;
+}

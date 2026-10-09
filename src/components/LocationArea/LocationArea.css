@@ -1,0 +1,24 @@
+.locationAreaContainer {
+    padding: 20px 50px;
+}
+
+.locationAreaTitle {
+    text-align: center;
+    padding: 20px 0 10px;
+    text-transform: capitalize;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.pokemonEncountersContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+@media (max-width: 600px) {
+    .locationAreaContainer {
+        padding: 10px;
+    }
+}

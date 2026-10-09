@@ -1,0 +1,71 @@
+.regionsTitle {
+    text-align: center;
+    padding: 20px 0 10px;
+}
+
+.regionContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    padding: 30px 80px;
+}
+
+.cardRegionMedia {
+    margin-top: 15%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: auto;
+    width: 130px;
+    height: 130px;
+}
+
+.cardRegionContent {
+    text-align: center;
+}
+
+.regionTagContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 7px;
+    margin-top: 20px;
+    padding-bottom: 7px;
+    border-radius: 2px;
+}
+
+.regionId {
+    margin-right: 5px;
+}
+
+.regionId,
+.regionName {
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.4rem;
+    text-align: center;
+    font-weight: bolder;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    padding: 1rem 0;
+}
+
+.nav-link {
+    text-decoration: none;
+}
+
+.regionPaper {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    border-radius: 12px !important;
+}
+
+.regionPaper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+}
